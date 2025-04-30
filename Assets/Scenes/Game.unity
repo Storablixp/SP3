@@ -172,7 +172,7 @@ MonoBehaviour:
   seed: 0
   worldSize: {x: 1920, y: 1080}
   worldMutators:
-  - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
+  - {fileID: 11400000, guid: 4bd28dd395938eb42bd6db2e8fa8e5c4, type: 2}
   tilesPerFrame: 1000000
 --- !u!114 &31248613
 MonoBehaviour:
