@@ -21,11 +21,11 @@ public class RandomizerMutator : WorldMutatorSO
 
                 if (nr <= PercentageForA)
                 {
-                    worldGenerator.AddPixel(arrayX, arrayY, PixelA);
+                    worldGenerator.ChangePixel(arrayX, arrayY, PixelA);
                 }
                 else
                 {
-                    worldGenerator.AddPixel(arrayX, arrayY, PixelB);
+                    worldGenerator.ChangePixel(arrayX, arrayY, PixelB);
                 }
             }
         }

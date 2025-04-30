@@ -20,19 +20,17 @@ public class CellularAutomataMutator : WorldMutatorSO
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
-        PixelSO[,] updatedPixelData = new PixelSO[worldSize.x, worldSize.y];
-        PixelSO[,] originalPixels = worldGenerator.RetrievePixels();
+        PixelSO[,] currentPixels = worldGenerator.RetrievePixels();
+        PixelSO[,] updatedPixels = new PixelSO[worldSize.x, worldSize.y];
 
         for (int i = 0; i < Iterations; i++)
         {
-            if (visuals && i != 0) worldGenerator.ResetCounterValues();
-
             // First pass: calculate new states
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    PixelSO pixelInstance = originalPixels[arrayX, arrayY];
+                    PixelSO pixelInstance = currentPixels[arrayX, arrayY];
                     if (pixelInstance == null) continue;
                     if (pixelInstance != PixelToReplace && pixelInstance != PixelToCount) continue;
 
@@ -49,7 +47,7 @@ public class CellularAutomataMutator : WorldMutatorSO
 
                             if (worldGenerator.IsInBounds(nx, ny))
                             {
-                                PixelSO neighbor = originalPixels[nx, ny];
+                                PixelSO neighbor = currentPixels[nx, ny];
                                 if (neighbor != null && neighbor == PixelToCount)
                                 {
                                     desiredNeighbors++;
@@ -60,9 +58,9 @@ public class CellularAutomataMutator : WorldMutatorSO
 
                     if (desiredNeighbors > ReplacementThreshold)
                     {
-                        updatedPixelData[arrayX, arrayY] = PixelToCount;
+                        updatedPixels[arrayX, arrayY] = PixelToCount;
                     }
-                    else updatedPixelData[arrayX, arrayY] = PixelToReplace;
+                    else updatedPixels[arrayX, arrayY] = PixelToReplace;
                 }
             }
 
@@ -71,16 +69,16 @@ public class CellularAutomataMutator : WorldMutatorSO
             {
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    PixelSO pixelInstance = originalPixels[arrayX, arrayY];
+                    PixelSO pixelInstance = currentPixels[arrayX, arrayY];
                     if (pixelInstance == null) continue;
                     if (pixelInstance != PixelToReplace && pixelInstance != PixelToCount) continue;
 
-                    PixelSO newPixel = updatedPixelData[arrayX, arrayY];
+                    PixelSO newPixel = updatedPixels[arrayX, arrayY];
                     if (newPixel == null) continue;
 
                     pixelInstance = newPixel;
 
-                    worldGenerator.AddPixel(arrayX, arrayY, newPixel);
+                    worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
                 }
             }
         }

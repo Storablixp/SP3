@@ -33,7 +33,7 @@ public class TerrainMutator : WorldMutatorSO
                 else
                     pixelToAdd = stonePixel;
 
-                worldGenerator.AddPixel(arrayX, arrayY, pixelToAdd);
+                worldGenerator.ChangePixel(arrayX, arrayY, pixelToAdd);
             }
         }
 
