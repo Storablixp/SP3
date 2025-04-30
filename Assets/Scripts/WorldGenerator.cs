@@ -18,6 +18,7 @@ public class WorldGenerator : MonoBehaviour
     private RectTransform rectTransform;
     private RawImage rawImage;
     [SerializeField] private WorldMutatorSO[] worldMutators;
+    [SerializeField] private WorldBuilder worldBuilder;
 
     [Header("Visualization")]
     [SerializeField] private int tilesPerFrame = 100000;
@@ -83,6 +84,8 @@ public class WorldGenerator : MonoBehaviour
 
         worldTexture.Apply();
         rawImage.texture = worldTexture;
+
+        worldBuilder.BuildWorld(worldSize, pixels);
     }
 
     public void ResetCounterValues()
