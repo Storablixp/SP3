@@ -8,7 +8,7 @@ public class WorldBuilder : MonoBehaviour
     [SerializeField] private Tilemap worldTilemap;
     [SerializeField] private List<PixelToTileMapping> pixelToTileMappings;
 
-    private Dictionary<Color, TileBase> tileLookup;
+    private Dictionary<Color, WorldTile> tileLookup;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class WorldBuilder : MonoBehaviour
     public class PixelToTileMapping
     {
         public PixelSO pixel;
-        public TileBase tile;
+        public WorldTile tile;
     }
 }
 

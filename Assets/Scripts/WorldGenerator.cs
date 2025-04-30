@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
@@ -82,7 +83,9 @@ public class WorldGenerator : MonoBehaviour
             }
         }
 
+        worldTexture.filterMode = FilterMode.Point;
         worldTexture.Apply();
+
         rawImage.texture = worldTexture;
 
         worldBuilder.BuildWorld(worldSize, pixels);
