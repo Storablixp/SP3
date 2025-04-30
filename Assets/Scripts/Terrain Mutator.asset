@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25068435d17f32845889459afe00614b, type: 3}
+  m_Name: Terrain Mutator
+  m_EditorClassIdentifier: 
+  IncludeAllTiles: 1
+  CanBeVisualized: 1
+  StartingDepthLevel: 0
+  EndDepthLevel: 0
+  noiseSettings: {fileID: 11400000, guid: 9792e8fd20ec80f4bb5b551711858f18, type: 2}
+  heightVariationStrength: 100
+  airThreshold: 0.9
+  dirtThreshold: 0.75
+  airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
+  dirtPixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
+  stonePixel: {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}

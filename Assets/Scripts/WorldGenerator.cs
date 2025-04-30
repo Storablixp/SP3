@@ -4,16 +4,19 @@ using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
+    private PixelSO[,] pixels;
+
     [Header("Generation Settings")]
     private Texture2D worldTexture;
-    private float xOffset;
-    private float yOffset;
+    public static float XOffset;
+    public static float YOffset;
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int worldSize;
 
     [Header("Components")]
     private RectTransform rectTransform;
     private RawImage rawImage;
+    [SerializeField] private WorldMutator terrain;
 
     [Header("Visualization")]
     [SerializeField] private int tilesPerFrame = 100000;
@@ -23,8 +26,10 @@ public class WorldGenerator : MonoBehaviour
     void Start()
     {
         Random.InitState(seed);
-        xOffset = Random.Range(-100000f, 100000f);
-        yOffset = Random.Range(-100000f, 100000f);
+        XOffset = Random.Range(-100000f, 100000f);
+        YOffset = Random.Range(-100000f, 100000f);
+
+        pixels = new PixelSO[worldSize.x, worldSize.y];
 
         rawImage = GetComponent<RawImage>();
         rectTransform = GetComponent<RectTransform>();
@@ -32,34 +37,40 @@ public class WorldGenerator : MonoBehaviour
         worldTexture = new Texture2D(worldSize.x, worldSize.y);
         rectTransform.sizeDelta = worldSize;
 
-        StartCoroutine(GenerateWorld());
+        terrain.SetUp(this, worldSize);
+
+        StartCoroutine(nameof(GenerateWorld));
     }
 
     private IEnumerator GenerateWorld()
     {
         ResetCounterValues();
+        yield return StartCoroutine(terrain.ApplyMutator(worldSize));
+        ColorPixels();
+        Debug.Log(Time.realtimeSinceStartup);
+    }
 
+    public void AddPixel(int xCoord, int yCoord, PixelSO pixel) => pixels[xCoord, yCoord] = pixel;
+
+    public void ColorPixels()
+    {
         for (int x = 0; x < worldSize.x; x++)
         {
-            for (int y = 0; y < worldSize.y; y++)
+            for(int y = 0; y < worldSize.y; y++)
             {
-                float noiseValue = Mathf.PerlinNoise((x + xOffset) * 0.01f, (y + yOffset) * 0.01f);
-                worldTexture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));
+                Color color = Color.white;
 
-                if (UpdateProgressbar())
+                if (pixels[x, y] != null)
                 {
-                    worldTexture.Apply();
-                    rawImage.texture = worldTexture;
-                    yield return null;
+                    color = pixels[x, y].Color;
                 }
+
+                worldTexture.SetPixel(x, y, color);
             }
         }
 
         worldTexture.Apply();
         rawImage.texture = worldTexture;
-
-        Debug.Log(Time.realtimeSinceStartup);
-        yield return null;
     }
 
     public void ResetCounterValues()

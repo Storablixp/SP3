@@ -170,8 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 0
-  worldSize: {x: 1000, y: 1000}
-  tilesPerFrame: 10000
+  worldSize: {x: 1920, y: 1080}
+  terrain: {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
+  tilesPerFrame: 1000000
 --- !u!114 &31248613
 MonoBehaviour:
   m_ObjectHideFlags: 0
