@@ -4,7 +4,7 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Cellular Automata Mutator", menuName = "Scriptable Objects/World Mutator/Cellular Automata")]
 public class CellularAutomataMutator : WorldMutatorSO
 {
-    [Header("Tiles")]
+    [Header("Pixels")]
     public PixelSO PixelToCount;
     public PixelSO PixelToReplace;
 
@@ -20,7 +20,7 @@ public class CellularAutomataMutator : WorldMutatorSO
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
-        //PixelSO[,] updatedTileData = new PixelSO[worldSize.x, worldSize.y];
+        PixelSO[,] updatedTileData = new PixelSO[worldSize.x, worldSize.y];
 
         //for (int i = 0; i < Iterations; i++)
         //{
@@ -31,9 +31,9 @@ public class CellularAutomataMutator : WorldMutatorSO
         //    {
         //        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         //        {
-        //            TileInstance tileInstance = chunk.Tiles[arrayX, arrayY];
-        //            if (tileInstance == null) continue;
-        //            if (tileInstance.WorldTile != PixelToReplace && tileInstance.WorldTile != PixelToCount) continue;
+        //            PixelSO pixelInstance = chunk.Tiles[arrayX, arrayY];
+        //            if (pixelInstance == null) continue;
+        //            if (pixelInstance != PixelToReplace && pixelInstance != PixelToCount) continue;
 
 
         //            int desiredNeighbors = 0;
@@ -74,31 +74,14 @@ public class CellularAutomataMutator : WorldMutatorSO
         //            if (tileInstance == null) continue;
         //            if (tileInstance.WorldTile != PixelToReplace && tileInstance.WorldTile != PixelToCount) continue;
 
-        //            WorldTile newTile = updatedTileData[arrayX, arrayY];
-        //            if (newTile == null) continue;
+        //            PixelSO newPixel = updatedTileData[arrayX, arrayY];
+        //            if (newPixel == null) continue;
 
-        //            tileInstance.WorldTile = newTile;
-        //            tileInstance.Health = newTile.Health;
+        //            tileInstance.WorldTile = newPixel;
+        //            tileInstance.Health = newPixel.Health;
 
-        //            worldGenerator.PlaceTile(arrayX, arrayY, chunk, newTile);
-
-        //            if (visuals)
-        //            {
-        //                if (worldGenerator.UpdateProgressbar(false))
-        //                {
-        //                    yield return null;
-        //                }
-        //            }
+        //            worldGenerator.AddPixel(arrayX, arrayY, newPixel);
         //        }
-        //    }
-        //    if (visuals) worldGenerator.UpdateProgressbar(true);
-        //}
-
-        //if (!visuals)
-        //{
-        //    for (int i = 0; i < Iterations; i++)
-        //    {
-        //        worldGenerator.UpdateProgressbar(true);
         //    }
         //}
 

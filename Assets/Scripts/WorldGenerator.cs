@@ -62,6 +62,7 @@ public class WorldGenerator : MonoBehaviour
     }
 
     public void AddPixel(int xCoord, int yCoord, PixelSO pixel) => pixels[xCoord, yCoord] = pixel;
+    public PixelSO[,] RetrievePixels() => pixels;
 
     public void ColorPixels()
     {

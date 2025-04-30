@@ -10,6 +10,7 @@ public class TerrainMutator : WorldMutatorSO
     [Range(0.001f, 1f)] public float airThreshold = 0.9f;
     [Range(0.001f, 1f)] public float dirtThreshold = 0.75f;
 
+    [Header("Pixels")]
     public PixelSO airPixel;
     public PixelSO dirtPixel;
     public PixelSO stonePixel;
@@ -23,16 +24,16 @@ public class TerrainMutator : WorldMutatorSO
                 float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
                 float yMod = arrayY + (noiseValue - 0.5f) * 2f * heightVariationStrength;
 
-                PixelSO selectedKey;
+                PixelSO pixelToAdd;
 
                 if (yMod > worldSize.y * airThreshold)
-                    selectedKey = airPixel;
+                    pixelToAdd = airPixel;
                 else if (yMod > worldSize.y * dirtThreshold)
-                    selectedKey = dirtPixel;
+                    pixelToAdd = dirtPixel;
                 else
-                    selectedKey = stonePixel;
+                    pixelToAdd = stonePixel;
 
-                worldGenerator.AddPixel(arrayX, arrayY, selectedKey);
+                worldGenerator.AddPixel(arrayX, arrayY, pixelToAdd);
             }
         }
 

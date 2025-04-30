@@ -7,7 +7,7 @@ public class RandomizerMutator : WorldMutatorSO
     [Header("Settings")]
     [Range(1, 100)] public int PercentageForA;
 
-    [Header("Tiles")]
+    [Header("Pixels")]
     public PixelSO PixelA;
     public PixelSO PixelB;
 
