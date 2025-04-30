@@ -101,4 +101,16 @@ public class WorldGenerator : MonoBehaviour
         }
         else return false;
     }
+
+    public bool IsInBounds(int arrayX, int arrayY)
+    {
+        if (arrayX >= 0 && arrayX < worldSize.x && arrayY >= 0 && arrayY < worldSize.y)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
