@@ -60,6 +60,7 @@ public class WorldGenerator : MonoBehaviour
         }
 
         ColorPixels();
+        worldBuilder.BuildWorld(worldSize, pixels);
         Debug.Log(Time.realtimeSinceStartup);
     }
 
@@ -87,8 +88,6 @@ public class WorldGenerator : MonoBehaviour
         worldTexture.Apply();
 
         rawImage.texture = worldTexture;
-
-        worldBuilder.BuildWorld(worldSize, pixels);
     }
 
     public void ResetCounterValues()

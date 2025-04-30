@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentSprite: {fileID: 21300000, guid: 60ae6afc60d3928478c1c00462c23a02, type: 3}
   Color: {r: 0.2627451, g: 0.15686275, b: 0.14117648, a: 1}
-  ColliderType: 2
+  ColliderType: 0
