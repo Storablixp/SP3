@@ -9,6 +9,12 @@ public class AreaRemover : MonoBehaviour
     [SerializeField] private WorldTile hollowTile;
     [SerializeField] private CircleCollider2D removeArea;
     [SerializeField] private ParticleSystem digParticle;
+    float diameter = 1f;
+
+    private void Start()
+    {
+        diameter = removeArea.radius * 2;
+    }
 
     void Update()
     {
@@ -28,7 +34,6 @@ public class AreaRemover : MonoBehaviour
             Vector3Int max = tilemap.WorldToCell(colliderBounds.max);
 
             Vector3 cirlceCenter = removeArea.transform.position;
-            float radius = 1f;
 
             for (int worldY = min.y; worldY <= max.y; worldY++)
             {
@@ -38,7 +43,7 @@ public class AreaRemover : MonoBehaviour
                     Vector3 worldTilePos = tilemap.GetCellCenterWorld(tilePos);
 
                     float distanceToCenter = Vector3.Distance(worldTilePos, cirlceCenter);
-                    if (distanceToCenter <= radius)
+                    if (distanceToCenter <= diameter)
                     {
                         if (tilemap.HasTile(tilePos))
                         {
@@ -46,9 +51,9 @@ public class AreaRemover : MonoBehaviour
 
                             if (currentTile.ColliderType != Tile.ColliderType.None)
                             {
-                                //Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, -directionToMouse);
-                                //ParticleSystem ps = Instantiate(digParticle, transform.position, spawnRotation);
-                                //ps.GetComponent<ParticleSystemRenderer>().material.color = currentTile.Color;
+                                Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, -directionToMouse);
+                                ParticleSystem ps = Instantiate(digParticle, transform.position, spawnRotation);
+                                ps.GetComponent<ParticleSystemRenderer>().material.color = currentTile.Color;
 
                                 tilemap.SetTile(tilePos, hollowTile);
                                 tilemap.SetColor(tilePos, hollowTile.Color);

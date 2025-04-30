@@ -1049,7 +1049,7 @@ MonoBehaviour:
   tilemap: {fileID: 95671057}
   hollowTile: {fileID: 11400000, guid: 7a0e41f16b36e074a8dee7efd3a38b18, type: 2}
   removeArea: {fileID: 1454828306}
-  digParticle: {fileID: 0}
+  digParticle: {fileID: 1279120283845368153, guid: 71f4f83b9a8a03e48aea51380c6f8846, type: 3}
 --- !u!1 &1454828304
 GameObject:
   m_ObjectHideFlags: 0
