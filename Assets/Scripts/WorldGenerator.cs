@@ -4,9 +4,10 @@ using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
+    [Header("Other")]
     private PixelSO[,] pixels;
 
-    [Header("Generation Settings")]
+    [Header("World Settings")]
     private Texture2D worldTexture;
     public static float XOffset;
     public static float YOffset;
@@ -16,36 +17,46 @@ public class WorldGenerator : MonoBehaviour
     [Header("Components")]
     private RectTransform rectTransform;
     private RawImage rawImage;
-    [SerializeField] private WorldMutator terrain;
+    [SerializeField] private WorldMutatorSO[] worldMutators;
 
     [Header("Visualization")]
     [SerializeField] private int tilesPerFrame = 100000;
     private int tileCounter;
-    int totalTiles;
+
+    private void Awake()
+    {
+        rawImage = GetComponent<RawImage>();
+        rectTransform = GetComponent<RectTransform>();
+
+        foreach (WorldMutatorSO mutator in worldMutators)
+        {
+            mutator.SetUp(this, worldSize);
+        }
+    }
 
     void Start()
     {
         Random.InitState(seed);
         XOffset = Random.Range(-100000f, 100000f);
         YOffset = Random.Range(-100000f, 100000f);
-
+        
         pixels = new PixelSO[worldSize.x, worldSize.y];
-
-        rawImage = GetComponent<RawImage>();
-        rectTransform = GetComponent<RectTransform>();
-
         worldTexture = new Texture2D(worldSize.x, worldSize.y);
         rectTransform.sizeDelta = worldSize;
-
-        terrain.SetUp(this, worldSize);
 
         StartCoroutine(nameof(GenerateWorld));
     }
 
     private IEnumerator GenerateWorld()
     {
-        ResetCounterValues();
-        yield return StartCoroutine(terrain.ApplyMutator(worldSize));
+
+        foreach (WorldMutatorSO mutator in worldMutators)
+        {
+            ResetCounterValues();
+            yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+            UpdateProgressbar();
+        }
+
         ColorPixels();
         Debug.Log(Time.realtimeSinceStartup);
     }
@@ -76,7 +87,6 @@ public class WorldGenerator : MonoBehaviour
     public void ResetCounterValues()
     {
         tileCounter = 0;
-        totalTiles = worldSize.x * worldSize.y;
     }
 
     public bool UpdateProgressbar()

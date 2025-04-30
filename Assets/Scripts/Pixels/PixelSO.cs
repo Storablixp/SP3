@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Key", menuName = "Scriptable Objects/Key")]
+[CreateAssetMenu(fileName = "New PixelSO", menuName = "Scriptable Objects/PixelSO")]
 public class PixelSO : ScriptableObject
 {
     public Color Color = Color.white;

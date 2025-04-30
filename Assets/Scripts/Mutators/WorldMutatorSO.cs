@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class WorldMutator : ScriptableObject
+public class WorldMutatorSO : ScriptableObject
 {
     [Header("Mutator")]
     [SerializeField] private bool IncludeAllTiles = true;

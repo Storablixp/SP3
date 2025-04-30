@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPerlin2DSettings", menuName = "Scriptable Objects/Noise Settings/Perlin2D")]
+[CreateAssetMenu(fileName = "New Perlin2DSettings", menuName = "Scriptable Objects/Noise Settings/Perlin 2D")]
 public class Perlin2DSettings : ScriptableObject
 {
     [Range(0.01f, 0.1f)] public float NoiseScale = 0.1f;
