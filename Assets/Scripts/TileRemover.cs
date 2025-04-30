@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 public class TileRemover : MonoBehaviour
 {
-    public Tilemap tilemap;
+    [SerializeField] Tilemap tilemap;
     [SerializeField] private WorldTile hollowTile;
 
     void Update()
