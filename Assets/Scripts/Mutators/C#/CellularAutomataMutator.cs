@@ -5,7 +5,7 @@ using System.Collections;
 public class CellularAutomataMutator : WorldMutatorSO
 {
     [Header("Pixels")]
-    public PixelSO PixelToCount;
+    public PixelSO PixelToCheckFor;
     public PixelSO PixelToReplace;
 
     [Header("Settings")]
@@ -32,33 +32,12 @@ public class CellularAutomataMutator : WorldMutatorSO
                 {
                     PixelSO pixelInstance = currentPixels[arrayX, arrayY];
                     if (pixelInstance == null) continue;
-                    if (pixelInstance != PixelToReplace && pixelInstance != PixelToCount) continue;
+                    if (pixelInstance != PixelToReplace && pixelInstance != PixelToCheckFor) continue;
 
 
-                    int desiredNeighbors = 0;
-                    for (int dy = -MooreNeighborhoodSize; dy <= MooreNeighborhoodSize; dy++)
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, PixelToCheckFor, ReplacementThreshold))
                     {
-                        for (int dx = -MooreNeighborhoodSize; dx <= MooreNeighborhoodSize; dx++)
-                        {
-                            if (dx == 0 && dy == 0) continue;
-
-                            int nx = arrayX + dx;
-                            int ny = arrayY + dy;
-
-                            if (worldGenerator.IsInBounds(nx, ny))
-                            {
-                                PixelSO neighbor = currentPixels[nx, ny];
-                                if (neighbor != null && neighbor == PixelToCount)
-                                {
-                                    desiredNeighbors++;
-                                }
-                            }
-                        }
-                    }
-
-                    if (desiredNeighbors > ReplacementThreshold)
-                    {
-                        updatedPixels[arrayX, arrayY] = PixelToCount;
+                        updatedPixels[arrayX, arrayY] = PixelToCheckFor;
                     }
                     else updatedPixels[arrayX, arrayY] = PixelToReplace;
                 }
@@ -71,7 +50,7 @@ public class CellularAutomataMutator : WorldMutatorSO
                 {
                     PixelSO pixelInstance = currentPixels[arrayX, arrayY];
                     if (pixelInstance == null) continue;
-                    if (pixelInstance != PixelToReplace && pixelInstance != PixelToCount) continue;
+                    if (pixelInstance != PixelToReplace && pixelInstance != PixelToCheckFor) continue;
 
                     PixelSO newPixel = updatedPixels[arrayX, arrayY];
                     if (newPixel == null) continue;
