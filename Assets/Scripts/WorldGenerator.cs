@@ -25,8 +25,8 @@ public class WorldGenerator : MonoBehaviour
 
     private void OnValidate()
     {
-        if (worldSize.x <= 1) worldSize.x = 2;
-        if (worldSize.y <= 1) worldSize.y = 2;
+        if (worldSize.x <= 0) worldSize.x = 1;
+        if (worldSize.y <= 0) worldSize.y = 1;
     }
 
     private void Awake()

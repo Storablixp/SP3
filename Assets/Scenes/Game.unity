@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildTilemap: 1
   seed: 0
-  worldSize: {x: 512, y: 512}
+  worldSize: {x: 128, y: 128}
   worldMutators:
   - {fileID: 11400000, guid: 4bd28dd395938eb42bd6db2e8fa8e5c4, type: 2}
   - {fileID: 11400000, guid: 215c5b0384a6c494bbccd9312cfceb1d, type: 2}
@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f974c04a73207374395c17248f72e942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTrans: {fileID: 2001004497}
   pixelToTileMappings:
   - pixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
     tile: {fileID: 11400000, guid: 2edeb382d3132a24abe02f75aadbff28, type: 2}
@@ -279,6 +280,7 @@ MonoBehaviour:
   chunkSize: {x: 64, y: 64}
   chunkPrefab: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
   chunksFolder: {fileID: 1272393981}
+  CurrentTilemap: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,7 +756,7 @@ Transform:
   m_GameObject: {fileID: 1272393981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -130.5674, y: 69.49275, z: -2.4809911}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1067,7 +1069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!66 &2001004495
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -1106,7 +1108,17 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 1176431166}
+    m_ColliderPaths:
+    - - X: 1171609
+        Y: 2435614
+      - X: -1999372
+        Y: 2435614
+      - X: -1999372
+        Y: -2817684
+      - X: 1171609
+        Y: -2817684
   m_CompositePaths:
     m_Paths:
     - - {x: 0.1171316, y: -0.2817684}
@@ -1153,7 +1165,7 @@ Transform:
   m_GameObject: {fileID: 2001004494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 510, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1202,7 +1214,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 2001004497}
   - {fileID: 349933714}
   - {fileID: 1272393982}
-  - {fileID: 2001004497}
   - {fileID: 527121851}
