@@ -6,55 +6,49 @@ using UnityEngine.UI;
 public class WorldGenerator : MonoBehaviour
 {
     [Header("World Settings")]
-    private Texture2D worldTexture;
-    public static float XOffset;
-    public static float YOffset;
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int worldSize;
-
-    [Header("Components")]
-    private RectTransform rectTransform;
-    private RawImage rawImage;
     [SerializeField] private WorldMutatorSO[] worldMutators;
-    [SerializeField] private WorldBuilder worldBuilder;
+    private WorldBuilder worldBuilder;
+    public static float XOffset;
+    public static float YOffset;
 
     [Header("Other")]
-    private PixelSO[,] pixels;
     [SerializeField] private bool buildTilemap;
+    private PixelSO[,] pixels;
 
     [Header("Visualization")]
+    [SerializeField] private bool DisplayTexture;
     [SerializeField] private int tilesPerFrame = 100000;
+    [SerializeField] private GameObject worldCanvas;
     private int tileCounter;
 
     private void OnValidate()
     {
-        if (worldSize.x <= 1) worldSize.x = 2;
-        else if (worldSize.x % 2 == 1) worldSize.x++;
-        
+        if (worldSize.x <= 1) worldSize.x = 2;      
         if (worldSize.y <= 1) worldSize.y = 2;
-        else if (worldSize.y % 2 == 1) worldSize.y++;
     }
 
     private void Awake()
     {
-        rawImage = GetComponent<RawImage>();
-        rectTransform = GetComponent<RectTransform>();
-
         foreach (WorldMutatorSO mutator in worldMutators)
         {
             mutator.SetUp(this, worldSize);
         }
+
+        worldBuilder = GetComponent<WorldBuilder>();
     }
 
     void Start()
     {
+        if (worldSize.x % 2 == 1) worldSize.x++;
+        if (worldSize.y % 2 == 1) worldSize.y++;
+
         Random.InitState(seed);
         XOffset = Random.Range(-100000f, 100000f);
         YOffset = Random.Range(-100000f, 100000f);
 
         pixels = new PixelSO[worldSize.x, worldSize.y];
-        worldTexture = new Texture2D(worldSize.x, worldSize.y);
-        rectTransform.sizeDelta = worldSize;
 
         StartCoroutine(nameof(GenerateWorld));
     }
@@ -69,7 +63,12 @@ public class WorldGenerator : MonoBehaviour
             UpdateProgressbar();
         }
 
-        ColorPixels();
+
+        if (DisplayTexture)
+        {
+            GenerateTexture();
+        }
+
 
         if (buildTilemap)
         {
@@ -78,11 +77,13 @@ public class WorldGenerator : MonoBehaviour
         Debug.Log(Time.realtimeSinceStartup);
     }
 
-    public void ChangePixel(int xCoord, int yCoord, PixelSO pixel) => pixels[xCoord, yCoord] = pixel;
-    public PixelSO[,] RetrievePixels() => pixels;
-
-    public void ColorPixels()
+    private void GenerateTexture()
     {
+        Texture2D worldTexture = new Texture2D(worldSize.x, worldSize.y);
+
+        GameObject childObj = Instantiate(worldCanvas, Vector3.zero, Quaternion.identity).transform.GetChild(0).gameObject;
+        childObj.GetComponent<RectTransform>().sizeDelta = worldSize;
+
         for (int x = 0; x < worldSize.x; x++)
         {
             for (int y = 0; y < worldSize.y; y++)
@@ -101,8 +102,12 @@ public class WorldGenerator : MonoBehaviour
         worldTexture.filterMode = FilterMode.Point;
         worldTexture.Apply();
 
-        rawImage.texture = worldTexture;
+        childObj.GetComponent<RawImage>().texture = worldTexture;
     }
+
+    public void ChangePixel(int xCoord, int yCoord, PixelSO pixel) => pixels[xCoord, yCoord] = pixel;
+    public PixelSO[,] RetrievePixels() => pixels;
+
 
     public void ResetCounterValues()
     {
