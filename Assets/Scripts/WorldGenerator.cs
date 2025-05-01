@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
-    [Header("Other")]
-    private PixelSO[,] pixels;
-
     [Header("World Settings")]
     private Texture2D worldTexture;
     public static float XOffset;
@@ -21,9 +18,22 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private WorldMutatorSO[] worldMutators;
     [SerializeField] private WorldBuilder worldBuilder;
 
+    [Header("Other")]
+    private PixelSO[,] pixels;
+    [SerializeField] private bool buildTilemap;
+
     [Header("Visualization")]
     [SerializeField] private int tilesPerFrame = 100000;
     private int tileCounter;
+
+    private void OnValidate()
+    {
+        if (worldSize.x <= 1) worldSize.x = 2;
+        else if (worldSize.x % 2 == 1) worldSize.x++;
+        
+        if (worldSize.y <= 1) worldSize.y = 2;
+        else if (worldSize.y % 2 == 1) worldSize.y++;
+    }
 
     private void Awake()
     {
@@ -41,7 +51,7 @@ public class WorldGenerator : MonoBehaviour
         Random.InitState(seed);
         XOffset = Random.Range(-100000f, 100000f);
         YOffset = Random.Range(-100000f, 100000f);
-        
+
         pixels = new PixelSO[worldSize.x, worldSize.y];
         worldTexture = new Texture2D(worldSize.x, worldSize.y);
         rectTransform.sizeDelta = worldSize;
@@ -60,7 +70,11 @@ public class WorldGenerator : MonoBehaviour
         }
 
         ColorPixels();
-        worldBuilder.BuildWorld(worldSize, pixels);
+
+        if (buildTilemap)
+        {
+            worldBuilder.BuildWorld(worldSize, pixels);
+        }
         Debug.Log(Time.realtimeSinceStartup);
     }
 
@@ -71,7 +85,7 @@ public class WorldGenerator : MonoBehaviour
     {
         for (int x = 0; x < worldSize.x; x++)
         {
-            for(int y = 0; y < worldSize.y; y++)
+            for (int y = 0; y < worldSize.y; y++)
             {
                 Color color = Color.white;
 

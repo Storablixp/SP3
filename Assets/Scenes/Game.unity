@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4bd28dd395938eb42bd6db2e8fa8e5c4, type: 2}
   - {fileID: 11400000, guid: 215c5b0384a6c494bbccd9312cfceb1d, type: 2}
   worldBuilder: {fileID: 95671058}
+  buildTilemap: 0
   tilesPerFrame: 1000000
 --- !u!114 &31248613
 MonoBehaviour:
@@ -183,7 +184,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31248610}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
@@ -1280,7 +1281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!66 &2001004495
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -1319,17 +1320,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1176431166}
-    m_ColliderPaths:
-    - - X: 1171609
-        Y: 2435614
-      - X: -1999372
-        Y: 2435614
-      - X: -1999372
-        Y: -2817684
-      - X: 1171609
-        Y: -2817684
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 0.1171316, y: -0.2817684}
@@ -1527,7 +1518,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 2003658553}
-  - {fileID: 527121851}
-  - {fileID: 630712249}
   - {fileID: 2001004497}
+  - {fileID: 2003658553}
+  - {fileID: 630712249}
+  - {fileID: 527121851}

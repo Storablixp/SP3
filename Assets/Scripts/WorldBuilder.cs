@@ -24,7 +24,7 @@ public class WorldBuilder : MonoBehaviour
                 PixelSO pixel = pixels[x, y];
                 if (tileLookup.TryGetValue(pixel.Color, out var tile))
                 {
-                    worldTilemap.SetTile(new Vector3Int(x, y, 0), tile);
+                    worldTilemap.SetTile(new Vector3Int(x - (int)(worldSize.x * 0.5f), y - (int)(worldSize.y * 0.5f), 0), tile);
                 }
             }
         }
