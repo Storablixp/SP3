@@ -13,9 +13,7 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private Vector2Int chunkSize;
     [SerializeField] private GameObject chunkPrefab;
     [SerializeField] private GameObject chunksFolder;
-    private bool hasBeenSetUp = false;
     private Dictionary<Vector2Int, Tilemap> chunkTilemaps = new();
-    private List<Tilemap> activeTilemaps = new();
     public Tilemap CurrentTilemap;
 
     private void Awake()
@@ -23,18 +21,33 @@ public class ChunkManager : MonoBehaviour
         tileLookup = pixelToTileMappings.ToDictionary(p => p.pixel.Color, p => p.tile);
     }
 
+    private void Update()
+    {
+        if (CurrentTilemap != null)
+        {
+            //for (int i = -1; i <= 1; i++)
+            //{
+            //    Vector2Int coordinate = new Vector2Int(32 * i + CurrentTilemap.c, 32 * i);
+            //    chunkTilemaps[(32 * i, 32 * i)];
+            //}
+
+            CurrentTilemap.gameObject.SetActive(true);
+        }
+    }
+
     public void SplitTheWorldIntoChunks(Vector2Int worldSize, PixelSO[,] pixels)
     {
         int chunksX = worldSize.x / chunkSize.x;
         int chunksY = worldSize.y / chunkSize.y;
 
-        for (int yChunk = chunksY - 1; yChunk >= 0; yChunk--)
+        for (int yChunk = 0; yChunk < chunksY; yChunk++)
         {
             for (int xChunk = 0; xChunk < chunksX; xChunk++)
             {
                 GameObject chunkObj = Instantiate(chunkPrefab, Vector3.zero, Quaternion.identity, chunksFolder.transform);
                 chunkObj.name = $"Chunk ({xChunk}, {yChunk})";
                 GameObject childObj = chunkObj.transform.GetChild(0).gameObject;
+                childObj.name = $"Tilemap ({xChunk}, {yChunk})";
                 Tilemap chunkTilemap = childObj.GetComponent<Tilemap>();
 
                 int startX = xChunk * chunkSize.x;
@@ -55,21 +68,39 @@ public class ChunkManager : MonoBehaviour
 
                         if (x == centerX && y == centerY)
                         {
-                            chunkTilemaps.Add(new Vector2Int(x, y), chunkTilemap);
+                            Vector3Int centerTilePos = new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0);
+                            Vector3 worldCenterPos = chunkTilemap.CellToWorld(centerTilePos) + chunkTilemap.tileAnchor;
+                            chunkTilemaps.Add(new Vector2Int(Mathf.FloorToInt(worldCenterPos.x), Mathf.FloorToInt(worldCenterPos.y)), chunkTilemap);
 
-                            //if (xChunk == 0 && yChunk == 0)
-                            //{
-                            //    CurrentTilemap = chunkTilemap;
-                            //    playerTrans.transform.position = new Vector2(centerX - (chunkSize.x / 2), 0);
-                            //}
+                            chunkTilemap.gameObject.SetActive(false);
                         }
                     }
                 }
             }
         }
 
-        //FindActiveChunks();
-        hasBeenSetUp = true;
+        CurrentTilemap = FindClosestChunk();
+    }
+
+    private Tilemap FindClosestChunk()
+    {
+        int playerX = Mathf.FloorToInt(playerTrans.position.x);
+        int playerY = Mathf.FloorToInt(playerTrans.position.y);
+        float shortestDistance = float.MaxValue;
+        Tilemap closestTileMap = null;
+
+        foreach (var chunk in chunkTilemaps)
+        {
+            float distance = Vector2Int.Distance(chunk.Key, new Vector2Int(playerX, playerY));
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                closestTileMap = chunk.Value;
+            }
+
+        }
+
+       return closestTileMap;
     }
 
     //private void Update()
