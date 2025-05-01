@@ -92,7 +92,7 @@ public class ChunkManager : MonoBehaviour
                 {
                     if (x == 0 && y == 0) continue;
 
-                    Vector2Int posToCheck = new Vector2Int(chunk.Value.CenterPos.x + (x * 64), chunk.Value.CenterPos.y + (y * 64));
+                    Vector2Int posToCheck = new Vector2Int(chunk.Value.CenterPos.x + (x * 32), chunk.Value.CenterPos.y + (y * 32));
                     if (chunks.TryGetValue(posToCheck, out ChunkInstance neighborChunk))
                     {
                         chunk.Value.NeighborChunks[x + 1, y + 1] = neighborChunk;
