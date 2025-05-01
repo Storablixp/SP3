@@ -243,7 +243,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 215c5b0384a6c494bbccd9312cfceb1d, type: 2}
   DisplayTexture: 0
   tilesPerFrame: 1000000
-  worldCanvas: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
+  worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
 --- !u!4 &349933714
 Transform:
   m_ObjectHideFlags: 0
@@ -277,7 +277,8 @@ MonoBehaviour:
   - pixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
     tile: {fileID: 11400000, guid: 7a0e41f16b36e074a8dee7efd3a38b18, type: 2}
   chunkSize: {x: 64, y: 64}
-  masterChunk: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
+  chunkPrefab: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
+  chunksFolder: {fileID: 1272393981}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +729,37 @@ Transform:
   - {fileID: 101110722}
   m_Father: {fileID: 2001004497}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1272393981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1272393982}
+  m_Layer: 0
+  m_Name: Chunks Folder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1272393982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272393981}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -130.5674, y: 69.49275, z: -2.4809911}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1340531032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,5 +1203,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 349933714}
+  - {fileID: 1272393982}
   - {fileID: 2001004497}
   - {fileID: 527121851}

@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6458826188042699797}
   - component: {fileID: 8390984854415027151}
   m_Layer: 0
-  m_Name: Master Chunk
+  m_Name: Chunk Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,26 +11,42 @@ public class ChunkManager : MonoBehaviour
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
-    [SerializeField] private GameObject masterChunk;
+    [SerializeField] private GameObject chunkPrefab;
+    [SerializeField] private GameObject chunksFolder;
 
     private void Awake()
     {
         tileLookup = pixelToTileMappings.ToDictionary(p => p.pixel.Color, p => p.tile);
     }
 
-    public void GenerateMasterChunk(Vector2Int worldSize, PixelSO[,] pixels)
+    public void SplitTheWorldIntoChunks(Vector2Int worldSize, PixelSO[,] pixels)
     {
-        GameObject childObj = Instantiate(masterChunk, Vector3.zero, Quaternion.identity).transform.GetChild(0).gameObject;
-        Tilemap masterTilemap = childObj.GetComponent<Tilemap>();
+        int chunkSize = 64;
+        int chunksX = worldSize.x / chunkSize;
+        int chunksY = worldSize.y / chunkSize;
 
-        for (int x = 0; x < worldSize.x; x++)
+        for (int yChunk = 0; yChunk < chunksY; yChunk++)
         {
-            for (int y = 0; y < worldSize.y; y++)
+            for (int xChunk = 0; xChunk < chunksX; xChunk++)
             {
-                PixelSO pixel = pixels[x, y];
-                if (tileLookup.TryGetValue(pixel.Color, out var tile))
+                GameObject chunkObj = Instantiate(chunkPrefab, Vector3.zero, Quaternion.identity, chunksFolder.transform);
+                chunkObj.name = $"Chunk ({xChunk}, {yChunk})";
+                GameObject childObj = chunkObj.transform.GetChild(0).gameObject;
+                Tilemap masterTilemap = childObj.GetComponent<Tilemap>();
+
+                int startX = xChunk * chunkSize;
+                int startY = yChunk * chunkSize;
+
+                for (int x = startX; x < startX + chunkSize; x++)
                 {
-                    masterTilemap.SetTile(new Vector3Int(x - (int)(worldSize.x * 0.5f), y - (int)(worldSize.y * 0.5f), 0), tile);
+                    for (int y = startY; y < startY + chunkSize; y++)
+                    {
+                        PixelSO pixel = pixels[x, y];
+                        if (tileLookup.TryGetValue(pixel.Color, out var tile))
+                        {
+                            masterTilemap.SetTile(new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0), tile);
+                        }
+                    }
                 }
             }
         }

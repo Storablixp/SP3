@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 741717331067889873}
   - component: {fileID: 6466120260367141350}
   m_Layer: 5
-  m_Name: World Canvas
+  m_Name: World Canvas Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

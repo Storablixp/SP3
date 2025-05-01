@@ -20,7 +20,7 @@ public class WorldGenerator : MonoBehaviour
     [Header("Visualization")]
     [SerializeField] private bool DisplayTexture;
     [SerializeField] private int tilesPerFrame = 100000;
-    [SerializeField] private GameObject worldCanvas;
+    [SerializeField] private GameObject worldCanvasPrefab;
     private int tileCounter;
 
     private void OnValidate()
@@ -72,7 +72,7 @@ public class WorldGenerator : MonoBehaviour
 
         if (buildTilemap)
         {
-            chunkManager.GenerateMasterChunk(worldSize, pixels);
+            chunkManager.SplitTheWorldIntoChunks(worldSize, pixels);
         }
 
         Debug.Log(Time.realtimeSinceStartup);
@@ -82,7 +82,7 @@ public class WorldGenerator : MonoBehaviour
     {
         Texture2D worldTexture = new Texture2D(worldSize.x, worldSize.y);
 
-        GameObject childObj = Instantiate(worldCanvas, Vector3.zero, Quaternion.identity).transform.GetChild(0).gameObject;
+        GameObject childObj = Instantiate(worldCanvasPrefab, Vector3.zero, Quaternion.identity).transform.GetChild(0).gameObject;
         childObj.GetComponent<RectTransform>().sizeDelta = worldSize;
 
         for (int x = 0; x < worldSize.x; x++)
