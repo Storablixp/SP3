@@ -16,9 +16,19 @@ public class ChunkManager : MonoBehaviour
     private Dictionary<Vector2Int, ChunkInstance> chunks = new();
     private ChunkInstance currentChunk;
 
+    //Vi använder dessa världen för att scale på ChunkPrefab är satt til (0.5f, 0.5f, 1f).
+    private int halfWitdh;
+    private int halfHeight;
+
     private void Awake()
     {
         tileLookup = pixelToTileMappings.ToDictionary(p => p.pixel.Color, p => p.tile);
+    }
+
+    private void Start()
+    {
+        halfWitdh = chunkSize.x / 2;
+        halfHeight = chunkSize.y / 2;
     }
 
     private void Update()
@@ -95,7 +105,7 @@ public class ChunkManager : MonoBehaviour
                 {
                     if (x == 0 && y == 0) continue;
 
-                    Vector2Int posToCheck = new Vector2Int(chunk.Value.CenterPos.x + (x * 32), chunk.Value.CenterPos.y + (y * 32));
+                    Vector2Int posToCheck = new Vector2Int(chunk.Value.CenterPos.x + (x * halfWitdh), chunk.Value.CenterPos.y + (y * halfHeight));
                     if (chunks.TryGetValue(posToCheck, out ChunkInstance neighborChunk))
                     {
                         chunk.Value.NeighborChunks[x + 1, y + 1] = neighborChunk;
