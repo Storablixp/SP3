@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class AreaRemover : MonoBehaviour
 {
-    [SerializeField] Tilemap tilemap;
+    [SerializeField] private Tilemap tilemap;
     [SerializeField] private WorldTile hollowTile;
     [SerializeField] private CircleCollider2D removeArea;
     [SerializeField] private ParticleSystem digParticle;
