@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildTilemap: 1
   seed: 0
-  worldSize: {x: 256, y: 256}
+  worldSize: {x: 1024, y: 1024}
   worldMutators:
   - {fileID: 11400000, guid: 4bd28dd395938eb42bd6db2e8fa8e5c4, type: 2}
   - {fileID: 11400000, guid: 215c5b0384a6c494bbccd9312cfceb1d, type: 2}
@@ -280,7 +280,6 @@ MonoBehaviour:
   chunkSize: {x: 64, y: 64}
   chunkPrefab: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
   chunksFolder: {fileID: 1272393981}
-  CurrentChunk: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
