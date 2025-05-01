@@ -1,21 +1,21 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
+    [SerializeField] private bool buildTilemap;
+    private PixelSO[,] pixels;
+
     [Header("World Settings")]
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int worldSize;
     [SerializeField] private WorldMutatorSO[] worldMutators;
-    private WorldBuilder worldBuilder;
+    private ChunkManager chunkManager;
     public static float XOffset;
     public static float YOffset;
-
-    [Header("Other")]
-    [SerializeField] private bool buildTilemap;
-    private PixelSO[,] pixels;
 
     [Header("Visualization")]
     [SerializeField] private bool DisplayTexture;
@@ -25,7 +25,7 @@ public class WorldGenerator : MonoBehaviour
 
     private void OnValidate()
     {
-        if (worldSize.x <= 1) worldSize.x = 2;      
+        if (worldSize.x <= 1) worldSize.x = 2;
         if (worldSize.y <= 1) worldSize.y = 2;
     }
 
@@ -36,7 +36,7 @@ public class WorldGenerator : MonoBehaviour
             mutator.SetUp(this, worldSize);
         }
 
-        worldBuilder = GetComponent<WorldBuilder>();
+        chunkManager = GetComponent<ChunkManager>();
     }
 
     void Start()
@@ -72,8 +72,9 @@ public class WorldGenerator : MonoBehaviour
 
         if (buildTilemap)
         {
-            worldBuilder.BuildWorld(worldSize, pixels);
+            chunkManager.GenerateMasterChunk(worldSize, pixels);
         }
+
         Debug.Log(Time.realtimeSinceStartup);
     }
 

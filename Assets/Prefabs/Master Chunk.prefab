@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 784575021373211923}
   - component: {fileID: 364891070831370138}
   - component: {fileID: 8257438822754820929}
-  - component: {fileID: 1087139437633692856}
   - component: {fileID: 3555533613036875707}
   m_Layer: 3
   m_Name: Tilemap
@@ -125,24 +124,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &1087139437633692856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4656639911708981113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f974c04a73207374395c17248f72e942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  worldTilemap: {fileID: 364891070831370138}
-  pixelToTileMappings:
-  - pixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
-    tile: {fileID: 11400000, guid: 2edeb382d3132a24abe02f75aadbff28, type: 2}
-  - pixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
-    tile: {fileID: 11400000, guid: 7a0e41f16b36e074a8dee7efd3a38b18, type: 2}
 --- !u!19719996 &3555533613036875707
 TilemapCollider2D:
   m_ObjectHideFlags: 0
