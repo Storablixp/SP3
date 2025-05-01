@@ -5,10 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class AreaRemover : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap;
     [SerializeField] private WorldTile hollowTile;
     [SerializeField] private CircleCollider2D removeArea;
     [SerializeField] private ParticleSystem digParticle;
+    private Tilemap currentTilemap;
     float diameter = 1f;
 
     private void Start()
@@ -18,6 +18,7 @@ public class AreaRemover : MonoBehaviour
 
     void Update()
     {
+        //Rotation
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         Vector3 directionToMouse = (mousePos - transform.position).normalized;
@@ -26,12 +27,14 @@ public class AreaRemover : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            if (currentTilemap == null) return;
+
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             worldPosition.z = 0;
             Bounds colliderBounds = removeArea.bounds;
 
-            Vector3Int min = tilemap.WorldToCell(colliderBounds.min);
-            Vector3Int max = tilemap.WorldToCell(colliderBounds.max);
+            Vector3Int min = currentTilemap.WorldToCell(colliderBounds.min);
+            Vector3Int max = currentTilemap.WorldToCell(colliderBounds.max);
 
             Vector3 cirlceCenter = removeArea.transform.position;
 
@@ -40,14 +43,14 @@ public class AreaRemover : MonoBehaviour
                 for (int worldX = min.x; worldX <= max.x; worldX++)
                 {
                     Vector3Int tilePos = new Vector3Int(worldX, worldY, 0);
-                    Vector3 worldTilePos = tilemap.GetCellCenterWorld(tilePos);
+                    Vector3 worldTilePos = currentTilemap.GetCellCenterWorld(tilePos);
 
                     float distanceToCenter = Vector3.Distance(worldTilePos, cirlceCenter);
                     if (distanceToCenter <= diameter)
                     {
-                        if (tilemap.HasTile(tilePos))
+                        if (currentTilemap.HasTile(tilePos))
                         {
-                            WorldTile currentTile = tilemap.GetTile(tilePos) as WorldTile;
+                            WorldTile currentTile = currentTilemap.GetTile(tilePos) as WorldTile;
 
                             if (currentTile.ColliderType != Tile.ColliderType.None)
                             {
@@ -55,13 +58,24 @@ public class AreaRemover : MonoBehaviour
                                 ParticleSystem ps = Instantiate(digParticle, transform.position, spawnRotation);
                                 ps.GetComponent<ParticleSystemRenderer>().material.color = currentTile.Color;
 
-                                tilemap.SetTile(tilePos, hollowTile);
-                                tilemap.SetColor(tilePos, hollowTile.Color);
+                                currentTilemap.SetTile(tilePos, hollowTile);
+                                currentTilemap.SetColor(tilePos, hollowTile.Color);
                             }
                         }
                     }
                 }
 
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 3)
+        {
+            if (collision.gameObject.TryGetComponent(out Tilemap tilemap))
+            {
+                currentTilemap = tilemap;
             }
         }
     }
