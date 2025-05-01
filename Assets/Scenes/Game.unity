@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 349933713}
   - component: {fileID: 349933715}
   m_Layer: 0
-  m_Name: World Generator
+  m_Name: World Creator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
