@@ -277,6 +277,8 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2edeb382d3132a24abe02f75aadbff28, type: 2}
   - pixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
     tile: {fileID: 11400000, guid: 7a0e41f16b36e074a8dee7efd3a38b18, type: 2}
+  - pixel: {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}
+    tile: {fileID: 11400000, guid: fc294fe43067851479d4f8bd5f53bc4a, type: 2}
   chunkSize: {x: 64, y: 64}
   chunkPrefab: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
   chunksFolder: {fileID: 1272393981}
