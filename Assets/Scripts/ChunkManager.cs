@@ -13,8 +13,8 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private Vector2Int chunkSize;
     [SerializeField] private GameObject chunkPrefab;
     [SerializeField] private GameObject chunksFolder;
-    private Dictionary<Vector2Int, Tilemap> chunkTilemaps = new();
-    public Tilemap CurrentTilemap;
+    private Dictionary<Vector2Int, ChunkInstance> chunks = new();
+    public ChunkInstance CurrentChunk;
 
     private void Awake()
     {
@@ -23,15 +23,17 @@ public class ChunkManager : MonoBehaviour
 
     private void Update()
     {
-        if (CurrentTilemap != null)
+        if (CurrentChunk != null)
         {
-            //for (int i = -1; i <= 1; i++)
-            //{
-            //    Vector2Int coordinate = new Vector2Int(32 * i + CurrentTilemap.c, 32 * i);
-            //    chunkTilemaps[(32 * i, 32 * i)];
-            //}
+            CurrentChunk.gameObject.SetActive(true);
 
-            CurrentTilemap.gameObject.SetActive(true);
+            foreach (var neighbor in CurrentChunk.NeighborChunks)
+            {
+                if (neighbor != null)
+                {
+                    neighbor.gameObject.SetActive(true);
+                }
+            }
         }
     }
 
@@ -48,7 +50,9 @@ public class ChunkManager : MonoBehaviour
                 chunkObj.name = $"Chunk ({xChunk}, {yChunk})";
                 GameObject childObj = chunkObj.transform.GetChild(0).gameObject;
                 childObj.name = $"Tilemap ({xChunk}, {yChunk})";
-                Tilemap chunkTilemap = childObj.GetComponent<Tilemap>();
+
+                ChunkInstance chunkInstance = childObj.GetComponent<ChunkInstance>();
+                Tilemap tilemap = chunkInstance.Tilemap;
 
                 int startX = xChunk * chunkSize.x;
                 int startY = yChunk * chunkSize.y;
@@ -60,7 +64,7 @@ public class ChunkManager : MonoBehaviour
                         PixelSO pixel = pixels[x, y];
                         if (tileLookup.TryGetValue(pixel.Color, out var tile))
                         {
-                            chunkTilemap.SetTile(new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0), tile);
+                            tilemap.SetTile(new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0), tile);
                         }
 
                         int centerX = startX + chunkSize.x / 2;
@@ -69,38 +73,58 @@ public class ChunkManager : MonoBehaviour
                         if (x == centerX && y == centerY)
                         {
                             Vector3Int centerTilePos = new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0);
-                            Vector3 worldCenterPos = chunkTilemap.CellToWorld(centerTilePos) + chunkTilemap.tileAnchor;
-                            chunkTilemaps.Add(new Vector2Int(Mathf.FloorToInt(worldCenterPos.x), Mathf.FloorToInt(worldCenterPos.y)), chunkTilemap);
+                            Vector3 worldCenterPos = tilemap.CellToWorld(centerTilePos) + tilemap.tileAnchor;
+                            chunks.Add(new Vector2Int(Mathf.FloorToInt(worldCenterPos.x), Mathf.FloorToInt(worldCenterPos.y)), chunkInstance);
 
-                            chunkTilemap.gameObject.SetActive(false);
+                            chunkInstance.CenterPos = new Vector2Int(Mathf.FloorToInt(worldCenterPos.x), Mathf.FloorToInt(worldCenterPos.y));
+                            chunkInstance.gameObject.SetActive(false);
                         }
                     }
                 }
             }
         }
 
-        CurrentTilemap = FindClosestChunk();
+        foreach (var chunk in chunks)
+        {
+            for (int x = -1; x < 2; x++)
+            {
+                for (int y = -1; y < 2; y++)
+                {
+                    if (x == 0 && y == 0) continue;
+
+                    Vector2Int posToCheck = new Vector2Int(chunk.Value.CenterPos.x + (x * 64), chunk.Value.CenterPos.y + (y * 64));
+                    if (chunks.TryGetValue(posToCheck, out ChunkInstance neighborChunk))
+                    {
+                        chunk.Value.NeighborChunks[x + 1, y + 1] = neighborChunk;
+                        chunk.Value.Ne.Add(neighborChunk);
+                    }
+                }
+            }
+        }
+
+
+        CurrentChunk = FindClosestChunk();
     }
 
-    private Tilemap FindClosestChunk()
+    private ChunkInstance FindClosestChunk()
     {
         int playerX = Mathf.FloorToInt(playerTrans.position.x);
         int playerY = Mathf.FloorToInt(playerTrans.position.y);
         float shortestDistance = float.MaxValue;
-        Tilemap closestTileMap = null;
+        ChunkInstance closestChunk = null;
 
-        foreach (var chunk in chunkTilemaps)
+        foreach (var chunk in chunks)
         {
             float distance = Vector2Int.Distance(chunk.Key, new Vector2Int(playerX, playerY));
             if (distance < shortestDistance)
             {
                 shortestDistance = distance;
-                closestTileMap = chunk.Value;
+                closestChunk = chunk.Value;
             }
 
         }
 
-       return closestTileMap;
+        return closestChunk;
     }
 
     //private void Update()
@@ -116,11 +140,11 @@ public class ChunkManager : MonoBehaviour
         int playerX = Mathf.FloorToInt(playerTrans.position.x);
         int playerY = Mathf.FloorToInt(playerTrans.position.y);
 
-        foreach (var chunk in chunkTilemaps)
+        foreach (var chunk in chunks)
         {
             if (Vector2Int.Distance(chunk.Key, new Vector2Int(playerX, playerY)) > (chunkSize.x + chunkSize.y) * 2)
             {
-               chunk.Value.gameObject.SetActive(false);
+                chunk.Value.gameObject.SetActive(false);
             }
         }
     }

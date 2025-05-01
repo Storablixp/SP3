@@ -280,7 +280,7 @@ MonoBehaviour:
   chunkSize: {x: 64, y: 64}
   chunkPrefab: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
   chunksFolder: {fileID: 1272393981}
-  CurrentTilemap: {fileID: 0}
+  CurrentChunk: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,7 +1164,7 @@ Transform:
   m_GameObject: {fileID: 2001004494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32, y: 32, z: 0}
+  m_LocalPosition: {x: -25, y: 45.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
