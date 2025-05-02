@@ -1,7 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour

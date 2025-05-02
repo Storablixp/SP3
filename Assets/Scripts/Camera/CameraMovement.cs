@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private Transform playerTrans;
+    private Transform playerTrans;
     [SerializeField] private float yOffset = 1.5f;
+
+    public void SetUp(Transform playerTrans)
+    {
+        this.playerTrans = playerTrans;
+    }
 
     void Update()
     {

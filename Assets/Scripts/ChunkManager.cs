@@ -4,7 +4,11 @@ using UnityEngine.Tilemaps;
 
 public class ChunkManager : MonoBehaviour
 {
-    [SerializeField] private Transform playerTrans;
+    [Header("Player")]
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private CameraMovement cameraMovement;
+    private Transform playerTrans;
+    
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
@@ -30,6 +34,8 @@ public class ChunkManager : MonoBehaviour
             Vector3 playerWorldPos = playerTrans.position;
             Vector3Int playerCellPos = currentChunk.Tilemap.WorldToCell(playerWorldPos);
 
+            Debug.Log(playerWorldPos);
+
             if (!currentChunk.Bounds.Contains(playerCellPos))
             {
                 var newClosetChunk = FindClosestChunk();
@@ -43,6 +49,8 @@ public class ChunkManager : MonoBehaviour
     {
         int chunksX = worldSize.x / chunkSize.x;
         int chunksY = worldSize.y / chunkSize.y;
+
+        Vector3 vectorForPlayerSpawaning = Vector3.zero;
 
         for (int yChunk = 0; yChunk < chunksY; yChunk++)
         {
@@ -86,7 +94,7 @@ public class ChunkManager : MonoBehaviour
 
                             if (xChunk == chunksX / 2 && yChunk == chunksY - 1)
                             {
-                                playerTrans.position = new Vector2(worldCenterPos.x, worldCenterPos.y + (halfHeight / 2f) + 1f);
+                                vectorForPlayerSpawaning = worldCenterPos;
                             }
                         }
                     }
@@ -94,6 +102,13 @@ public class ChunkManager : MonoBehaviour
             }
         }
 
+        AssignNeighborChunks();
+        SpawnPlayer(vectorForPlayerSpawaning);
+        UpdateCurrentChunk(FindClosestChunk());
+    }
+
+    private void AssignNeighborChunks()
+    {
         foreach (var chunk in chunks)
         {
             for (int x = -1; x < 2; x++)
@@ -110,29 +125,13 @@ public class ChunkManager : MonoBehaviour
                 }
             }
         }
-
-        UpdateCurrentChunk(FindClosestChunk());
     }
 
-    private ChunkInstance FindClosestChunk()
+    private void SpawnPlayer(Vector3 vectorForPlayerSpawaning)
     {
-        int playerX = Mathf.FloorToInt(playerTrans.position.x);
-        int playerY = Mathf.FloorToInt(playerTrans.position.y);
-        float shortestDistance = float.MaxValue;
-        ChunkInstance closestChunk = null;
-
-        foreach (var chunk in chunks)
-        {
-            float distance = Vector2Int.Distance(chunk.Key, new Vector2Int(playerX, playerY));
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                closestChunk = chunk.Value;
-            }
-
-        }
-
-        return closestChunk;
+        Vector2 playerSpawnPoint = new Vector2(vectorForPlayerSpawaning.x, vectorForPlayerSpawaning.y + (halfHeight / 2f) + 1f);
+        playerTrans = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity).transform;
+        cameraMovement.SetUp(playerTrans);
     }
 
     private void UpdateCurrentChunk(ChunkInstance closetChunk)
@@ -158,5 +157,26 @@ public class ChunkManager : MonoBehaviour
                 neighbor.gameObject.SetActive(true);
             }
         }
+    }
+
+    private ChunkInstance FindClosestChunk()
+    {
+        int playerX = Mathf.FloorToInt(playerTrans.position.x);
+        int playerY = Mathf.FloorToInt(playerTrans.position.y);
+        float shortestDistance = float.MaxValue;
+        ChunkInstance closestChunk = null;
+
+        foreach (var chunk in chunks)
+        {
+            float distance = Vector2Int.Distance(chunk.Key, new Vector2Int(playerX, playerY));
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                closestChunk = chunk.Value;
+            }
+
+        }
+
+        return closestChunk;
     }
 }
