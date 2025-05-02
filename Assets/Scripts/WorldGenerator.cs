@@ -20,6 +20,8 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private int tilesPerFrame = 100000;
     [SerializeField] private GameObject worldCanvasPrefab;
     private int tileCounter;
+    private Texture2D worldTexture;
+    private RawImage rawImage;
 
     private void OnValidate()
     {
@@ -78,10 +80,13 @@ public class WorldGenerator : MonoBehaviour
 
     private void GenerateTexture()
     {
-        Texture2D worldTexture = new Texture2D(worldSize.x, worldSize.y);
-
-        GameObject childObj = Instantiate(worldCanvasPrefab, Vector3.zero, Quaternion.identity).transform.GetChild(0).gameObject;
-        childObj.GetComponent<RectTransform>().sizeDelta = worldSize;
+        if (worldTexture == null)
+        {
+            worldTexture = new Texture2D(worldSize.x, worldSize.y);
+            GameObject childObj = Instantiate(worldCanvasPrefab, Vector3.zero, Quaternion.identity).transform.GetChild(0).gameObject;
+            childObj.GetComponent<RectTransform>().sizeDelta = worldSize;
+            rawImage = childObj.GetComponent<RawImage>();
+        } 
 
         for (int x = 0; x < worldSize.x; x++)
         {
@@ -101,7 +106,7 @@ public class WorldGenerator : MonoBehaviour
         worldTexture.filterMode = FilterMode.Point;
         worldTexture.Apply();
 
-        childObj.GetComponent<RawImage>().texture = worldTexture;
+        rawImage.texture = worldTexture;
     }
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
