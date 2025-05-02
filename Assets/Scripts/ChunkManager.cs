@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Unity.Cinemachine;
 
 public class ChunkManager : MonoBehaviour
 {
-    [Header("Player")]
+    [Header("Player & Camera")]
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private CameraMovement cameraMovement;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
+    [SerializeField] private CinemachineConfiner2D confiner2D;
     private Transform playerTrans;
-    
+    private BoxCollider2D cameraBox;
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
@@ -25,6 +27,8 @@ public class ChunkManager : MonoBehaviour
     {
         halfWitdh = chunkSize.x / 2;
         halfHeight = chunkSize.y / 2;
+
+        cameraBox = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -101,7 +105,7 @@ public class ChunkManager : MonoBehaviour
         }
 
         AssignNeighborChunks();
-        SpawnPlayer(vectorForPlayerSpawaning);
+        SpawnPlayer(worldSize, vectorForPlayerSpawaning);
         UpdateCurrentChunk(FindClosestChunk());
     }
 
@@ -125,11 +129,14 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    private void SpawnPlayer(Vector3 vectorForPlayerSpawaning)
+    private void SpawnPlayer(Vector2Int worldSize, Vector3 vectorForPlayerSpawaning)
     {
         Vector2 playerSpawnPoint = new Vector2(vectorForPlayerSpawaning.x, vectorForPlayerSpawaning.y + (halfHeight / 2f) + 1f);
         playerTrans = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity).transform;
-        cameraMovement.SetUp(playerTrans);
+        cinemachineCamera.Follow = playerTrans;
+        cameraBox.size = new Vector2(worldSize.x / 2, (worldSize.y / 2) + 16);
+        cameraBox.offset = new Vector2(0, 8);
+        confiner2D.BoundingShape2D = cameraBox;
     }
 
     private void UpdateCurrentChunk(ChunkInstance closetChunk)
