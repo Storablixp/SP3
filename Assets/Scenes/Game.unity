@@ -329,13 +329,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9467f51c2c29f484091681ea8b5035d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildTilemap: 1
+  buildTilemap: 0
+  airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 0
-  worldSize: {x: 512, y: 512}
+  worldSize: {x: 1024, y: 1024}
   worldMutators:
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
-  DisplayTexture: 0
+  - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
+  DisplayTexture: 1
   tilesPerFrame: 10
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
 --- !u!4 &349933714
@@ -1402,8 +1404,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 1571603334}
-  - {fileID: 619394802}
   - {fileID: 349933714}
+  - {fileID: 619394802}
   - {fileID: 1272393982}
   - {fileID: 527121851}
   - {fileID: 26961339}

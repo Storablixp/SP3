@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class WorldGenerator : MonoBehaviour
 {
     [SerializeField] private bool buildTilemap;
+    [SerializeField] private PixelSO airPixel;
     private PixelSO[,] pixels;
 
     [Header("World Settings")]
@@ -55,12 +56,14 @@ public class WorldGenerator : MonoBehaviour
 
     private IEnumerator GenerateWorld()
     {
+        yield return StartCoroutine(FillWithAir());
+
 
         foreach (WorldMutatorSO mutator in worldMutators)
         {
-            ResetCounterValues();
+            //ResetCounterValues();
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
-            UpdateProgressbar();
+            //UpdateProgressbar();
         }
 
 
@@ -78,6 +81,19 @@ public class WorldGenerator : MonoBehaviour
         Debug.Log(Time.realtimeSinceStartup);
     }
 
+    private IEnumerator FillWithAir()
+    {
+        for (int x = 0; x < worldSize.x; x++)
+        {
+            for (int y = 0; y < worldSize.y; y++)
+            {
+                TurnToAir(x, y);
+            }
+        }
+
+        yield return null;
+    }
+
     private void GenerateTexture()
     {
         if (worldTexture == null)
@@ -86,7 +102,7 @@ public class WorldGenerator : MonoBehaviour
             GameObject childObj = Instantiate(worldCanvasPrefab, Vector3.zero, Quaternion.identity).transform.GetChild(0).gameObject;
             childObj.GetComponent<RectTransform>().sizeDelta = worldSize;
             rawImage = childObj.GetComponent<RawImage>();
-        } 
+        }
 
         for (int x = 0; x < worldSize.x; x++)
         {
@@ -119,6 +135,9 @@ public class WorldGenerator : MonoBehaviour
         pixels[xCoord, yCoord] = pixel;
 
     }
+
+    public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord] = airPixel;
+
     public PixelSO[,] RetrievePixels() => pixels;
 
 

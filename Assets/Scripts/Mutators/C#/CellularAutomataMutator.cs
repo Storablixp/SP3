@@ -13,10 +13,10 @@ public class CellularAutomataMutator : WorldMutatorSO
     public int MooreNeighborhoodSize = 1;
     public int Iterations = 5;
 
-    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
-    {
-        base.SetUp(worldGenerator, worldSize);
-    }
+    //public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
+    //{
+    //    base.SetUp(worldGenerator, worldSize);
+    //}
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
