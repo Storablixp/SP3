@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -76,7 +75,7 @@ public class ChunkManager : MonoBehaviour
                         if (x == centerX && y == centerY)
                         {
                             Vector3Int centerTilePos = new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0);
-                            Vector3 worldCenterPos = tilemap.CellToWorld(centerTilePos) + tilemap.tileAnchor;
+                            Vector3 worldCenterPos = tilemap.CellToWorld(centerTilePos) /*+ tilemap.tileAnchor*/;
                             chunks.Add(new Vector2Int(Mathf.FloorToInt(worldCenterPos.x), Mathf.FloorToInt(worldCenterPos.y)), chunkInstance);
 
                             chunkInstance.CenterPos = new Vector2Int(Mathf.FloorToInt(worldCenterPos.x), Mathf.FloorToInt(worldCenterPos.y));
@@ -84,6 +83,11 @@ public class ChunkManager : MonoBehaviour
                                                    new Vector3Int(chunkSize.x, chunkSize.y, 1)
 );
                             chunkInstance.gameObject.SetActive(false);
+
+                            if (xChunk == chunksX / 2 && yChunk == chunksY - 1)
+                            {
+                                playerTrans.position = new Vector2(worldCenterPos.x, worldCenterPos.y + (halfHeight / 2f) + 1f);
+                            }
                         }
                     }
                 }

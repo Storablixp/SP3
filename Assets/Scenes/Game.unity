@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildTilemap: 1
   seed: 0
-  worldSize: {x: 1024, y: 1024}
+  worldSize: {x: 512, y: 512}
   worldMutators:
   - {fileID: 11400000, guid: 4bd28dd395938eb42bd6db2e8fa8e5c4, type: 2}
   - {fileID: 11400000, guid: 215c5b0384a6c494bbccd9312cfceb1d, type: 2}
