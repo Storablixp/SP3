@@ -139,28 +139,37 @@ public class ChunkManager : MonoBehaviour
         confiner2D.BoundingShape2D = cameraBox;
     }
 
-    private void UpdateCurrentChunk(ChunkInstance closetChunk)
+    private void UpdateCurrentChunk(ChunkInstance closestChunk)
     {
-        if (currentChunk != null)
+        HashSet<ChunkInstance> newActiveChunks = new HashSet<ChunkInstance>();
+        ChunkInstance previousCurrent = currentChunk;
+
+        // Step 1: Define which chunks should be active
+        newActiveChunks.Add(closestChunk);
+        foreach (var neighbor in closestChunk.NeighborChunks)
         {
-            foreach (var neighbor in currentChunk.NeighborChunks)
+            if (neighbor != null)
+                newActiveChunks.Add(neighbor);
+        }
+
+        // Step 2: Deactivate old current and its neighbors if they're no longer needed
+        if (previousCurrent != null)
+        {
+            if (!newActiveChunks.Contains(previousCurrent))
+                previousCurrent.gameObject.SetActive(false);
+
+            foreach (var neighbor in previousCurrent.NeighborChunks)
             {
-                if (neighbor != null)
-                {
+                if (neighbor != null && !newActiveChunks.Contains(neighbor))
                     neighbor.gameObject.SetActive(false);
-                }
             }
         }
 
-        currentChunk = closetChunk;
-        currentChunk.gameObject.SetActive(true);
-
-        foreach (var neighbor in currentChunk.NeighborChunks)
+        // Step 3: Activate new current and its neighbors
+        currentChunk = closestChunk;
+        foreach (var chunk in newActiveChunks)
         {
-            if (neighbor != null)
-            {
-                neighbor.gameObject.SetActive(true);
-            }
+            chunk.gameObject.SetActive(true);
         }
     }
 
