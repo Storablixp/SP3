@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -41,15 +40,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-
-        //if (transform.position.x > 32)
-        //{
-        //    transform.position = new Vector2(-32, transform.position.y);
-        //}
-        //if (transform.position.x < -32)
-        //{
-        //    transform.position = new Vector2(32, transform.position.y);
-        //}
     }
 
     private void Jump()
@@ -59,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
    
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(dirX * speed, rb.linearVelocity.y);
+       rb.linearVelocity = new Vector2(dirX * speed, rb.linearVelocity.y);
     }
 
     private void OnDrawGizmos()
