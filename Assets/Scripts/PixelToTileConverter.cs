@@ -1,16 +1,23 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PixelToTileConverter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private List<PixelTile> pixelTiles;
+    public static Dictionary<Color, WorldTile> TileLookup;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Awake()
     {
-        
+        TileLookup = pixelTiles.ToDictionary(p => p.pixel.Color, p => p.tile);
     }
+}
+
+
+[System.Serializable]
+public class PixelTile
+{
+    public PixelSO pixel;
+    public WorldTile tile;
 }

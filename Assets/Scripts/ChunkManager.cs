@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 public class ChunkManager : MonoBehaviour
 {
     [SerializeField] private Transform playerTrans;
-    [SerializeField] private List<PixelToTileMapping> pixelToTileMappings;
-    private Dictionary<Color, WorldTile> tileLookup;
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
@@ -19,11 +17,6 @@ public class ChunkManager : MonoBehaviour
     //Vi använder dessa världen för att scale på ChunkPrefab är satt til (0.5f, 0.5f, 1f).
     private int halfWitdh;
     private int halfHeight;
-
-    private void Awake()
-    {
-        tileLookup = pixelToTileMappings.ToDictionary(p => p.pixel.Color, p => p.tile);
-    }
 
     private void Start()
     {
@@ -72,7 +65,7 @@ public class ChunkManager : MonoBehaviour
                     for (int y = startY; y < startY + chunkSize.y; y++)
                     {
                         PixelSO pixel = pixels[x, y];
-                        if (tileLookup.TryGetValue(pixel.Color, out var tile))
+                        if (PixelToTileConverter.TileLookup.TryGetValue(pixel.Color, out var tile))
                         {
                             tilemap.SetTile(new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0), tile);
                         }
@@ -162,12 +155,4 @@ public class ChunkManager : MonoBehaviour
             }
         }
     }
-
-    [System.Serializable]
-    public class PixelToTileMapping
-    {
-        public PixelSO pixel;
-        public WorldTile tile;
-    }
 }
-
