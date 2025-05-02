@@ -34,8 +34,6 @@ public class ChunkManager : MonoBehaviour
             Vector3 playerWorldPos = playerTrans.position;
             Vector3Int playerCellPos = currentChunk.Tilemap.WorldToCell(playerWorldPos);
 
-            Debug.Log(playerWorldPos);
-
             if (!currentChunk.Bounds.Contains(playerCellPos))
             {
                 var newClosetChunk = FindClosestChunk();

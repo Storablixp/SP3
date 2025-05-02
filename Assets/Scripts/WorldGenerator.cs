@@ -104,7 +104,16 @@ public class WorldGenerator : MonoBehaviour
         childObj.GetComponent<RawImage>().texture = worldTexture;
     }
 
-    public void ChangePixel(int xCoord, int yCoord, PixelSO pixel) => pixels[xCoord, yCoord] = pixel;
+    public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
+    {
+        if (pixels[xCoord, yCoord] != null && pixels[xCoord, yCoord].Unchangeable) //Return if pixel can't be changed.
+        {
+            return;
+        }
+
+        pixels[xCoord, yCoord] = pixel;
+
+    }
     public PixelSO[,] RetrievePixels() => pixels;
 
 

@@ -152,8 +152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildTilemap: 1
   seed: 0
-  worldSize: {x: 256, y: 256}
+  worldSize: {x: 128, y: 128}
   worldMutators:
+  - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: 4bd28dd395938eb42bd6db2e8fa8e5c4, type: 2}
   - {fileID: 11400000, guid: 215c5b0384a6c494bbccd9312cfceb1d, type: 2}
   DisplayTexture: 0
@@ -204,6 +205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pixelTiles:
+  - pixel: {fileID: 11400000, guid: 05a18c895ea4d894995841d20a82a441, type: 2}
+    tile: {fileID: 11400000, guid: bbfc2e5f5bbf421458aa2f35c195c421, type: 2}
   - pixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
     tile: {fileID: 11400000, guid: 2edeb382d3132a24abe02f75aadbff28, type: 2}
   - pixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
@@ -360,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e0226a20e054e4bbde9fe88231ca52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxX: 23
   yOffset: 1.5
 --- !u!1 &527121848
 GameObject:

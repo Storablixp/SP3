@@ -52,6 +52,8 @@ public class AreaRemover : MonoBehaviour
                         {
                             WorldTile currentTile = currentTilemap.GetTile(tilePos) as WorldTile;
 
+                            if (currentTile.Unbreakable) continue;
+
                             if (currentTile.ColliderType != Tile.ColliderType.None)
                             {
                                 Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, -directionToMouse);
