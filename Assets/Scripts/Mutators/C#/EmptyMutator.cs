@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Layer Mutator", menuName = "Scriptable Objects/World Mutator/Layer")]
-public class LayerMutator : WorldMutatorSO
+//[CreateAssetMenu(fileName = "Mutator", menuName = "Scriptable Objects/World Mutator/")]
+public class EmptyMutator : WorldMutatorSO
 {
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {

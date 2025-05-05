@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
-    [SerializeField] private bool buildTilemap;
+    [SerializeField] private bool testing;
     [SerializeField] private PixelSO airPixel;
     private PixelSO[,] pixels;
 
@@ -17,7 +17,6 @@ public class WorldGenerator : MonoBehaviour
     public static float YOffset;
 
     [Header("Visualization")]
-    [SerializeField] private bool DisplayTexture;
     [SerializeField] private int tilesPerFrame = 100000;
     [SerializeField] private GameObject worldCanvasPrefab;
     private int tileCounter;
@@ -67,13 +66,15 @@ public class WorldGenerator : MonoBehaviour
         }
 
 
-        if (DisplayTexture)
+        if (testing)
         {
             GenerateTexture();
+
+            pixels = new PixelSO[worldSize.x, worldSize.y];
+            yield return new WaitForSeconds(1); 
+            StartCoroutine(GenerateWorld());
         }
-
-
-        if (buildTilemap)
+        else
         {
             StartCoroutine(chunkManager.SpawnChunksAndPlayer(worldSize, pixels));
         }
