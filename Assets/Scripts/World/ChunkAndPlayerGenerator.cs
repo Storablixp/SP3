@@ -4,15 +4,9 @@ using UnityEngine.Tilemaps;
 using Unity.Cinemachine;
 using System.Collections;
 
-public class ChunkManager : MonoBehaviour
+public class ChunkAndPlayerGenerator : MonoBehaviour
 {
-    [Header("Player & Camera")]
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private CinemachineCamera cinemachineCamera;
-    [SerializeField] private CinemachineConfiner2D confiner2D;
-    private Transform playerTrans;
-    private BoxCollider2D cameraBox;
-    private Vector2 playerSpawnPosition;
+    private TestBuilder testBuilder;
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
@@ -20,11 +14,27 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private GameObject chunksFolder;
     private Dictionary<Vector2Int, ChunkInstance> chunks = new();
     private ChunkInstance currentChunk;
+
+    [Header("Player Camera")]
+    [SerializeField] private CinemachineCamera cinemachineCamera;
+    [SerializeField] private CinemachineConfiner2D confiner2D;
+    private BoxCollider2D cameraBox;
+
+    [Header("Player Spawning")]
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private GameObject playerPrefab;
+    private Transform playerTrans;
+    private Vector2 playerSpawnPosition;
+
 
     //Jag använder dessa världen för att scale på ChunkPrefab är satt til (0.5f, 0.5f, 1f).
     private int halfWitdh;
     private int halfHeight;
+
+    private void Awake()
+    {
+        testBuilder = GetComponent<TestBuilder>();
+    }
 
     private void Start()
     {
@@ -34,29 +44,14 @@ public class ChunkManager : MonoBehaviour
         cameraBox = GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
-    {
-        if (currentChunk != null && playerTrans != null)
-        {
-            Vector3 playerWorldPos = playerTrans.position;
-            Vector3Int playerCellPos = currentChunk.Tilemap.WorldToCell(playerWorldPos);
-
-            if (!currentChunk.Bounds.Contains(playerCellPos))
-            {
-                var newClosetChunk = FindClosestChunk();
-                StartCoroutine(UpdateCurrentChunk(newClosetChunk));
-            }
-
-        }
-    }
-
-    public IEnumerator SplitTheWorldIntoChunks(Vector2Int worldSize, PixelSO[,] pixels)
+    public IEnumerator SpawnChunksAndPlayer(Vector2Int worldSize, PixelSO[,] pixels)
     {
         yield return CreateChunks(worldSize, pixels);
-        yield return StartCoroutine(FindSpawnPoint());
+        yield return FindSpawnPoint();
         yield return AssignNeighborChunks();
-        yield return UpdateCurrentChunk(currentChunk);
         yield return SpawnPlayer(worldSize);
+
+        testBuilder.SetUp(playerTrans, currentChunk, chunks);
     }
 
     private IEnumerator CreateChunks(Vector2Int worldSize, PixelSO[,] pixels)
@@ -120,23 +115,6 @@ public class ChunkManager : MonoBehaviour
 
         yield return null;
     }
-    private IEnumerator FindSpawnPoint()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(playerSpawnPosition, Vector2.down, Mathf.Infinity, groundMask);
-        if (hit.collider != null)
-        {
-            playerSpawnPosition = hit.point;
-            currentChunk = hit.collider.gameObject.GetComponent<ChunkInstance>();
-        }
-
-        foreach (var chunk in chunks)
-        {
-            if (chunk.Value == currentChunk) continue;
-            chunk.Value.gameObject.SetActive(false);
-        }
-
-        yield return null;
-    }
     private IEnumerator AssignNeighborChunks()
     {
         foreach (var chunk in chunks)
@@ -158,37 +136,19 @@ public class ChunkManager : MonoBehaviour
 
         yield return null;
     }
-    private IEnumerator UpdateCurrentChunk(ChunkInstance closestChunk)
+    private IEnumerator FindSpawnPoint()
     {
-        HashSet<ChunkInstance> newActiveChunks = new HashSet<ChunkInstance>();
-        ChunkInstance previousCurrent = currentChunk;
-
-        // Step 1: Define which chunks should be active
-        newActiveChunks.Add(closestChunk);
-        foreach (var neighbor in closestChunk.NeighborChunks)
+        RaycastHit2D hit = Physics2D.Raycast(playerSpawnPosition, Vector2.down, Mathf.Infinity, groundMask);
+        if (hit.collider != null)
         {
-            if (neighbor != null)
-                newActiveChunks.Add(neighbor);
+            playerSpawnPosition = hit.point;
+            currentChunk = hit.collider.gameObject.GetComponent<ChunkInstance>();
         }
 
-        // Step 2: Deactivate old current and its neighbors if they're no longer needed
-        if (previousCurrent != null)
+        foreach (var chunk in chunks)
         {
-            if (!newActiveChunks.Contains(previousCurrent))
-                previousCurrent.gameObject.SetActive(false);
-
-            foreach (var neighbor in previousCurrent.NeighborChunks)
-            {
-                if (neighbor != null && !newActiveChunks.Contains(neighbor))
-                    neighbor.gameObject.SetActive(false);
-            }
-        }
-
-        // Step 3: Activate new current and its neighbors
-        currentChunk = closestChunk;
-        foreach (var chunk in newActiveChunks)
-        {
-            chunk.gameObject.SetActive(true);
+            if (chunk.Value == currentChunk) continue;
+            chunk.Value.gameObject.SetActive(false);
         }
 
         yield return null;
@@ -202,27 +162,5 @@ public class ChunkManager : MonoBehaviour
         confiner2D.BoundingShape2D = cameraBox;
 
         yield return null;
-    }
-
-
-    private ChunkInstance FindClosestChunk()
-    {
-        int playerX = Mathf.FloorToInt(playerTrans.position.x);
-        int playerY = Mathf.FloorToInt(playerTrans.position.y);
-        float shortestDistance = float.MaxValue;
-        ChunkInstance closestChunk = null;
-
-        foreach (var chunk in chunks)
-        {
-            float distance = Vector2Int.Distance(chunk.Key, new Vector2Int(playerX, playerY));
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                closestChunk = chunk.Value;
-            }
-
-        }
-
-        return closestChunk;
     }
 }

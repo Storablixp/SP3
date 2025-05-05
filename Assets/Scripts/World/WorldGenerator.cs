@@ -12,7 +12,7 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int worldSize;
     [SerializeField] private WorldMutatorSO[] worldMutators;
-    private ChunkManager chunkManager;
+    private ChunkAndPlayerGenerator chunkManager;
     public static float XOffset;
     public static float YOffset;
 
@@ -37,7 +37,7 @@ public class WorldGenerator : MonoBehaviour
             mutator.SetUp(this, worldSize);
         }
 
-        chunkManager = GetComponent<ChunkManager>();
+        chunkManager = GetComponent<ChunkAndPlayerGenerator>();
     }
 
     void Start()
@@ -75,7 +75,7 @@ public class WorldGenerator : MonoBehaviour
 
         if (buildTilemap)
         {
-            StartCoroutine(chunkManager.SplitTheWorldIntoChunks(worldSize, pixels));
+            StartCoroutine(chunkManager.SpawnChunksAndPlayer(worldSize, pixels));
         }
 
         Debug.Log(Time.realtimeSinceStartup);
