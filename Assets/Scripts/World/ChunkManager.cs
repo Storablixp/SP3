@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Cinemachine;
 using UnityEngine;
 
-public class TestBuilder : MonoBehaviour
+public class ChunkManager : MonoBehaviour
 {
     private bool hasBeenSetUp;
     private Transform playerTrans;

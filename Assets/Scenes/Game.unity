@@ -368,15 +368,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f974c04a73207374395c17248f72e942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7737958914302282996, guid: 5cc3f7c0cbccc864bb68c33f4b132c12, type: 3}
+  chunkSize: {x: 32, y: 32}
+  chunkPrefab: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
+  chunksFolder: {fileID: 1272393981}
   cinemachineCamera: {fileID: 1571603333}
   confiner2D: {fileID: 1571603335}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  chunkSize: {x: 32, y: 32}
-  chunkPrefab: {fileID: 6423891561179876222, guid: 70a4082efeae28d41829d5718ac47047, type: 3}
-  chunksFolder: {fileID: 1272393981}
+  playerPrefab: {fileID: 7737958914302282996, guid: 5cc3f7c0cbccc864bb68c33f4b132c12, type: 3}
 --- !u!114 &349933716
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using System.Collections;
 
 public class ChunkAndPlayerGenerator : MonoBehaviour
 {
-    private TestBuilder testBuilder;
+    private ChunkManager chunkManager;
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
@@ -33,7 +33,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
 
     private void Awake()
     {
-        testBuilder = GetComponent<TestBuilder>();
+        chunkManager = GetComponent<ChunkManager>();
     }
 
     private void Start()
@@ -51,7 +51,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
         yield return AssignNeighborChunks();
         yield return SpawnPlayer(worldSize);
 
-        testBuilder.SetUp(playerTrans, currentChunk, chunks);
+        chunkManager.SetUp(playerTrans, currentChunk, chunks);
     }
 
     private IEnumerator CreateChunks(Vector2Int worldSize, PixelSO[,] pixels)
