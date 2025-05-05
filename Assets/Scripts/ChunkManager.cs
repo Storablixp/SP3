@@ -44,7 +44,7 @@ public class ChunkManager : MonoBehaviour
             if (!currentChunk.Bounds.Contains(playerCellPos))
             {
                 var newClosetChunk = FindClosestChunk();
-                UpdateCurrentChunk(newClosetChunk);
+                StartCoroutine(UpdateCurrentChunk(newClosetChunk));
             }
 
         }
@@ -122,10 +122,8 @@ public class ChunkManager : MonoBehaviour
     }
     private IEnumerator FindSpawnPoint()
     {
-        RaycastHit2D hit = Physics2D.Raycast(playerSpawnPosition, Vector2.down, 16, groundMask);
-        Debug.DrawRay(playerSpawnPosition, Vector2.down * 16, Color.red, 5f);
-
-        if (hit)
+        RaycastHit2D hit = Physics2D.Raycast(playerSpawnPosition, Vector2.down, Mathf.Infinity, groundMask);
+        if (hit.collider != null)
         {
             playerSpawnPosition = hit.point;
             currentChunk = hit.collider.gameObject.GetComponent<ChunkInstance>();
