@@ -332,7 +332,7 @@ MonoBehaviour:
   buildTilemap: 1
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 0
-  worldSize: {x: 64, y: 96}
+  worldSize: {x: 1024, y: 1024}
   worldMutators:
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}

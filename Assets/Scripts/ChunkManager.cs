@@ -52,10 +52,17 @@ public class ChunkManager : MonoBehaviour
 
     public IEnumerator SplitTheWorldIntoChunks(Vector2Int worldSize, PixelSO[,] pixels)
     {
+        yield return CreateChunks(worldSize, pixels);
+        yield return StartCoroutine(FindSpawnPoint());
+        yield return AssignNeighborChunks();
+        yield return UpdateCurrentChunk(currentChunk);
+        yield return SpawnPlayer(worldSize);
+    }
+
+    private IEnumerator CreateChunks(Vector2Int worldSize, PixelSO[,] pixels)
+    {
         int chunksX = worldSize.x / chunkSize.x;
         int chunksY = worldSize.y / chunkSize.y;
-
-        Vector3 vectorForPlayerSpawaning = Vector3.zero;
 
         for (int yChunk = 0; yChunk < chunksY; yChunk++)
         {
@@ -95,11 +102,15 @@ public class ChunkManager : MonoBehaviour
                             chunkInstance.Bounds = new BoundsInt(new Vector3Int(startX - (worldSize.x / 2), startY - (worldSize.y / 2), 0),
                                                    new Vector3Int(chunkSize.x, chunkSize.y, 1)
 );
-                            //chunkInstance.gameObject.SetActive(false);
+
+                            if (xChunk != chunksX / 2)
+                            {
+                                chunkInstance.gameObject.SetActive(false);
+                            }
 
                             if (xChunk == chunksX / 2 && yChunk == chunksY - 1)
                             {
-                                vectorForPlayerSpawaning = new Vector3(worldCenterPos.x, worldCenterPos.y + (halfHeight / 2), 0);
+                                playerSpawnPosition = new Vector3(worldCenterPos.x, worldCenterPos.y + (halfHeight / 2), 0);
                             }
                         }
                     }
@@ -107,20 +118,13 @@ public class ChunkManager : MonoBehaviour
             }
         }
 
-        yield return StartCoroutine(Test(vectorForPlayerSpawaning));
-        AssignNeighborChunks();
-
-        yield return new WaitForSeconds(2);
-        //SpawnPlayer(worldSize, vectorForPlayerSpawaning);
-        UpdateCurrentChunk(currentChunk);
+        yield return null;
     }
-
-    private IEnumerator Test(Vector3 vectorForPlayerSpawaning)
+    private IEnumerator FindSpawnPoint()
     {
-        yield return new WaitForSeconds(2);
-        RaycastHit2D hit = Physics2D.Raycast(vectorForPlayerSpawaning, Vector2.down, 100, groundMask);
-        Debug.DrawRay(vectorForPlayerSpawaning, Vector2.down * 100, Color.red, 5f);
-        
+        RaycastHit2D hit = Physics2D.Raycast(playerSpawnPosition, Vector2.down, 16, groundMask);
+        Debug.DrawRay(playerSpawnPosition, Vector2.down * 16, Color.red, 5f);
+
         if (hit)
         {
             playerSpawnPosition = hit.point;
@@ -132,9 +136,10 @@ public class ChunkManager : MonoBehaviour
             if (chunk.Value == currentChunk) continue;
             chunk.Value.gameObject.SetActive(false);
         }
-    }
 
-    private void AssignNeighborChunks()
+        yield return null;
+    }
+    private IEnumerator AssignNeighborChunks()
     {
         foreach (var chunk in chunks)
         {
@@ -152,19 +157,10 @@ public class ChunkManager : MonoBehaviour
                 }
             }
         }
-    }
 
-    private void SpawnPlayer(Vector2Int worldSize, Vector3 vectorForPlayerSpawaning)
-    {
-        Vector2 playerSpawnPoint = new Vector2(vectorForPlayerSpawaning.x, vectorForPlayerSpawaning.y + (halfHeight / 2f) + 1f);
-        playerTrans = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity).transform;
-        cinemachineCamera.Follow = playerTrans;
-        cameraBox.size = new Vector2(worldSize.x / 2, (worldSize.y / 2) + 16);
-        cameraBox.offset = new Vector2(0, 8);
-        confiner2D.BoundingShape2D = cameraBox;
+        yield return null;
     }
-
-    private void UpdateCurrentChunk(ChunkInstance closestChunk)
+    private IEnumerator UpdateCurrentChunk(ChunkInstance closestChunk)
     {
         HashSet<ChunkInstance> newActiveChunks = new HashSet<ChunkInstance>();
         ChunkInstance previousCurrent = currentChunk;
@@ -196,7 +192,20 @@ public class ChunkManager : MonoBehaviour
         {
             chunk.gameObject.SetActive(true);
         }
+
+        yield return null;
     }
+    private IEnumerator SpawnPlayer(Vector2Int worldSize)
+    {
+        playerTrans = Instantiate(playerPrefab, new Vector2(playerSpawnPosition.x, playerSpawnPosition.y + 0.25f), Quaternion.identity).transform;
+        cinemachineCamera.Follow = playerTrans;
+        cameraBox.size = new Vector2(worldSize.x / 2, (worldSize.y / 2) + 16);
+        cameraBox.offset = new Vector2(0, 8);
+        confiner2D.BoundingShape2D = cameraBox;
+
+        yield return null;
+    }
+
 
     private ChunkInstance FindClosestChunk()
     {
