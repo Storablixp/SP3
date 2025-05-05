@@ -75,7 +75,7 @@ public class WorldGenerator : MonoBehaviour
 
         if (buildTilemap)
         {
-            chunkManager.SplitTheWorldIntoChunks(worldSize, pixels);
+            StartCoroutine(chunkManager.SplitTheWorldIntoChunks(worldSize, pixels));
         }
 
         Debug.Log(Time.realtimeSinceStartup);

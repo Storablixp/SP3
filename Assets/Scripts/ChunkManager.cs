@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Unity.Cinemachine;
+using System.Collections;
 
 public class ChunkManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private CinemachineConfiner2D confiner2D;
     private Transform playerTrans;
     private BoxCollider2D cameraBox;
+    private Vector2 playerSpawnPosition;
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
@@ -18,8 +20,9 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private GameObject chunksFolder;
     private Dictionary<Vector2Int, ChunkInstance> chunks = new();
     private ChunkInstance currentChunk;
+    [SerializeField] private LayerMask groundMask;
 
-    //Vi använder dessa världen för att scale på ChunkPrefab är satt til (0.5f, 0.5f, 1f).
+    //Jag använder dessa världen för att scale på ChunkPrefab är satt til (0.5f, 0.5f, 1f).
     private int halfWitdh;
     private int halfHeight;
 
@@ -33,7 +36,7 @@ public class ChunkManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentChunk != null)
+        if (currentChunk != null && playerTrans != null)
         {
             Vector3 playerWorldPos = playerTrans.position;
             Vector3Int playerCellPos = currentChunk.Tilemap.WorldToCell(playerWorldPos);
@@ -47,7 +50,7 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    public void SplitTheWorldIntoChunks(Vector2Int worldSize, PixelSO[,] pixels)
+    public IEnumerator SplitTheWorldIntoChunks(Vector2Int worldSize, PixelSO[,] pixels)
     {
         int chunksX = worldSize.x / chunkSize.x;
         int chunksY = worldSize.y / chunkSize.y;
@@ -92,11 +95,11 @@ public class ChunkManager : MonoBehaviour
                             chunkInstance.Bounds = new BoundsInt(new Vector3Int(startX - (worldSize.x / 2), startY - (worldSize.y / 2), 0),
                                                    new Vector3Int(chunkSize.x, chunkSize.y, 1)
 );
-                            chunkInstance.gameObject.SetActive(false);
+                            //chunkInstance.gameObject.SetActive(false);
 
                             if (xChunk == chunksX / 2 && yChunk == chunksY - 1)
                             {
-                                vectorForPlayerSpawaning = worldCenterPos;
+                                vectorForPlayerSpawaning = new Vector3(worldCenterPos.x, worldCenterPos.y + (halfHeight / 2), 0);
                             }
                         }
                     }
@@ -104,9 +107,31 @@ public class ChunkManager : MonoBehaviour
             }
         }
 
+        yield return StartCoroutine(Test(vectorForPlayerSpawaning));
         AssignNeighborChunks();
-        SpawnPlayer(worldSize, vectorForPlayerSpawaning);
-        UpdateCurrentChunk(FindClosestChunk());
+
+        yield return new WaitForSeconds(2);
+        //SpawnPlayer(worldSize, vectorForPlayerSpawaning);
+        UpdateCurrentChunk(currentChunk);
+    }
+
+    private IEnumerator Test(Vector3 vectorForPlayerSpawaning)
+    {
+        yield return new WaitForSeconds(2);
+        RaycastHit2D hit = Physics2D.Raycast(vectorForPlayerSpawaning, Vector2.down, 100, groundMask);
+        Debug.DrawRay(vectorForPlayerSpawaning, Vector2.down * 100, Color.red, 5f);
+        
+        if (hit)
+        {
+            playerSpawnPosition = hit.point;
+            currentChunk = hit.collider.gameObject.GetComponent<ChunkInstance>();
+        }
+
+        foreach (var chunk in chunks)
+        {
+            if (chunk.Value == currentChunk) continue;
+            chunk.Value.gameObject.SetActive(false);
+        }
     }
 
     private void AssignNeighborChunks()
