@@ -23,7 +23,7 @@ public class RandomizerMutator : WorldMutatorSO
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, PixelA);
                 }
-                else
+                else if (PixelB != null)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, PixelB);
                 }
