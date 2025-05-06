@@ -522,12 +522,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27021a72d6f099e4b85e3526caa95a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heightVariationStrength: 50
+  layerNoise: {fileID: 0}
+  temperatureNoise: {fileID: 11400000, guid: 5bc952e237d4d7e4286edf8fca7a3043, type: 2}
+  humidityNoise: {fileID: 0}
   seed: 0
   imageSize: {x: 512, y: 512}
-  noiseSettings: {fileID: 11400000, guid: 4929def06042ab6498fa5ace73bc543f, type: 2}
+  noiseSettings: {fileID: 11400000, guid: 9792e8fd20ec80f4bb5b551711858f18, type: 2}
   saveImage: 0
   oneTimeGeneration: 0
-  view: 2
+  view: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
