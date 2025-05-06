@@ -71,8 +71,10 @@ public class WorldGenerator : MonoBehaviour
             GenerateTexture();
 
             pixels = new PixelSO[worldSize.x, worldSize.y];
-            yield return new WaitForSeconds(1); 
+            XOffset = Random.Range(-100000f, 100000f);
+            YOffset = Random.Range(-100000f, 100000f);
             StartCoroutine(GenerateWorld());
+            yield break;
         }
         else
         {

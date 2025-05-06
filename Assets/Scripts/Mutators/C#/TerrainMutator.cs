@@ -6,7 +6,7 @@ public class TerrainMutator : WorldMutatorSO
 {
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
-    public float heightVariationStrength = 30f;
+    [Range(0, 100)] public int heightVariationStrength = 50;
     [Range(0.001f, 1f)] public float airThreshold = 0.9f;
     [Range(0.001f, 1f)] public float dirtThreshold = 0.75f;
 

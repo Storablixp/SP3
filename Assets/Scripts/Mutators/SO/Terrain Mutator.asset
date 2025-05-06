@@ -17,7 +17,7 @@ MonoBehaviour:
   StartingDepthLevel: 0
   EndDepthLevel: 0
   noiseSettings: {fileID: 11400000, guid: 9792e8fd20ec80f4bb5b551711858f18, type: 2}
-  heightVariationStrength: 64
+  heightVariationStrength: 30
   airThreshold: 0.9
   dirtThreshold: 0.804
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
