@@ -13,6 +13,7 @@ public class TerrainMutator : WorldMutatorSO
     [Header("Pixels")]
     public PixelSO airPixel;
     public PixelSO dirtPixel;
+    public PixelSO sandPixel;
     public PixelSO stonePixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
@@ -29,7 +30,14 @@ public class TerrainMutator : WorldMutatorSO
                 if (yMod > worldSize.y * airThreshold)
                     pixelToAdd = airPixel;
                 else if (yMod > worldSize.y * dirtThreshold)
-                    pixelToAdd = dirtPixel;
+                {
+                    float temp = worldGenerator.CheckTemperature(arrayX, arrayY);
+                    if (temp > 0.5f)
+                    {
+                        pixelToAdd = sandPixel;
+                    }
+                    else pixelToAdd = dirtPixel;
+                }
                 else
                     pixelToAdd = stonePixel;
 

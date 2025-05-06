@@ -10,5 +10,5 @@ public class Perlin2DSettings : ScriptableObject
     public float Lacunarity = 2f;//A multiplier that determines how quickly the frequency increases for each successive octave.
 
     public GlobalEasingFunctions.EasingType EasingFunctionType;
-    public float EasingFunctionModifier = 3;
+    [Range(0.01f, 3f)] public float EasingFunctionModifier = 3;
 }
