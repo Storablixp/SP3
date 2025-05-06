@@ -5,12 +5,13 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
 {
     private RawImage image;
     private Texture2D texture;
-    [SerializeField] private bool saveImage;
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int imageSize;
     [SerializeField] private Perlin2DSettings noiseSettings;
-    [SerializeField] private bool heatView;
+    [SerializeField] private bool saveImage;
     [SerializeField] private bool oneTimeGeneration;
+    private enum ViewType { defaultView, temperatureView, humidityView }
+    [SerializeField] private ViewType view;
 
     private void Start()
     {
@@ -35,15 +36,19 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
         {
             for (int x = 0; x < imageSize.x; x++)
             {
-                if (heatView)
+                if (view == ViewType.defaultView)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
-                    float baseTemperature = (noiseValue - 0.5f) * 2;
+                    texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));
+                }
+                else if (view == ViewType.temperatureView)
+                {
+                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
                     float depthFactor = (float)y / (imageSize.y - 1);
-                    float finalTemperature = baseTemperature /*+ depthFactor*/;
+                    float finalTemperature = noiseValue;
 
                     Color tempColor;
-                    float t = Mathf.InverseLerp(-1f, 1f, finalTemperature);
+                    float t = Mathf.InverseLerp(0f, 1f, finalTemperature);
 
                     if (t < 0.33f)
                     {
@@ -59,10 +64,34 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     }
                     texture.SetPixel(x, y, tempColor);
                 }
-                else
+                else if(view == ViewType.humidityView)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
-                    texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));
+                    float t = Mathf.InverseLerp(0f, 1f, noiseValue);
+
+                    Color tempColor;
+                    if (t < 0.25f)
+                    {
+                        // 0% - 25%: Beige to Light Brown
+                        tempColor = Color.Lerp(new Color(0.96f, 0.87f, 0.70f), new Color(0.71f, 0.53f, 0.38f), t / 0.25f);
+                    }
+                    else if (t < 0.5f)
+                    {
+                        // 25% - 50%: Light Brown to Light Green
+                        tempColor = Color.Lerp(new Color(0.71f, 0.53f, 0.38f), new Color(0.56f, 0.93f, 0.56f), (t - 0.25f) / 0.25f);
+                    }
+                    else if (t < 0.75f)
+                    {
+                        // 50% - 75%: Light Green to Green
+                        tempColor = Color.Lerp(new Color(0.56f, 0.93f, 0.56f), Color.green, (t - 0.5f) / 0.25f);
+                    }
+                    else
+                    {
+                        // 75% - 100%: Green to Dark Green
+                        tempColor = Color.Lerp(Color.green, new Color(0.0f, 0.39f, 0.0f), (t - 0.75f) / 0.25f);
+                    }
+
+                    texture.SetPixel(x, y, tempColor);
                 }
             }
         }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Air Pixel
   m_EditorClassIdentifier: 
   Unchangeable: 0
-  Color: {r: 1, g: 1, b: 1, a: 0}
+  Color: {r: 0.7688679, g: 0.8126773, b: 1, a: 1}

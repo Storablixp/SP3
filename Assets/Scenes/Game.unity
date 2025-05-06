@@ -337,7 +337,11 @@ MonoBehaviour:
   worldMutators:
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
   - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
+  - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
+  - {fileID: 11400000, guid: 4bd28dd395938eb42bd6db2e8fa8e5c4, type: 2}
+  - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
+  - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
   tilesPerFrame: 10
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
 --- !u!4 &349933714
@@ -399,6 +403,10 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: fc294fe43067851479d4f8bd5f53bc4a, type: 2}
   - pixel: {fileID: 11400000, guid: ed960c5253adca347893d851aeab4d08, type: 2}
     tile: {fileID: 11400000, guid: 82fba21225cd75f40b66796e18d1da2f, type: 2}
+  - pixel: {fileID: 11400000, guid: 972d9ae8f4fe0cc4ab39143628ad7e7f, type: 2}
+    tile: {fileID: 11400000, guid: e2251963dd642f945bda7e8a0d4c3122, type: 2}
+  - pixel: {fileID: 11400000, guid: eb25c22980f91b740801d5628ac92daa, type: 2}
+    tile: {fileID: 11400000, guid: aaae7431a5ab4c24ebc732477ebb6ad3, type: 2}
 --- !u!61 &349933717
 BoxCollider2D:
   m_ObjectHideFlags: 0

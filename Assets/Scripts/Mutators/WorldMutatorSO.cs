@@ -5,8 +5,6 @@ public class WorldMutatorSO : ScriptableObject
 {
     [Header("Mutator")]
     [SerializeField] private bool IncludeAllTiles = true;
-    public bool CanBeVisualized = true;
-    protected bool visuals;
     protected WorldGenerator worldGenerator;
 
     [Header("Location (Only if IncludeAllTiles is false)")]

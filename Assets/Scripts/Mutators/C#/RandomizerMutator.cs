@@ -4,10 +4,8 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Randomizer Mutator", menuName = "Scriptable Objects/World Mutator/Randomizer")]
 public class RandomizerMutator : WorldMutatorSO
 {
-    public Perlin2DSettings noiseSettings;
-
     [Header("Settings")]
-    [Range(0.0f, 1.0f)] public float PercentageForA;
+    [Range(1, 100)] public int PercentageForA;
 
     [Header("Pixels")]
     public PixelSO PixelA;
@@ -19,9 +17,9 @@ public class RandomizerMutator : WorldMutatorSO
         {
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
-                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
+                int nr = Random.Range(1, 101);
 
-                if (noiseValue <= PercentageForA)
+                if (nr <= PercentageForA)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, PixelA);
                 }

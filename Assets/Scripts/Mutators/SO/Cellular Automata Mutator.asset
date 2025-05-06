@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Cellular Automata Mutator
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
-  CanBeVisualized: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
   PixelToCheckFor: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
   PixelToReplace: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
   ReplacementThreshold: 12
-  MooreNeighborhoodSize: 2
+  MooreNeighborhoodSize: 5
   Iterations: 5

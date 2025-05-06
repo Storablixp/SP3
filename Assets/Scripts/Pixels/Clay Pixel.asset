@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2a6debd6c81d3040b9a6ca47d611689, type: 3}
-  m_Name: Reset World
+  m_Script: {fileID: 11500000, guid: d6b537e053443ac44905b7263f486a81, type: 3}
+  m_Name: Clay Pixel
   m_EditorClassIdentifier: 
-  IncludeAllTiles: 1
-  CanBeVisualized: 1
-  StartingDepthLevel: 0
-  EndDepthLevel: 0
-  PlaceHolderPixel: {fileID: 11400000, guid: 766f0eaff09b489418b5129a0a2dea1f, type: 2}
+  Unchangeable: 0
+  Color: {r: 0.3962264, g: 0.32980022, b: 0.2971698, a: 1}
