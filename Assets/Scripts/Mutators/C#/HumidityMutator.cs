@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Temperature Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Temperature")]
-public class TemperatureMutator : WorldMutatorSO
+[CreateAssetMenu(fileName = "Humidity Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Humidity")]
+public class HumidityMutator : WorldMutatorSO
 {
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;

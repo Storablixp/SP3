@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66057ae282f033849a1a168f017bbbe1, type: 3}
+  m_Name: Add Humidity
+  m_EditorClassIdentifier: 
+  IncludeAllTiles: 1
+  CanBeVisualized: 1
+  StartingDepthLevel: 0
+  EndDepthLevel: 0
+  noiseSettings: {fileID: 11400000, guid: 5bc952e237d4d7e4286edf8fca7a3043, type: 2}
