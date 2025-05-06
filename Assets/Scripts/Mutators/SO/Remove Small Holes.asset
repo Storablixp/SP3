@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b4d33b4052d274c9a1c9726c719be8, type: 3}
-  m_Name: Cave System
+  m_Script: {fileID: 11500000, guid: 2a8c3e71b53055443b83bb62b4d52e5b, type: 3}
+  m_Name: Remove Small Holes
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  PixelToCheckFor: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
-  PixelToReplace: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
-  ReplacementThreshold: 28
-  MooreNeighborhoodSize: 3
-  Iterations: 5
+  hollowPixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
+  placeholderPixel: {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}
