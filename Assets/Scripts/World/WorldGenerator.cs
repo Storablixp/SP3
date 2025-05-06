@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +8,11 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private bool testing;
     [SerializeField] private PixelSO airPixel;
     private PixelSO[,] pixels;
-    private float[,] temperatures;
 
     [Header("World Settings")]
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int worldSize;
-    [SerializeField] private WorldMutatorSO[] worldMutators;
+    [SerializeField] private List<WorldMutatorSO> worldMutators = new();
     private ChunkAndPlayerGenerator chunkManager;
     public static float XOffset;
     public static float YOffset;
@@ -50,7 +50,6 @@ public class WorldGenerator : MonoBehaviour
         YOffset = Random.Range(-100000f, 100000f);
 
         pixels = new PixelSO[worldSize.x, worldSize.y];
-        temperatures = new float[worldSize.x, worldSize.y];
 
         StartCoroutine(nameof(GenerateWorld));
     }
@@ -73,7 +72,6 @@ public class WorldGenerator : MonoBehaviour
             GenerateTexture();
 
             pixels = new PixelSO[worldSize.x, worldSize.y];
-            temperatures = new float[worldSize.x, worldSize.y];
             XOffset = Random.Range(-100000f, 100000f);
             YOffset = Random.Range(-100000f, 100000f);
             StartCoroutine(GenerateWorld());
@@ -144,12 +142,12 @@ public class WorldGenerator : MonoBehaviour
 
     public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord] = airPixel;
 
-    public void SetTemperature(int xCoord, int yCoord, float temperature) => temperatures[xCoord, yCoord] = temperature;
-    public float CheckTemperature(int xCoord, int yCoord) => temperatures[xCoord, yCoord];
-
-
     public PixelSO[,] RetrievePixels() => pixels;
 
+    public bool CheckForMutator(WorldMutatorSO mutator)
+    {
+        return worldMutators.Contains(mutator);
+    }
 
     public void ResetCounterValues()
     {

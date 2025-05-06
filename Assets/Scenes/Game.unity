@@ -332,10 +332,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testing: 1
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  seed: 0
+  seed: 1
   worldSize: {x: 512, y: 512}
   worldMutators:
-  - {fileID: 11400000, guid: ecb4e5859ca3f4f43b5997b87bb80c2c, type: 2}
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
   tilesPerFrame: 10

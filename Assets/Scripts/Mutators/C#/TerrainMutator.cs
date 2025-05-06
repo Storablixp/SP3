@@ -4,6 +4,9 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Terrain")]
 public class TerrainMutator : WorldMutatorSO
 {
+    [Header("Optional Mutators")]
+    [SerializeField] private TemperatureMutator temperatureMutator;
+
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
     [Range(0, 100)] public int heightVariationStrength = 50;
@@ -31,12 +34,17 @@ public class TerrainMutator : WorldMutatorSO
                     pixelToAdd = airPixel;
                 else if (yMod > worldSize.y * dirtThreshold)
                 {
-                    float temp = worldGenerator.CheckTemperature(arrayX, arrayY);
-                    if (temp > 0.5f)
+                    if (worldGenerator.CheckForMutator(temperatureMutator))
                     {
-                        pixelToAdd = sandPixel;
+                        float temp = temperatureMutator.Temperatures[arrayX, arrayY];
+                        if (temp > 0.5f)
+                        {
+                            pixelToAdd = sandPixel;
+                        }
+                        else pixelToAdd = dirtPixel;
                     }
                     else pixelToAdd = dirtPixel;
+
                 }
                 else
                     pixelToAdd = stonePixel;
