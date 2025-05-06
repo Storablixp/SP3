@@ -480,7 +480,8 @@ MonoBehaviour:
   saveImage: 0
   seed: 0
   imageSize: {x: 512, y: 512}
-  noiseSettings: {fileID: 11400000, guid: 5bc952e237d4d7e4286edf8fca7a3043, type: 2}
+  noiseSettings: {fileID: 11400000, guid: 4929def06042ab6498fa5ace73bc543f, type: 2}
+  heatView: 0
   oneTimeGeneration: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

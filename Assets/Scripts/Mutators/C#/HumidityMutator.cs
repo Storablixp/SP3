@@ -4,7 +4,7 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Humidity Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Humidity")]
 public class HumidityMutator : WorldMutatorSO
 {
-    public static float[,] Humidities;
+    public float[,] Humidities;
 
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;

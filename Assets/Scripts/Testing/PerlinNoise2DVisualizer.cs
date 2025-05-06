@@ -9,6 +9,7 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int imageSize;
     [SerializeField] private Perlin2DSettings noiseSettings;
+    [SerializeField] private bool heatView;
     [SerializeField] private bool oneTimeGeneration;
 
     private void Start()
@@ -34,30 +35,35 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
         {
             for (int x = 0; x < imageSize.x; x++)
             {
-                //float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
-                //texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));
-
-                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
-                float baseTemperature = (noiseValue - 0.5f) * 2;
-                float depthFactor = (float)y / (imageSize.y - 1);
-                float finalTemperature = baseTemperature /*+ depthFactor*/;
-
-                Color tempColor;
-                float t = Mathf.InverseLerp(-1f, 1f, finalTemperature);
-
-                if (t < 0.33f)
+                if (heatView)
                 {
-                    tempColor = Color.Lerp(Color.blue, Color.green, t / 0.33f);
-                }
-                else if (t < 0.66f)
-                {
-                    tempColor = Color.Lerp(Color.green, Color.yellow, (t - 0.33f) / 0.33f);
+                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
+                    float baseTemperature = (noiseValue - 0.5f) * 2;
+                    float depthFactor = (float)y / (imageSize.y - 1);
+                    float finalTemperature = baseTemperature /*+ depthFactor*/;
+
+                    Color tempColor;
+                    float t = Mathf.InverseLerp(-1f, 1f, finalTemperature);
+
+                    if (t < 0.33f)
+                    {
+                        tempColor = Color.Lerp(Color.blue, Color.green, t / 0.33f);
+                    }
+                    else if (t < 0.66f)
+                    {
+                        tempColor = Color.Lerp(Color.green, Color.yellow, (t - 0.33f) / 0.33f);
+                    }
+                    else
+                    {
+                        tempColor = Color.Lerp(Color.yellow, Color.red, (t - 0.66f) / 0.34f);
+                    }
+                    texture.SetPixel(x, y, tempColor);
                 }
                 else
                 {
-                    tempColor = Color.Lerp(Color.yellow, Color.red, (t - 0.66f) / 0.34f);
+                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
+                    texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));
                 }
-                texture.SetPixel(x, y, tempColor);
             }
         }
 

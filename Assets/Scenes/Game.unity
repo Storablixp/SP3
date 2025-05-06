@@ -336,6 +336,7 @@ MonoBehaviour:
   worldSize: {x: 512, y: 512}
   worldMutators:
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
+  - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
   tilesPerFrame: 10
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}

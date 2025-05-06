@@ -6,6 +6,7 @@ public class TerrainMutator : WorldMutatorSO
 {
     [Header("Optional Mutators")]
     [SerializeField] private TemperatureMutator temperatureMutator;
+    [SerializeField] private HumidityMutator humidityMutator;
 
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
@@ -33,19 +34,7 @@ public class TerrainMutator : WorldMutatorSO
                 if (yMod > worldSize.y * airThreshold)
                     pixelToAdd = airPixel;
                 else if (yMod > worldSize.y * dirtThreshold)
-                {
-                    if (worldGenerator.CheckForMutator(temperatureMutator))
-                    {
-                        float temp = temperatureMutator.Temperatures[arrayX, arrayY];
-                        if (temp > 0.5f)
-                        {
-                            pixelToAdd = sandPixel;
-                        }
-                        else pixelToAdd = dirtPixel;
-                    }
-                    else pixelToAdd = dirtPixel;
-
-                }
+                    pixelToAdd = dirtPixel;
                 else
                     pixelToAdd = stonePixel;
 

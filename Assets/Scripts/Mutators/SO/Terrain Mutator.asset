@@ -17,6 +17,7 @@ MonoBehaviour:
   StartingDepthLevel: 0
   EndDepthLevel: 0
   temperatureMutator: {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
+  humidityMutator: {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
   noiseSettings: {fileID: 11400000, guid: 9792e8fd20ec80f4bb5b551711858f18, type: 2}
   heightVariationStrength: 30
   airThreshold: 0.9
