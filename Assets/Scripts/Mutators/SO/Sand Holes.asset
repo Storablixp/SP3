@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Sand Holes
   m_EditorClassIdentifier: 
   IncludeAllTiles: 0
-  CanBeVisualized: 1
+  CanBeVisualized: 0
   StartingDepthLevel: 64
   EndDepthLevel: 128
   PixelToCheckFor: {fileID: 11400000, guid: ed960c5253adca347893d851aeab4d08, type: 2}
   PixelToReplace: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
-  ReplacementThreshold: 21
+  ReplacementThreshold: 17
   MooreNeighborhoodSize: 3
   Iterations: 5
