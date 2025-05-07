@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoiseScale: 0.0797
   Octaves: 1
-  Frequency: 0.1
-  Persistence: 0.5
-  Lacunarity: 2
+  StartAmplitude: 1
+  StartFrequency: 1
   EasingFunctionType: 1
   EasingFunctionModifier: 0.01
+  Persistence: 0.5
+  Lacunarity: 2
