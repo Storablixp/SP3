@@ -333,7 +333,7 @@ MonoBehaviour:
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   testing: 0
   differentOffsets: 0
-  seed: 1
+  seed: 3
   worldSize: {x: 512, y: 512}
   worldMutators:
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
