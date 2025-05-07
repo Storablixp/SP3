@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spaghetti Noise
   m_EditorClassIdentifier: 
   NoiseScale: 0.01
-  Octaves: 1
+  Octaves: 3
   EasingFunctionType: 4
   EasingFunctionModifier: 0.1
   Persistence: 0.5
