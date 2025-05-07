@@ -24,18 +24,20 @@ public class SurfaceMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY] == dirtPixel && 
+                if (pixels[arrayX, arrayY] == dirtPixel &&
                     GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
                 {
-                    if (temperatureMutator.Temperatures[arrayX, arrayY] > 0.5f)
+                    if (temperatureMutator.Temperatures[arrayX, arrayY] > 0.6f)
                     {
-                        if (humidityMutator.Humidities[arrayX, arrayY] > 0.75f) worldGenerator.ChangePixel(arrayX, arrayY, sandPixel);
-                        else worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
+                        worldGenerator.ChangePixel(arrayX, arrayY, sandPixel);
+                    }
+                    else if (temperatureMutator.Temperatures[arrayX, arrayY] < 0.4f)
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, clayPixel);
                     }
                     else
                     {
-                        if (humidityMutator.Humidities[arrayX, arrayY] > 0.75f) worldGenerator.ChangePixel(arrayX, arrayY, clayPixel);
-                        else worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
+                        worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
                     }
                 }
             }

@@ -24,10 +24,11 @@ public class TemperatureMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
-                float depthFactor = (float)arrayY / (worldSize.y - 1);
-                float finalTemperature = noiseValue * depthFactor;
-                Temperatures[arrayX, arrayY] = finalTemperature;
+                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D((float)arrayX, (float)arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
+                //float depthFactor = (float)arrayY / (worldSize.y - 1);
+                //float finalTemperature = noiseValue += depthFactor;
+                //finalTemperature = Mathf.Clamp01(finalTemperature);
+                Temperatures[arrayX, arrayY] = noiseValue;
             }
         }
 

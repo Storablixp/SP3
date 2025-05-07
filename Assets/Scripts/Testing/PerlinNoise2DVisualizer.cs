@@ -5,11 +5,6 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
 {
     [Range(0, 100)] public int heightVariationStrength = 50;
 
-    [Header("Noise")]
-    [SerializeField] private Perlin2DSettings layerNoise;
-    [SerializeField] private Perlin2DSettings temperatureNoise;
-    [SerializeField] private Perlin2DSettings humidityNoise;
-
     [Header("Settings")]
     private RawImage image;
     private Texture2D texture;
@@ -58,29 +53,21 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     float yMod = y + noiseValue * heightVariationStrength;
 
                     float yNormalized = Mathf.Clamp01(yMod / imageSize.y);
+                   
+                    Color colorToAdd;
 
-                    Color colorToAdd = new Color(noiseValue, noiseValue, noiseValue);
-
-                    //if (noiseValue > 0.8f)
-                    //    colorToAdd = new Color(1f, 1f, 1f);
-                    //else if (noiseValue > 0.6f)
-                    //    colorToAdd = new Color(0.75f, 0.75f, 0.75f);
-                    //else if (noiseValue > 0.4f)
-                    //    colorToAdd = new Color(0.5f, 0.5f, 0.5f);
-                    //else if (noiseValue > 0.2f)
-                    //    colorToAdd = new Color(0.25f, 0.25f, 0.25f);
-                    //else
-                    //    colorToAdd = new Color(0f, 0f, 0f);
-
-                    if (noiseValue > 0.8f || noiseValue < 0.2f)
-                        colorToAdd = Color.gray;
-                    else colorToAdd = Color.cyan;
+                    if (noiseValue > 0.9f)
+                        colorToAdd = new Color(1f, 1f, 1f);
+                    else if (noiseValue < 0.1f)
+                        colorToAdd = new Color(0f, 0f, 0f);
+                    else
+                        colorToAdd = new Color(0.5f, 0.5f, 0.5f);
 
                     texture.SetPixel(x, y, colorToAdd);
                 }
                 else if (view == ViewType.temperatureView)
                 {
-                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, temperatureNoise);
+                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
                     float depthFactor = (float)y / (imageSize.y - 1);
                     float finalTemperature = noiseValue;
                     texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));

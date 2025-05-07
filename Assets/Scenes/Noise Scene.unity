@@ -523,12 +523,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightVariationStrength: 50
-  layerNoise: {fileID: 0}
-  temperatureNoise: {fileID: 11400000, guid: 5bc952e237d4d7e4286edf8fca7a3043, type: 2}
-  humidityNoise: {fileID: 0}
   seed: 0
   imageSize: {x: 512, y: 512}
-  noiseSettings: {fileID: 11400000, guid: 3d7befa46f44ae04f810630b206d4143, type: 2}
+  noiseSettings: {fileID: 11400000, guid: 5bc952e237d4d7e4286edf8fca7a3043, type: 2}
   saveImage: 0
   oneTimeGeneration: 0
   oneTimeRandom: 1

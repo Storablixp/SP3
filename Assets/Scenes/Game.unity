@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  testing: 1
+  testing: 0
   differentOffsets: 0
   seed: 1
   worldSize: {x: 512, y: 512}
@@ -395,6 +395,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pixelTiles:
+  - pixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
+    tile: {fileID: 11400000, guid: 5c8f67d9712ffd740ade97a28e5ae893, type: 2}
   - pixel: {fileID: 11400000, guid: 05a18c895ea4d894995841d20a82a441, type: 2}
     tile: {fileID: 11400000, guid: bbfc2e5f5bbf421458aa2f35c195c421, type: 2}
   - pixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
