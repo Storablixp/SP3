@@ -18,5 +18,5 @@ MonoBehaviour:
   StartFrequency: 1
   EasingFunctionType: 0
   EasingFunctionModifier: 0.3
-  Persistence: 0.525
+  Persistence: 0.5
   Lacunarity: 2
