@@ -55,26 +55,27 @@ public class GlobalPerlinFunctions
         return texture;
     }
 
-    public static float SumPerlinNoise2D(int x, int y, float xOffset, float yOffset, Perlin2DSettings noiseSettings)
+    public static float SumPerlinNoise2D(float x, float y, float xOffset, float yOffset, Perlin2DSettings noiseSettings)
     {
-        float amplitude = 1;
-        float frequency = noiseSettings.Frequency;
-        float noiseSum = 0;
-        float amplitudeSum = 0;
+        float noiseSum = 0f;
+        float frequency = 1f;
+        float amplitude = noiseSettings.StartAmplitude;
+
         for (int i = 0; i < noiseSettings.Octaves; i++)
         {
-            float sampleX = (x + xOffset) * frequency * noiseSettings.NoiseScale;
-            float sampleY = (y + yOffset) * frequency * noiseSettings.NoiseScale;
+            float sampleX = (x + xOffset) * noiseSettings.NoiseScale * frequency;
+            float sampleY = (y + yOffset) * noiseSettings.NoiseScale * frequency;
 
-            noiseSum += amplitude * Mathf.PerlinNoise(sampleX, sampleY);
-            amplitudeSum += amplitude;
+            float noiseValue = Mathf.PerlinNoise(sampleX, sampleY);
+            noiseSum += noiseValue * amplitude;
+
             amplitude *= noiseSettings.Persistence;
             frequency *= noiseSettings.Lacunarity;
         }
 
-        float rawValue = noiseSum / amplitudeSum;
-        float noiseValue = GlobalEasingFunctions.GetEasingValue(rawValue, noiseSettings.EasingFunctionModifier, noiseSettings.EasingFunctionType);
-        return noiseValue;
+        float clampedValue = Mathf.Clamp01(noiseSum);
+
+        return GlobalEasingFunctions.GetEasingValue(clampedValue, noiseSettings.EasingFunctionModifier, noiseSettings.EasingFunctionType);
     }
     #endregion
 }

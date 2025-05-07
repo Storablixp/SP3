@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 333bd8c8bdd3d634fa9a5fde3ca26ac9, type: 3}
-  m_Name: Terrain Noise
+  m_Name: Spaghetti Noise
   m_EditorClassIdentifier: 
-  NoiseScale: 0.1
-  Octaves: 3
-  StartAmplitude: 0.1
+  NoiseScale: 0.0136
+  Octaves: 1
+  StartAmplitude: 1.147
   Persistence: 0.5
   Lacunarity: 2
   EasingFunctionType: 1
-  EasingFunctionModifier: 1.29
+  EasingFunctionModifier: 2.18

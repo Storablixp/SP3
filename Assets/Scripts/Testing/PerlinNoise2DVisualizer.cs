@@ -18,6 +18,7 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
     [SerializeField] private Perlin2DSettings noiseSettings;
     [SerializeField] private bool saveImage;
     [SerializeField] private bool oneTimeGeneration;
+    [SerializeField] private bool oneTimeRandom;
     private enum ViewType { defaultView, layerView, temperatureView, humidityView }
     [SerializeField] private ViewType view;
 
@@ -37,8 +38,15 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
 
     private void GenerateNoise()
     {
-        float xOffset = Random.Range(-10000f, 10000f);
-        float yOffset = Random.Range(-10000f, 10000f);
+        float xOffset = 0;
+        float yOffset = 0;
+        
+        if (!oneTimeRandom)
+        {
+            xOffset = Random.Range(-10000f, 10000f);
+            yOffset = Random.Range(-10000f, 10000f);
+        }
+
 
         for (int y = imageSize.y - 1; y >= 0; y--)
         {
@@ -49,21 +57,24 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
                     float yMod = y + noiseValue * heightVariationStrength;
 
-                    // Normalize yMod between 0 and 1 based on image height
                     float yNormalized = Mathf.Clamp01(yMod / imageSize.y);
 
-                    Color colorToAdd;
+                    Color colorToAdd = new Color(noiseValue, noiseValue, noiseValue);
 
-                    if (noiseValue > 0.8f)
-                        colorToAdd = new Color(1f, 1f, 1f); 
-                    else if (noiseValue > 0.6f)
-                        colorToAdd = new Color(0.75f, 0.75f, 0.75f);
-                    else if (noiseValue > 0.4f)
-                        colorToAdd = new Color(0.5f, 0.5f, 0.5f);
-                    else if (noiseValue > 0.2f)
-                        colorToAdd = new Color(0.25f, 0.25f, 0.25f);
-                    else
-                        colorToAdd = new Color(0f, 0f, 0f);
+                    //if (noiseValue > 0.8f)
+                    //    colorToAdd = new Color(1f, 1f, 1f);
+                    //else if (noiseValue > 0.6f)
+                    //    colorToAdd = new Color(0.75f, 0.75f, 0.75f);
+                    //else if (noiseValue > 0.4f)
+                    //    colorToAdd = new Color(0.5f, 0.5f, 0.5f);
+                    //else if (noiseValue > 0.2f)
+                    //    colorToAdd = new Color(0.25f, 0.25f, 0.25f);
+                    //else
+                    //    colorToAdd = new Color(0f, 0f, 0f);
+
+                    //if (noiseValue > 0.75f || noiseValue < 0.25f)
+                    //    colorToAdd = Color.gray;
+                    //else colorToAdd = Color.cyan;
 
                     texture.SetPixel(x, y, colorToAdd);
                 }
