@@ -72,9 +72,9 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     //else
                     //    colorToAdd = new Color(0f, 0f, 0f);
 
-                    //if (noiseValue > 0.75f || noiseValue < 0.25f)
-                    //    colorToAdd = Color.gray;
-                    //else colorToAdd = Color.cyan;
+                    if (noiseValue > 0.6f || noiseValue < 0.4f)
+                        colorToAdd = Color.gray;
+                    else colorToAdd = Color.cyan;
 
                     texture.SetPixel(x, y, colorToAdd);
                 }

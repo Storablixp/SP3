@@ -58,7 +58,7 @@ public class GlobalPerlinFunctions
     public static float SumPerlinNoise2D(float x, float y, float xOffset, float yOffset, Perlin2DSettings noiseSettings)
     {
         float noiseSum = 0f;
-        float frequency = 1f;
+        float frequency = noiseSettings.StartFrequency;
         float amplitude = noiseSettings.StartAmplitude;
 
         for (int i = 0; i < noiseSettings.Octaves; i++)
