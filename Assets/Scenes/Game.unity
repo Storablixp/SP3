@@ -330,8 +330,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9467f51c2c29f484091681ea8b5035d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testing: 1
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
+  testing: 1
+  differentOffsets: 0
   seed: 1
   worldSize: {x: 512, y: 512}
   worldMutators:
@@ -339,6 +340,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
+  - {fileID: 11400000, guid: f172c1444a0662b4baf2fa67c1012169, type: 2}
+  - {fileID: 11400000, guid: a187ea287bba8014b8137457f771f60b, type: 2}
   - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
   tilesPerFrame: 10
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}

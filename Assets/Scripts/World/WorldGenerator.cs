@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
-    [SerializeField] private bool testing;
     [SerializeField] private PixelSO airPixel;
     private PixelSO[,] pixels;
+
+    [Header("Testing")]
+    [SerializeField] private bool testing;
+    [SerializeField] private bool differentOffsets;
 
     [Header("World Settings")]
     [SerializeField] private int seed;
@@ -72,8 +75,11 @@ public class WorldGenerator : MonoBehaviour
             GenerateTexture();
 
             pixels = new PixelSO[worldSize.x, worldSize.y];
-            XOffset = Random.Range(-100000f, 100000f);
-            YOffset = Random.Range(-100000f, 100000f);
+            if (differentOffsets)
+            {
+                XOffset = Random.Range(-100000f, 100000f);
+                YOffset = Random.Range(-100000f, 100000f);
+            }
             StartCoroutine(GenerateWorld());
             yield break;
         }

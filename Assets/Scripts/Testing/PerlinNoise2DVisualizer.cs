@@ -72,7 +72,7 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     //else
                     //    colorToAdd = new Color(0f, 0f, 0f);
 
-                    if (noiseValue > 0.6f || noiseValue < 0.4f)
+                    if (noiseValue > 0.8f || noiseValue < 0.2f)
                         colorToAdd = Color.gray;
                     else colorToAdd = Color.cyan;
 
