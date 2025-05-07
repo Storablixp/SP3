@@ -6,8 +6,6 @@ public class Perlin2DSettings : ScriptableObject
     [Header("Settings")]
     [Range(0.01f, 0.1f)] public float NoiseScale = 0.1f;
     [Range(1, 10)] public int Octaves = 3; //How many layers of nosie are stacked.
-    [Range(0.5f, 2f)] public float StartAmplitude = 1f;
-    [Range(0.5f, 2f)] public float StartFrequency = 1f;
     public GlobalEasingFunctions.EasingType EasingFunctionType;
     [Range(0.01f, 3f)] public float EasingFunctionModifier = 3;
 

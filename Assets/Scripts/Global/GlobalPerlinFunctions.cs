@@ -4,12 +4,12 @@ using UnityEngine;
 public class GlobalPerlinFunctions
 {
     #region 1D
-    public static float PerlinNoise1D(int x, float xOffset, Perlin1DSettings noiseSettings, int chunkHeight)
-    {
-        float noiseValue = SumPerlinNoise1D(x, xOffset, noiseSettings);
-        float noiseInRange = RangeMap(noiseValue, 0, 1, noiseSettings.noiseRangeMin * chunkHeight, chunkHeight);
-        return noiseInRange;
-    }
+    //public static float PerlinNoise1D(int x, float xOffset, Perlin1DSettings noiseSettings, int chunkHeight)
+    //{
+    //    float noiseValue = SumPerlinNoise1D(x, xOffset, noiseSettings);
+    //    float noiseInRange = RangeMap(noiseValue, 0, 1, noiseSettings.noiseRangeMin * chunkHeight, chunkHeight);
+    //    return noiseInRange;
+    //}
 
     private static float SumPerlinNoise1D(int x, float xOffset, Perlin1DSettings noiseSettings)
     {
