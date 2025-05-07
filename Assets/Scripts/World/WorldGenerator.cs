@@ -21,11 +21,10 @@ public class WorldGenerator : MonoBehaviour
     public static float YOffset;
 
     [Header("Visualization")]
-    [SerializeField] private int tilesPerFrame = 100000;
     [SerializeField] private GameObject worldCanvasPrefab;
-    private int tileCounter;
     private Texture2D worldTexture;
     private RawImage rawImage;
+    [SerializeField] private RawImage worldMap;
 
     private void OnValidate()
     {
@@ -64,16 +63,14 @@ public class WorldGenerator : MonoBehaviour
 
         foreach (WorldMutatorSO mutator in worldMutators)
         {
-            //ResetCounterValues();
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
-            //UpdateProgressbar();
         }
 
+        GenerateTexture();
+        worldMap.texture = rawImage.texture;
 
         if (testing)
         {
-            GenerateTexture();
-
             pixels = new PixelSO[worldSize.x, worldSize.y];
             if (differentOffsets)
             {
@@ -85,6 +82,7 @@ public class WorldGenerator : MonoBehaviour
         }
         else
         {
+            rawImage.gameObject.SetActive(false);
             StartCoroutine(chunkManager.SpawnChunksAndPlayer(worldSize, pixels));
         }
 
@@ -153,23 +151,6 @@ public class WorldGenerator : MonoBehaviour
     public bool CheckForMutator(WorldMutatorSO mutator)
     {
         return worldMutators.Contains(mutator);
-    }
-
-    public void ResetCounterValues()
-    {
-        tileCounter = 0;
-    }
-
-    public bool UpdateProgressbar()
-    {
-        tileCounter++;
-
-        if (tileCounter >= tilesPerFrame)
-        {
-            tileCounter = 0;
-            return true;
-        }
-        else return false;
     }
 
     public bool IsInBounds(int arrayX, int arrayY)
