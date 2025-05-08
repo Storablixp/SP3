@@ -3,13 +3,30 @@ using UnityEngine.UI;
 
 public class WorldMap : MonoBehaviour
 {
-    [SerializeField] private RawImage rawImage;
-    [SerializeField] private Image playerMarker;
-    [SerializeField] private Transform playerTrans;
-    [SerializeField] private Vector2 worldSize;
+    private RawImage rawImage;
+    private Transform playerTrans;
+    private RectTransform rectTransform;
+    [SerializeField] private RectTransform playerMarker;
+
+    private void Start()
+    {
+        rawImage = GetComponent<RawImage>();
+        rectTransform = GetComponent<RectTransform>();
+    }
+
+    public void SetUp(Vector2 worldSize, Texture texture)
+    {
+        rectTransform.sizeDelta = worldSize / 2;
+        rawImage.texture = texture;
+    }
+
+    public void SetPlayer(Transform playerTrans) => this.playerTrans = playerTrans;
 
     private void Update()
     {
-        
+        if (rawImage != null && playerTrans != null)
+        {
+            playerMarker.anchoredPosition = playerTrans.position;
+        }
     }
 }

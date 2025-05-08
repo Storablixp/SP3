@@ -24,7 +24,7 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private GameObject worldCanvasPrefab;
     private Texture2D worldTexture;
     private RawImage rawImage;
-    [SerializeField] private RawImage worldMap;
+    [SerializeField] private WorldMap worldMap;
 
     private void OnValidate()
     {
@@ -67,7 +67,7 @@ public class WorldGenerator : MonoBehaviour
         }
 
         GenerateTexture();
-        worldMap.texture = rawImage.texture;
+        worldMap.SetUp(worldSize, rawImage.texture);
 
         if (testing)
         {

@@ -6,6 +6,7 @@ using System.Collections;
 
 public class ChunkAndPlayerGenerator : MonoBehaviour
 {
+    [SerializeField] private WorldMap worldMap;
     private ChunkManager chunkManager;
 
     [Header("Chunk Settings")]
@@ -161,6 +162,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
         cameraBox.offset = new Vector2(0, 8);
         confiner2D.BoundingShape2D = cameraBox;
 
+        worldMap.SetPlayer(playerTrans);
         yield return null;
     }
 }
