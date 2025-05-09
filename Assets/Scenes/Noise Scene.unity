@@ -525,11 +525,11 @@ MonoBehaviour:
   heightVariationStrength: 50
   seed: 0
   imageSize: {x: 512, y: 512}
-  noiseSettings: {fileID: 11400000, guid: 387c3e9042ebe8a4e8ca737d984a87d2, type: 2}
+  noiseSettings: {fileID: 11400000, guid: 4929def06042ab6498fa5ace73bc543f, type: 2}
   saveImage: 0
   oneTimeGeneration: 0
   oneTimeRandom: 1
-  view: 1
+  view: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

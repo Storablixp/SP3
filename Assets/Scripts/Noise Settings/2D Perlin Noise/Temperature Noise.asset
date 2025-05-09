@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333bd8c8bdd3d634fa9a5fde3ca26ac9, type: 3}
   m_Name: Temperature Noise
   m_EditorClassIdentifier: 
-  NoiseScale: 0.0263
-  Octaves: 4
+  NoiseScale: 0.0394
+  Octaves: 1
   EasingFunctionType: 1
-  EasingFunctionModifier: 0.44
+  EasingFunctionModifier: 1
   Persistence: 0.5
   Lacunarity: 2
