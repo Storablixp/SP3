@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +9,15 @@ public class AreaRemover : MonoBehaviour
     [SerializeField] private CircleCollider2D removeArea;
     [SerializeField] private ParticleSystem digParticle;
     private Tilemap currentTilemap;
-    float diameter = 1f;
-
-    private void Start()
+    private float diameter = 1f;
+    
+    private WorldGenerator worldGenerator;
+    private Vector2Int worldSize;
+    public void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
     {
         diameter = removeArea.radius * 2;
+        this.worldGenerator = worldGenerator;
+        this.worldSize = worldSize;
     }
 
     void Update()
@@ -51,10 +54,10 @@ public class AreaRemover : MonoBehaviour
                     {
                         if (currentTilemap.HasTile(tilePos))
                         {
-                            int logicalX = tilePos.x + 512 / 2;
-                            int logicalY = tilePos.y + 512 / 2;
-                            Vector2Int lookupKey = new Vector2Int(logicalX, logicalY);
-                            TileInstance tileInstance = FindFirstObjectByType<WorldGenerator>().tiles[lookupKey];
+                            int pixelX = tilePos.x + worldSize.x / 2;
+                            int pixelY = tilePos.y + worldSize.y / 2;
+                            Vector2Int lookupKey = new Vector2Int(pixelX, pixelY);
+                            TileInstance tileInstance = worldGenerator.tiles[lookupKey];
 
 
                             if (tileInstance.Tile.Unbreakable) continue;
@@ -67,6 +70,7 @@ public class AreaRemover : MonoBehaviour
 
                                 currentTilemap.SetTile(tilePos, hollowTile);
                                 currentTilemap.SetColor(tilePos, hollowTile.Color);
+                                worldGenerator.ReplaceTile(lookupKey, hollowTile);
                             }
                         }
                     }

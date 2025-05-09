@@ -9,7 +9,6 @@ public class WorldGenerator : MonoBehaviour
     private PixelInstance[,] pixels;
     public Dictionary<Vector2Int, TileInstance> tiles = new();
 
-
     [Header("Testing")]
     [SerializeField] private bool testing;
     [SerializeField] private bool differentOffsets;
@@ -153,6 +152,15 @@ public class WorldGenerator : MonoBehaviour
         TileInstance newInstance = new TileInstance();
         newInstance.Tile = tile;
         tiles.Add(position, newInstance);
+    }
+
+    public void ReplaceTile(Vector2Int position, WorldTile tile)
+    {
+        if (tiles.TryGetValue(position, out TileInstance instance))
+        {
+            instance.Tile = tile;
+            tiles[position] = instance;
+        }
     }
 
     public bool IsInBounds(int arrayX, int arrayY)
