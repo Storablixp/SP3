@@ -7,6 +7,8 @@ public class WorldGenerator : MonoBehaviour
 {
     [SerializeField] private PixelSO airPixel;
     private PixelInstance[,] pixels;
+    public Dictionary<Vector2Int, TileInstance> tiles = new();
+
 
     [Header("Testing")]
     [SerializeField] private bool testing;
@@ -134,22 +136,23 @@ public class WorldGenerator : MonoBehaviour
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
     {
-        if (pixels[xCoord, yCoord].Pixel != null && pixels[xCoord, yCoord].Pixel.Unchangeable) //Return if pixel can't be changed.
+        if (pixels[xCoord, yCoord].Pixel == null || pixels[xCoord, yCoord].Pixel.Unchangeable) //Return if pixel can't be changed.
         {
             return;
         }
 
         pixels[xCoord, yCoord].Pixel = pixel;
-
     }
 
     public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord].Pixel = airPixel;
 
     public PixelInstance[,] RetrievePixels() => pixels;
 
-    public bool CheckForMutator(WorldMutatorSO mutator)
+    public void AddTile(Vector2Int position, WorldTile tile)
     {
-        return worldMutators.Contains(mutator);
+        TileInstance newInstance = new TileInstance();
+        newInstance.Tile = tile;
+        tiles.Add(position, newInstance);
     }
 
     public bool IsInBounds(int arrayX, int arrayY)

@@ -8,6 +8,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
 {
     [SerializeField] private WorldMap worldMap;
     private ChunkManager chunkManager;
+    private WorldGenerator worldGenerator;
 
     [Header("Chunk Settings")]
     [SerializeField] private Vector2Int chunkSize;
@@ -35,6 +36,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
     private void Awake()
     {
         chunkManager = GetComponent<ChunkManager>();
+        worldGenerator = GetComponent<WorldGenerator>();
     }
 
     private void Start()
@@ -82,6 +84,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
                         PixelInstance pixel = pixels[x, y];
                         if (PixelToTileConverter.TileLookup.TryGetValue(pixel.Pixel.Color, out var tile))
                         {
+                            worldGenerator.AddTile(new Vector2Int(x, y), tile);
                             tilemap.SetTile(new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0), tile);
                         }
 

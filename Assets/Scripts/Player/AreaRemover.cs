@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,15 +51,19 @@ public class AreaRemover : MonoBehaviour
                     {
                         if (currentTilemap.HasTile(tilePos))
                         {
-                            WorldTile currentTile = currentTilemap.GetTile(tilePos) as WorldTile;
+                            int logicalX = tilePos.x + 512 / 2;
+                            int logicalY = tilePos.y + 512 / 2;
+                            Vector2Int lookupKey = new Vector2Int(logicalX, logicalY);
+                            TileInstance tileInstance = FindFirstObjectByType<WorldGenerator>().tiles[lookupKey];
 
-                            if (currentTile.Unbreakable) continue;
 
-                            if (currentTile.ColliderType != Tile.ColliderType.None)
+                            if (tileInstance.Tile.Unbreakable) continue;
+
+                            if (tileInstance.Tile.ColliderType != Tile.ColliderType.None)
                             {
                                 Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.right, -directionToMouse);
                                 ParticleSystem ps = Instantiate(digParticle, transform.position, spawnRotation);
-                                ps.GetComponent<ParticleSystemRenderer>().material.color = currentTile.Color;
+                                ps.GetComponent<ParticleSystemRenderer>().material.color = tileInstance.Tile.Color;
 
                                 currentTilemap.SetTile(tilePos, hollowTile);
                                 currentTilemap.SetColor(tilePos, hollowTile.Color);
