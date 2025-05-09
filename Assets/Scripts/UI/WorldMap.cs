@@ -6,6 +6,7 @@ public class WorldMap : MonoBehaviour
     private RawImage rawImage;
     private Transform playerTrans;
     private RectTransform rectTransform;
+    [SerializeField] private WorldGenerator worldGenerator;
     [SerializeField] private RectTransform playerMarker;
 
     private void Start()
@@ -28,5 +29,14 @@ public class WorldMap : MonoBehaviour
         {
             playerMarker.anchoredPosition = playerTrans.position;
         }
+    }
+
+    public void ChangePixel(Vector2Int position)
+    {
+        Color color = worldGenerator.Tiles[position].Tile.Color;
+        Texture2D texture = (Texture2D)rawImage.texture;
+        texture.SetPixel(position.x, position.y, color);
+        texture.Apply();
+        rawImage.texture = texture;
     }
 }

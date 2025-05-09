@@ -7,7 +7,7 @@ public class WorldGenerator : MonoBehaviour
 {
     [SerializeField] private PixelSO airPixel;
     private PixelInstance[,] pixels;
-    public Dictionary<Vector2Int, TileInstance> tiles = new();
+    public Dictionary<Vector2Int, TileInstance> Tiles = new();
 
     [Header("Testing")]
     [SerializeField] private bool testing;
@@ -151,15 +151,15 @@ public class WorldGenerator : MonoBehaviour
     {
         TileInstance newInstance = new TileInstance();
         newInstance.Tile = tile;
-        tiles.Add(position, newInstance);
+        Tiles.Add(position, newInstance);
     }
 
     public void ReplaceTile(Vector2Int position, WorldTile tile)
     {
-        if (tiles.TryGetValue(position, out TileInstance instance))
+        if (Tiles.TryGetValue(position, out TileInstance instance))
         {
             instance.Tile = tile;
-            tiles[position] = instance;
+            Tiles[position] = instance;
         }
     }
 

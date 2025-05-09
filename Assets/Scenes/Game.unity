@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1b527299872b648832633256410627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldGenerator: {fileID: 349933713}
   playerMarker: {fileID: 1046896759}
 --- !u!1 &311371040
 GameObject:

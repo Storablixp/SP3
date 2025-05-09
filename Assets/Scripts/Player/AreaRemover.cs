@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class AreaRemover : MonoBehaviour
 {
+    [SerializeField] private WorldMap worldMap;
     [SerializeField] private WorldTile hollowTile;
     [SerializeField] private CircleCollider2D removeArea;
     [SerializeField] private ParticleSystem digParticle;
@@ -13,11 +14,12 @@ public class AreaRemover : MonoBehaviour
     
     private WorldGenerator worldGenerator;
     private Vector2Int worldSize;
-    public void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
+    public void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize, WorldMap worldMap)
     {
         diameter = removeArea.radius * 2;
         this.worldGenerator = worldGenerator;
         this.worldSize = worldSize;
+        this.worldMap = worldMap;
     }
 
     void Update()
@@ -57,7 +59,7 @@ public class AreaRemover : MonoBehaviour
                             int pixelX = tilePos.x + worldSize.x / 2;
                             int pixelY = tilePos.y + worldSize.y / 2;
                             Vector2Int lookupKey = new Vector2Int(pixelX, pixelY);
-                            TileInstance tileInstance = worldGenerator.tiles[lookupKey];
+                            TileInstance tileInstance = worldGenerator.Tiles[lookupKey];
 
 
                             if (tileInstance.Tile.Unbreakable) continue;
@@ -71,6 +73,8 @@ public class AreaRemover : MonoBehaviour
                                 currentTilemap.SetTile(tilePos, hollowTile);
                                 currentTilemap.SetColor(tilePos, hollowTile.Color);
                                 worldGenerator.ReplaceTile(lookupKey, hollowTile);
+
+                                worldMap.ChangePixel(lookupKey);
                             }
                         }
                     }
