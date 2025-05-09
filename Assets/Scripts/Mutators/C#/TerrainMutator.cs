@@ -42,7 +42,7 @@ public class TerrainMutator : WorldMutatorSO
                     pixelToAdd = dirtPixel;
                 else if (yMod > worldSize.y * stoneThreshold)
                 {
-                    if (pixels[arrayX, arrayY].pixel == hollowPixel)
+                    if (pixels[arrayX, arrayY].Pixel == hollowPixel)
                     {
                         continue;
                     }

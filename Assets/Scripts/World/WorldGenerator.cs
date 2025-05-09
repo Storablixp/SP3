@@ -117,9 +117,9 @@ public class WorldGenerator : MonoBehaviour
             {
                 Color color = Color.white;
 
-                if (pixels[x, y].pixel != null)
+                if (pixels[x, y].Pixel != null)
                 {
-                    color = pixels[x, y].pixel.Color;
+                    color = pixels[x, y].Pixel.Color;
                 }
 
                 worldTexture.SetPixel(x, y, color);
@@ -134,16 +134,16 @@ public class WorldGenerator : MonoBehaviour
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
     {
-        if (pixels[xCoord, yCoord].pixel != null && pixels[xCoord, yCoord].pixel.Unchangeable) //Return if pixel can't be changed.
+        if (pixels[xCoord, yCoord].Pixel != null && pixels[xCoord, yCoord].Pixel.Unchangeable) //Return if pixel can't be changed.
         {
             return;
         }
 
-        pixels[xCoord, yCoord].pixel = pixel;
+        pixels[xCoord, yCoord].Pixel = pixel;
 
     }
 
-    public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord].pixel = airPixel;
+    public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord].Pixel = airPixel;
 
     public PixelInstance[,] RetrievePixels() => pixels;
 

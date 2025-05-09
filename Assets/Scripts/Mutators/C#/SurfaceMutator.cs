@@ -4,10 +4,6 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Surface Mutator", menuName = "Scriptable Objects/World Mutator/Surface")]
 public class SurfaceMutator : WorldMutatorSO
 {
-    [Header("Required Mutators")]
-    [SerializeField] private TemperatureMutator temperatureMutator;
-    [SerializeField] private HumidityMutator humidityMutator;
-
     [Header("Pixels")]
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO dirtPixel;
@@ -24,14 +20,14 @@ public class SurfaceMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY].pixel == dirtPixel &&
+                if (pixels[arrayX, arrayY].Pixel == dirtPixel &&
                     GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
                 {
-                    if (temperatureMutator.Temperatures[arrayX, arrayY] > 0.6f)
+                    if (pixels[arrayX, arrayY].Temperature > 0.6f)
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, sandPixel);
                     }
-                    else if (temperatureMutator.Temperatures[arrayX, arrayY] < 0.4f)
+                    else if (pixels[arrayX, arrayY].Temperature < 0.4f)
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, clayPixel);
                     }

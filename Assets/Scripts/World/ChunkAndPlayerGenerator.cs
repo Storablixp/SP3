@@ -80,7 +80,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
                     for (int y = startY; y < startY + chunkSize.y; y++)
                     {
                         PixelInstance pixel = pixels[x, y];
-                        if (PixelToTileConverter.TileLookup.TryGetValue(pixel.pixel.Color, out var tile))
+                        if (PixelToTileConverter.TileLookup.TryGetValue(pixel.Pixel.Color, out var tile))
                         {
                             tilemap.SetTile(new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0), tile);
                         }

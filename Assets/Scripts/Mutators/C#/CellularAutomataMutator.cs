@@ -30,15 +30,15 @@ public class CellularAutomataMutator : WorldMutatorSO
             {
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    PixelSO pixel = currentPixels[arrayX, arrayY].pixel;
+                    PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
                     if (pixel == null) continue;
                     if (pixel != PixelToReplace && pixel != PixelToCheckFor) continue;
 
                     if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, PixelToCheckFor, ReplacementThreshold))
                     {
-                        updatedPixels[arrayX, arrayY].pixel = PixelToCheckFor;
+                        updatedPixels[arrayX, arrayY].Pixel = PixelToCheckFor;
                     }
-                    else updatedPixels[arrayX, arrayY].pixel = PixelToReplace;
+                    else updatedPixels[arrayX, arrayY].Pixel = PixelToReplace;
                 }
             }
 
@@ -47,11 +47,11 @@ public class CellularAutomataMutator : WorldMutatorSO
             {
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    PixelSO pixel = currentPixels[arrayX, arrayY].pixel;
+                    PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
                     if (pixel == null) continue;
                     if (pixel != PixelToReplace && pixel != PixelToCheckFor) continue;
 
-                    PixelSO newPixel = updatedPixels[arrayX, arrayY].pixel;
+                    PixelSO newPixel = updatedPixels[arrayX, arrayY].Pixel;
                     if (newPixel == null) continue;
 
                     pixel = newPixel;

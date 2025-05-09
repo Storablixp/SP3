@@ -14,7 +14,7 @@ public class RemoveSmallHoles : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY].pixel == hollowPixel &&
+                if (pixels[arrayX, arrayY].Pixel == hollowPixel &&
                     !GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, hollowPixel, 9))
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, placeholderPixel);

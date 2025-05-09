@@ -9,7 +9,7 @@ public class GlobalNeighborCheckFucntions : MonoBehaviour
 
         if (worldGenerator.IsInBounds(arrayX + direction.x, arrayY + direction.y))
         {
-            if (pixels[arrayX + direction.x, arrayY + direction.y].pixel == pixelToCheckFor)
+            if (pixels[arrayX + direction.x, arrayY + direction.y].Pixel == pixelToCheckFor)
             {
                return true;
             }
@@ -30,7 +30,7 @@ public class GlobalNeighborCheckFucntions : MonoBehaviour
 
             if (worldGenerator.IsInBounds(x + arrayX, y + arrayY))
             {
-                if (pixels[x + arrayX, y + arrayY].pixel == pixelToCheckFor)
+                if (pixels[x + arrayX, y + arrayY].Pixel == pixelToCheckFor)
                 {
                     amount++;
                     if (amount > threshold) return true;
