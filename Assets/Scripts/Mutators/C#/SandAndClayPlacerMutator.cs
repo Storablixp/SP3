@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-[CreateAssetMenu(fileName = "Sand Placer Mutator", menuName = "Scriptable Objects/World Mutator/Sand Placer")]
-public class SandPlacerMutator : WorldMutatorSO
+[CreateAssetMenu(fileName = "Sand And Clay Placer Mutator", menuName = "Scriptable Objects/World Mutator/Sand And Clay Placer")]
+public class SandAndClayPlacerMutator : WorldMutatorSO
 {
     private List<Vector2Int> sandPixels = new();
     private PixelInstance[,] pixels;
@@ -12,7 +12,6 @@ public class SandPlacerMutator : WorldMutatorSO
     [Header("Settings")]
     [Range(0.0f, 1.0f), SerializeField] private float SandThreshold;
     [Range(0.0f, 1.0f), SerializeField] private float ClayThreshold;
-    [Range(0.0f, 1.0f), SerializeField] private float WaterThreshold;
 
     [Header("Pixels")]
     [SerializeField] private PixelSO DirtPixel;
@@ -39,7 +38,7 @@ public class SandPlacerMutator : WorldMutatorSO
 
                 if (pixel.Pixel == DirtPixel || pixel.Pixel == StonePixel)
                 {
-                    if (pixel.Temperature > SandThreshold)
+                    if (pixel.Wetness > SandThreshold)
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, SandPixel);
                         sandPixels.Add(new Vector2Int(arrayX, arrayY));
@@ -50,13 +49,13 @@ public class SandPlacerMutator : WorldMutatorSO
 
         for (int i = 0; i < sandPixels.Count; i++)
         {
-            if (pixels[sandPixels[i].x, sandPixels[i].y].Humidity > ClayThreshold)
-            {
-                worldGenerator.ChangePixel(sandPixels[i].x, sandPixels[i].y, ClayPixel);
-            }
-            else if (pixels[sandPixels[i].x, sandPixels[i].y].Humidity < WaterThreshold)
+            if (pixels[sandPixels[i].x, sandPixels[i].y].Wetness > 0.8f)
             {
                 worldGenerator.ChangePixel(sandPixels[i].x, sandPixels[i].y, WaterPixel);
+            }
+            else if (pixels[sandPixels[i].x, sandPixels[i].y].Wetness > 0.6f && pixels[sandPixels[i].x, sandPixels[i].y].Temperature > 0.6f)
+            {
+                worldGenerator.ChangePixel(sandPixels[i].x, sandPixels[i].y, ClayPixel);
             }
         }
 

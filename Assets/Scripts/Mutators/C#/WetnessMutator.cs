@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Humidity Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Humidity")]
-public class HumidityMutator : WorldMutatorSO
+[CreateAssetMenu(fileName = "Wetness Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Wetness")]
+public class WetnessMutator : WorldMutatorSO
 {
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
@@ -24,7 +24,7 @@ public class HumidityMutator : WorldMutatorSO
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
                 float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
-                pixels[arrayX, arrayY].Humidity = noiseValue;
+                pixels[arrayX, arrayY].Wetness = noiseValue;
             }
         }
 

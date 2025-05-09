@@ -4,5 +4,5 @@ public struct PixelInstance
 {
     public PixelSO Pixel;
     public float Temperature;
-    public float Humidity;
+    public float Wetness;
 }
