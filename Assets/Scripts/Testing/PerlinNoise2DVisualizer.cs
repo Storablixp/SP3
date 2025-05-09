@@ -35,7 +35,7 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
     {
         float xOffset = 0;
         float yOffset = 0;
-        
+
         if (!oneTimeRandom)
         {
             xOffset = Random.Range(-10000f, 10000f);
@@ -50,18 +50,36 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                 if (view == ViewType.layerView)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
+                    float xMod = x + noiseValue * heightVariationStrength;
                     float yMod = y + noiseValue * heightVariationStrength;
 
+                    float xNormalized = Mathf.Clamp01(xMod / imageSize.x);
                     float yNormalized = Mathf.Clamp01(yMod / imageSize.y);
-                   
+
+                    float value = (xNormalized + yNormalized) / 2;
+
                     Color colorToAdd;
 
-                    if (noiseValue > 0.9f)
+                    if (value > 0.9f)
                         colorToAdd = new Color(1f, 1f, 1f);
-                    else if (noiseValue < 0.1f)
-                        colorToAdd = new Color(0f, 0f, 0f);
-                    else
+                    else if (value > 0.8f)
+                        colorToAdd = new Color(0.9f, 0.9f, 0.9f);
+                    else if (value > 0.7f)
+                        colorToAdd = new Color(0.8f, 0.8f, 0.8f);
+                    else if (value > 0.6f)
+                        colorToAdd = new Color(0.7f, 0.7f, 0.7f);
+                    else if (value > 0.5f)
+                        colorToAdd = new Color(0.6f, 0.6f, 0.6f);
+                    else if (value > 0.4f)
                         colorToAdd = new Color(0.5f, 0.5f, 0.5f);
+                    else if (value > 0.3f)
+                        colorToAdd = new Color(0.4f, 0.4f, 0.4f);
+                    else if (value > 0.2f)
+                        colorToAdd = new Color(0.3f, 0.3f, 0.3f);
+                    else if (value > 0.1f)
+                        colorToAdd = new Color(0.2f, 0.2f, 0.2f);
+                    else
+                        colorToAdd = new Color(0.1f, 0.1f, 0.1f);
 
                     texture.SetPixel(x, y, colorToAdd);
                 }

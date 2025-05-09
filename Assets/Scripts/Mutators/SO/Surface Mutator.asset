@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Surface Mutator
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
-  CanBeVisualized: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  temperatureMutator: {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
-  humidityMutator: {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
+  sandThreshold: 0.9
+  grassThreshold: 0.1
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   dirtPixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
   grassPixel: {fileID: 11400000, guid: eb25c22980f91b740801d5628ac92daa, type: 2}

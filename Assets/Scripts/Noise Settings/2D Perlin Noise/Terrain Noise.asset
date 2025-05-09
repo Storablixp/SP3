@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333bd8c8bdd3d634fa9a5fde3ca26ac9, type: 3}
   m_Name: Terrain Noise
   m_EditorClassIdentifier: 
-  NoiseScale: 0.003
+  NoiseScale: 0.01
   Octaves: 3
   EasingFunctionType: 1
   EasingFunctionModifier: 1
