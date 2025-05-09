@@ -14,13 +14,13 @@ public class CheeseCaveMutator : WorldMutatorSO
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
-        PixelSO[,] pixels = worldGenerator.RetrievePixels();
+        PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY] == stonePixel)
+                if (pixels[arrayX, arrayY].pixel == stonePixel)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
 

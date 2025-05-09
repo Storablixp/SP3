@@ -20,8 +20,8 @@ public class CellularAutomataMutator : WorldMutatorSO
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
-        PixelSO[,] currentPixels = worldGenerator.RetrievePixels();
-        PixelSO[,] updatedPixels = new PixelSO[worldSize.x, worldSize.y];
+        PixelInstance[,] currentPixels = worldGenerator.RetrievePixels();
+        PixelInstance[,] updatedPixels = new PixelInstance[worldSize.x, worldSize.y];
 
         for (int i = 0; i < Iterations; i++)
         {
@@ -30,16 +30,15 @@ public class CellularAutomataMutator : WorldMutatorSO
             {
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    PixelSO pixelInstance = currentPixels[arrayX, arrayY];
-                    if (pixelInstance == null) continue;
-                    if (pixelInstance != PixelToReplace && pixelInstance != PixelToCheckFor) continue;
-
+                    PixelSO pixel = currentPixels[arrayX, arrayY].pixel;
+                    if (pixel == null) continue;
+                    if (pixel != PixelToReplace && pixel != PixelToCheckFor) continue;
 
                     if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, PixelToCheckFor, ReplacementThreshold))
                     {
-                        updatedPixels[arrayX, arrayY] = PixelToCheckFor;
+                        updatedPixels[arrayX, arrayY].pixel = PixelToCheckFor;
                     }
-                    else updatedPixels[arrayX, arrayY] = PixelToReplace;
+                    else updatedPixels[arrayX, arrayY].pixel = PixelToReplace;
                 }
             }
 
@@ -48,14 +47,14 @@ public class CellularAutomataMutator : WorldMutatorSO
             {
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    PixelSO pixelInstance = currentPixels[arrayX, arrayY];
-                    if (pixelInstance == null) continue;
-                    if (pixelInstance != PixelToReplace && pixelInstance != PixelToCheckFor) continue;
+                    PixelSO pixel = currentPixels[arrayX, arrayY].pixel;
+                    if (pixel == null) continue;
+                    if (pixel != PixelToReplace && pixel != PixelToCheckFor) continue;
 
-                    PixelSO newPixel = updatedPixels[arrayX, arrayY];
+                    PixelSO newPixel = updatedPixels[arrayX, arrayY].pixel;
                     if (newPixel == null) continue;
 
-                    pixelInstance = newPixel;
+                    pixel = newPixel;
 
                     worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
                 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WorldGenerator : MonoBehaviour
 {
     [SerializeField] private PixelSO airPixel;
-    private PixelSO[,] pixels;
+    private PixelInstance[,] pixels;
 
     [Header("Testing")]
     [SerializeField] private bool testing;
@@ -51,8 +51,7 @@ public class WorldGenerator : MonoBehaviour
         XOffset = Random.Range(-100000f, 100000f);
         YOffset = Random.Range(-100000f, 100000f);
 
-        pixels = new PixelSO[worldSize.x, worldSize.y];
-
+        pixels = new PixelInstance[worldSize.x, worldSize.y];
         StartCoroutine(nameof(GenerateWorld));
     }
 
@@ -71,7 +70,7 @@ public class WorldGenerator : MonoBehaviour
 
         if (testing)
         {
-            pixels = new PixelSO[worldSize.x, worldSize.y];
+            pixels = new PixelInstance[worldSize.x, worldSize.y];
             if (differentOffsets)
             {
                 XOffset = Random.Range(-100000f, 100000f);
@@ -118,9 +117,9 @@ public class WorldGenerator : MonoBehaviour
             {
                 Color color = Color.white;
 
-                if (pixels[x, y] != null)
+                if (pixels[x, y].pixel != null)
                 {
-                    color = pixels[x, y].Color;
+                    color = pixels[x, y].pixel.Color;
                 }
 
                 worldTexture.SetPixel(x, y, color);
@@ -135,18 +134,18 @@ public class WorldGenerator : MonoBehaviour
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
     {
-        if (pixels[xCoord, yCoord] != null && pixels[xCoord, yCoord].Unchangeable) //Return if pixel can't be changed.
+        if (pixels[xCoord, yCoord].pixel != null && pixels[xCoord, yCoord].pixel.Unchangeable) //Return if pixel can't be changed.
         {
             return;
         }
 
-        pixels[xCoord, yCoord] = pixel;
+        pixels[xCoord, yCoord].pixel = pixel;
 
     }
 
-    public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord] = airPixel;
+    public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord].pixel = airPixel;
 
-    public PixelSO[,] RetrievePixels() => pixels;
+    public PixelInstance[,] RetrievePixels() => pixels;
 
     public bool CheckForMutator(WorldMutatorSO mutator)
     {

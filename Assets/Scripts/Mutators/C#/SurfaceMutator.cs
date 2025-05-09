@@ -18,13 +18,13 @@ public class SurfaceMutator : WorldMutatorSO
     
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
-        PixelSO[,] pixels = worldGenerator.RetrievePixels();
+        PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY] == dirtPixel &&
+                if (pixels[arrayX, arrayY].pixel == dirtPixel &&
                     GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
                 {
                     if (temperatureMutator.Temperatures[arrayX, arrayY] > 0.6f)

@@ -25,7 +25,7 @@ public class TerrainMutator : WorldMutatorSO
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
-        PixelSO[,] pixels = worldGenerator.RetrievePixels();
+        PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
@@ -42,7 +42,7 @@ public class TerrainMutator : WorldMutatorSO
                     pixelToAdd = dirtPixel;
                 else if (yMod > worldSize.y * stoneThreshold)
                 {
-                    if (pixels[arrayX, arrayY] == hollowPixel)
+                    if (pixels[arrayX, arrayY].pixel == hollowPixel)
                     {
                         continue;
                     }

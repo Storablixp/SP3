@@ -8,13 +8,13 @@ public class RemoveSmallHoles : WorldMutatorSO
     [SerializeField] private PixelSO placeholderPixel;
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
-        PixelSO[,] pixels = worldGenerator.RetrievePixels();
+        PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY] == hollowPixel &&
+                if (pixels[arrayX, arrayY].pixel == hollowPixel &&
                     !GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, hollowPixel, 9))
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, placeholderPixel);

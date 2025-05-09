@@ -45,7 +45,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
         cameraBox = GetComponent<BoxCollider2D>();
     }
 
-    public IEnumerator SpawnChunksAndPlayer(Vector2Int worldSize, PixelSO[,] pixels)
+    public IEnumerator SpawnChunksAndPlayer(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         yield return CreateChunks(worldSize, pixels);
         yield return FindSpawnPoint();
@@ -55,7 +55,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
         chunkManager.SetUp(playerTrans, currentChunk, chunks);
     }
 
-    private IEnumerator CreateChunks(Vector2Int worldSize, PixelSO[,] pixels)
+    private IEnumerator CreateChunks(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         int chunksX = worldSize.x / chunkSize.x;
         int chunksY = worldSize.y / chunkSize.y;
@@ -79,8 +79,8 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
                 {
                     for (int y = startY; y < startY + chunkSize.y; y++)
                     {
-                        PixelSO pixel = pixels[x, y];
-                        if (PixelToTileConverter.TileLookup.TryGetValue(pixel.Color, out var tile))
+                        PixelInstance pixel = pixels[x, y];
+                        if (PixelToTileConverter.TileLookup.TryGetValue(pixel.pixel.Color, out var tile))
                         {
                             tilemap.SetTile(new Vector3Int(x - (worldSize.x / 2), y - (worldSize.y / 2), 0), tile);
                         }

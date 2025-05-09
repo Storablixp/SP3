@@ -5,11 +5,11 @@ public class GlobalNeighborCheckFucntions : MonoBehaviour
 {
     public static bool SimpleCheck(int arrayX, int arrayY, Vector2Int direction, WorldGenerator worldGenerator, PixelSO pixelToCheckFor)
     {
-        PixelSO[,] pixels = worldGenerator.RetrievePixels();
+        PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         if (worldGenerator.IsInBounds(arrayX + direction.x, arrayY + direction.y))
         {
-            if (pixels[arrayX + direction.x, arrayY + direction.y] == pixelToCheckFor)
+            if (pixels[arrayX + direction.x, arrayY + direction.y].pixel == pixelToCheckFor)
             {
                return true;
             }
@@ -19,7 +19,7 @@ public class GlobalNeighborCheckFucntions : MonoBehaviour
 
     public static bool MooreCheck(int arrayX, int arrayY, WorldGenerator worldGenerator, int mooreNeighborhoodSize, PixelSO pixelToCheckFor, int threshold)
 {
-    PixelSO[,] pixels = worldGenerator.RetrievePixels();
+    PixelInstance[,] pixels = worldGenerator.RetrievePixels();
     int amount = 0;
 
     for (int y = -mooreNeighborhoodSize; y <= mooreNeighborhoodSize; y++)
@@ -30,7 +30,7 @@ public class GlobalNeighborCheckFucntions : MonoBehaviour
 
             if (worldGenerator.IsInBounds(x + arrayX, y + arrayY))
             {
-                if (pixels[x + arrayX, y + arrayY] == pixelToCheckFor)
+                if (pixels[x + arrayX, y + arrayY].pixel == pixelToCheckFor)
                 {
                     amount++;
                     if (amount > threshold) return true;
