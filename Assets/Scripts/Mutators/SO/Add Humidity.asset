@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Add Humidity
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
-  CanBeVisualized: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
   noiseSettings: {fileID: 11400000, guid: 5bc952e237d4d7e4286edf8fca7a3043, type: 2}

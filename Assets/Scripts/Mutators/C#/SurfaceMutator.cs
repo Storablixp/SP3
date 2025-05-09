@@ -12,8 +12,6 @@ public class SurfaceMutator : WorldMutatorSO
     [SerializeField] private PixelSO dirtPixel;
     [SerializeField] private PixelSO grassPixel;
     [SerializeField] private PixelSO sandPixel;
-    [SerializeField] private PixelSO clayPixel;
-    [SerializeField] private PixelSO placeholder;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
