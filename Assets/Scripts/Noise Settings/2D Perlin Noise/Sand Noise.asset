@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 333bd8c8bdd3d634fa9a5fde3ca26ac9, type: 3}
-  m_Name: Temperature Noise
+  m_Name: Sand Noise
   m_EditorClassIdentifier: 
-  NoiseScale: 0.0079
+  NoiseScale: 0.0394
   Octaves: 1
-  EasingFunctionType: 1
-  EasingFunctionModifier: 1
+  EasingFunctionType: 2
+  EasingFunctionModifier: 0.9
   Persistence: 0.5
   Lacunarity: 2

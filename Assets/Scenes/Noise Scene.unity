@@ -525,7 +525,7 @@ MonoBehaviour:
   heightVariationStrength: 50
   seed: 0
   imageSize: {x: 512, y: 512}
-  noiseSettings: {fileID: 11400000, guid: 5bc952e237d4d7e4286edf8fca7a3043, type: 2}
+  noiseSettings: {fileID: 11400000, guid: 387c3e9042ebe8a4e8ca737d984a87d2, type: 2}
   saveImage: 0
   oneTimeGeneration: 0
   oneTimeRandom: 1

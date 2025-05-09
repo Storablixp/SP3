@@ -5,8 +5,7 @@ using System.Collections;
 public class SurfaceMutator : WorldMutatorSO
 {
     [Header("Threshold")]
-    [SerializeField, Range(0.0f, 1.0f)] private float sandThreshold;
-    [SerializeField, Range(0.0f, 1.0f)] private float grassThreshold;
+    //[SerializeField, Range(0.0f, 1.0f)] private float grassThreshold;
 
     [Header("Pixels")]
     [SerializeField] private PixelSO airPixel;
@@ -15,7 +14,7 @@ public class SurfaceMutator : WorldMutatorSO
     [SerializeField] private PixelSO sandPixel;
     [SerializeField] private PixelSO clayPixel;
     [SerializeField] private PixelSO placeholder;
-    
+
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
@@ -27,18 +26,22 @@ public class SurfaceMutator : WorldMutatorSO
                 if (pixels[arrayX, arrayY].Pixel == dirtPixel &&
                     GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
                 {
-                    if (pixels[arrayX, arrayY].Temperature > sandThreshold)
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY, sandPixel);
-                    }
-                    else if (pixels[arrayX, arrayY].Temperature > grassThreshold)
+                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.down, worldGenerator, dirtPixel))
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
                     }
                     else
                     {
-                        worldGenerator.ChangePixel(arrayX, arrayY, clayPixel);
+                        worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
+                        worldGenerator.ChangePixel(arrayX, arrayY - 1, dirtPixel);
                     }
+
+
+                    //if (pixels[arrayX, arrayY].Temperature > grassThreshold)
+                    //{
+                    //    worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
+                    //}
+
                 }
             }
         }
