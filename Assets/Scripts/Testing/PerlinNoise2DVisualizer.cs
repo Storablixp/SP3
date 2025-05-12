@@ -118,7 +118,7 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     depthTemperature = Mathf.Clamp01(depthTemperature);
                     coreTemperature = Mathf.Clamp01(coreTemperature);
 
-                    float finalTemperature = Mathf.Lerp(depthTemperature, coreTemperature, 0.2f);
+                    float finalTemperature = coreTemperature;
 
                     Color tempColor;
                     float t = Mathf.InverseLerp(0f, 1f, finalTemperature);

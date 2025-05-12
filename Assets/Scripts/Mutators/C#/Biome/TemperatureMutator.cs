@@ -11,18 +11,21 @@ public class TemperatureMutator : WorldMutatorSO
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
-        float xOffset = Random.Range(-10000f, 10000f);
-        float yOffset = Random.Range(-10000f, 10000f);
+        float centerX = worldSize.x / 2f;
+        float centerY = worldSize.y / 2f;
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
                 float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
-                float baseTemperature = noiseValue;
-                float depthFactor = (float)arrayY / (worldSize.y - 1);
-                float finalTemperature = baseTemperature + depthFactor;
-                pixels[arrayX, arrayY].Temperature = Mathf.InverseLerp(0f, 1f, finalTemperature);
+                float dx = arrayX - centerX;
+                float dy = arrayY - centerY;
+                float distanceFromCenter = Mathf.Sqrt(dx * dx + dy * dy);
+                float maxDistance = Mathf.Sqrt(centerX * centerX + centerY * centerY);
+                float radialFactor = 1f - Mathf.InverseLerp(0f, maxDistance, distanceFromCenter);
+                float coreTemperature = noiseValue * radialFactor;
+                pixels[arrayX, arrayY].Temperature = Mathf.Clamp01(coreTemperature);
             }
         }
 

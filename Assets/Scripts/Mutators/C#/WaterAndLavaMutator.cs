@@ -36,7 +36,7 @@ public class WaterAndLavaMutator : WorldMutatorSO
                     }
                     else
                     {
-                        if (pixelInstance.Temperature < 0.5f)
+                        if (pixelInstance.Temperature < 0.9f)
                         {
                             worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
                         }

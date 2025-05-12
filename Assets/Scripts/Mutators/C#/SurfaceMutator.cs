@@ -33,13 +33,10 @@ public class SurfaceMutator : WorldMutatorSO
                         worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
                         worldGenerator.ChangePixel(arrayX, arrayY - 1, dirtPixel);
                     }
-
-
-                    //if (pixels[arrayX, arrayY].Temperature > grassThreshold)
-                    //{
-                    //    worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
-                    //}
-
+                }
+                else if (pixels[arrayX, arrayY].Pixel == dirtPixel && arrayY == startY)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
                 }
             }
         }
