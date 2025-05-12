@@ -16,6 +16,7 @@ MonoBehaviour:
   StartingDepthLevel: 0
   EndDepthLevel: 0
   hollowPixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
-  stonePixel: {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}
+  airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   noiseScettings: {fileID: 11400000, guid: af10a88a3c9642c428d3c510749f76aa, type: 2}
-  holeThreshold: 0.662
+  holeThreshold: 0.736
+  depth: 0.886

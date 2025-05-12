@@ -6,10 +6,11 @@ public class SpaghettiCaveMutator : WorldMutatorSO
 {
     [Header("Pixels")]
     [SerializeField] private PixelSO hollowPixel;
-    [SerializeField] private PixelSO stonePixel;
+    [SerializeField] private PixelSO airPixel;
 
     [Header("Settings")]
     [SerializeField, Range(0.2f, 1.0f)] private float thickness;
+    [SerializeField, Range(0.2f, 1.0f)] private float depth;
     [SerializeField] private Perlin2DSettings noiseScettings;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
@@ -20,7 +21,8 @@ public class SpaghettiCaveMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY].Pixel == stonePixel)
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+                if (pixelInstance.Depth < depth && pixelInstance.Pixel != airPixel)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
 

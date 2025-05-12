@@ -16,7 +16,10 @@ public class DepthMutator : WorldMutatorSO
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
-                pixels[arrayX, arrayY].Depth = noiseValue;
+                float depthFactor = (float)arrayY / (worldSize.y - 1);
+                float finalDepth = noiseValue + depthFactor;
+                finalDepth = Mathf.Clamp01(finalDepth);
+                pixels[arrayX, arrayY].Depth = finalDepth;
             }
         }
 

@@ -6,11 +6,12 @@ public class CheeseCaveMutator : WorldMutatorSO
 {
     [Header("Pixels")]
     [SerializeField] private PixelSO hollowPixel;
-    [SerializeField] private PixelSO stonePixel;
+    [SerializeField] private PixelSO airPixel;
 
     [Header("Settings")]
     [SerializeField] private Perlin2DSettings noiseScettings;
     [SerializeField, Range(0.0f, 1.0f)] private float holeThreshold = 0.8f;
+    [SerializeField, Range(0.0f, 1.0f)] private float depth = 0.9f;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -20,7 +21,8 @@ public class CheeseCaveMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                if (pixels[arrayX, arrayY].Pixel == stonePixel)
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+                if (pixelInstance.Depth < depth && pixelInstance.Pixel != airPixel)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
 
