@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  testing: 0
+  testing: 1
   differentOffsets: 0
   seed: 1
   worldSize: {x: 512, y: 512}
@@ -432,8 +432,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f172c1444a0662b4baf2fa67c1012169, type: 2}
   - {fileID: 11400000, guid: a187ea287bba8014b8137457f771f60b, type: 2}
   - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
-  - {fileID: 11400000, guid: fa7c79a37f7b73e41a92fbf86cd93f99, type: 2}
   - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
+  - {fileID: 11400000, guid: e6f36acc8ae67c04d9ec044bf35f9f2a, type: 2}
   - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}

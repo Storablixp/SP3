@@ -15,4 +15,4 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  noiseSettings: {fileID: 11400000, guid: 4929def06042ab6498fa5ace73bc543f, type: 2}
+  noiseSettings: {fileID: 11400000, guid: 10f7c021ea9409944a5ab8e4373d34da, type: 2}
