@@ -1,14 +1,9 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditorInternal.VersionControl;
 
 [CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Terrain")]
 public class TerrainMutator : WorldMutatorSO
 {
-    //[Header("Optional Mutators")]
-    //[SerializeField] private TemperatureMutator temperatureMutator;
-    //[SerializeField] private HumidityMutator humidityMutator;
-
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
     [Range(0, 100)] public int heightVariationStrength = 50;

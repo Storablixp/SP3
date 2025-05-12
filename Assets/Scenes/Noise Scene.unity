@@ -522,15 +522,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27021a72d6f099e4b85e3526caa95a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightVariationStrength: 50
   seed: 1
   imageSize: {x: 512, y: 512}
   depthNoise: {fileID: 11400000, guid: 387c3e9042ebe8a4e8ca737d984a87d2, type: 2}
   coreNoise: {fileID: 11400000, guid: ad20d17c2a49ba54f8fe6a5df6b39e93, type: 2}
-  saveImage: 0
+  seasonsNoise: {fileID: 11400000, guid: 747d46bdd3ca3ab42a8bcabc3114a8cc, type: 2}
   oneTimeGeneration: 0
   oneTimeRandom: 1
-  view: 2
+  heightVariationStrength: 50
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

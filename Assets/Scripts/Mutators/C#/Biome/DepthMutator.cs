@@ -1,27 +1,22 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Wetness Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Wetness")]
-public class WetnessMutator : WorldMutatorSO
+[CreateAssetMenu(fileName = "Depth Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Depth")]
+public class DepthMutator : WorldMutatorSO
 {
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
-
-    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
-    {
-        base.SetUp(worldGenerator, worldSize);
-    }
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
-        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         {
-            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
-                pixels[arrayX, arrayY].Wetness = noiseValue;
+                pixels[arrayX, arrayY].Depth = noiseValue;
             }
         }
 
