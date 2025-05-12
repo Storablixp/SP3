@@ -25,13 +25,16 @@ public class CellularAutomataMutator : WorldMutatorSO
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
                     PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
-                    if (pixel == null) continue;
+                    if (pixel == null || pixel == PixelToCheckFor) continue;
 
                     if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, PixelToCheckFor, ReplacementThreshold))
                     {
                         updatedPixels[arrayX, arrayY].Pixel = PixelToCheckFor;
                     }
-                    else updatedPixels[arrayX, arrayY].Pixel = pixel;
+                    else
+                    {
+                        updatedPixels[arrayX, arrayY].Pixel = pixel;
+                    }
                 }
             }
 
