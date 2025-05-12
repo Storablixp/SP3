@@ -16,6 +16,6 @@ MonoBehaviour:
   StartingDepthLevel: 0
   EndDepthLevel: 0
   PixelToCheckFor: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
-  ReplacementThreshold: 10
+  ReplacementThreshold: 12
   MooreNeighborhoodSize: 2
-  Iterations: 3
+  Iterations: 5
