@@ -6,17 +6,11 @@ public class CellularAutomataMutator : WorldMutatorSO
 {
     [Header("Pixels")]
     public PixelSO PixelToCheckFor;
-    public PixelSO PixelToReplace;
 
     [Header("Settings")]
     public int ReplacementThreshold = 4;
     public int MooreNeighborhoodSize = 1;
-    public int Iterations = 5;
-
-    //public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
-    //{
-    //    base.SetUp(worldGenerator, worldSize);
-    //}
+    public uint Iterations = 5;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -32,13 +26,12 @@ public class CellularAutomataMutator : WorldMutatorSO
                 {
                     PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
                     if (pixel == null) continue;
-                    if (pixel != PixelToReplace && pixel != PixelToCheckFor) continue;
 
                     if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, PixelToCheckFor, ReplacementThreshold))
                     {
                         updatedPixels[arrayX, arrayY].Pixel = PixelToCheckFor;
                     }
-                    else updatedPixels[arrayX, arrayY].Pixel = PixelToReplace;
+                    else updatedPixels[arrayX, arrayY].Pixel = pixel;
                 }
             }
 
@@ -49,7 +42,6 @@ public class CellularAutomataMutator : WorldMutatorSO
                 {
                     PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
                     if (pixel == null) continue;
-                    if (pixel != PixelToReplace && pixel != PixelToCheckFor) continue;
 
                     PixelSO newPixel = updatedPixels[arrayX, arrayY].Pixel;
                     if (newPixel == null) continue;

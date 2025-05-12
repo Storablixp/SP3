@@ -15,6 +15,6 @@ MonoBehaviour:
   NoiseScale: 0.01
   Octaves: 5
   EasingFunctionType: 4
-  EasingFunctionModifier: 0.1
+  EasingFunctionModifier: 0.05
   Persistence: 0.5
   Lacunarity: 2
