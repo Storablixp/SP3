@@ -67,7 +67,7 @@ public class GlobalPerlinFunctions
 
         for (int i = 0; i < noiseSettings.Octaves; i++)
         {
-            noiseSum += amplitude * Mathf.PerlinNoise(x * frequency, y * frequency);
+            noiseSum += amplitude * Mathf.Clamp01(Mathf.PerlinNoise(x * frequency, y * frequency));
             amplitudeSum += amplitude;
             amplitude *= noiseSettings.Persistence;
             frequency *= noiseSettings.Lacunarity;

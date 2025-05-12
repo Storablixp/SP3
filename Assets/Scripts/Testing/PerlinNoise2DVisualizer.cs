@@ -54,23 +54,23 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
 
                     Color colorToAdd;
 
-                    if (value > 0.8f)
-                        colorToAdd = new Color(1f, 1f, 1f);
-                    else if (value < 0.2f)
-                        colorToAdd = new Color(0.0f, 0.0f, 0.0f);
-                    else
-                        colorToAdd = new Color(0.5f, 0.5f, 0.5f);
 
-                    //if (value > 0.8f)
-                    //    colorToAdd = new Color(1f, 1f, 1f);
-                    //else if (value > 0.6f)
-                    //    colorToAdd = new Color(0.8f, 0.8f, 0.8f);
-                    //else if (value > 0.4f)
-                    //    colorToAdd = new Color(0.6f, 0.6f, 0.6f);
-                    //else if (value > 0.2f)
-                    //    colorToAdd = new Color(0.4f, 0.4f, 0.4f);
-                    //else
-                    //    colorToAdd = new Color(0.2f, 0.2f, 0.2f);
+
+                    if (value > 0.9f)
+                        colorToAdd = new Color(1f, 1f, 1f);
+                    else if (value > 0.8f)
+                        colorToAdd = new Color(0.9f, 0.9f, 0.9f);
+                    else if (value > 0.7f)
+                        colorToAdd = new Color(0.8f, 0.8f, 0.8f);
+                    else if (value > 0.6f)
+                        colorToAdd = new Color(0.7f, 0.7f, 0.7f);
+                    else if (value > 0.5f)
+                        colorToAdd = new Color(0.6f, 0.6f, 0.6f);
+                    else if (value > 0.4f)
+                        colorToAdd = new Color(0.5f, 0.5f, 0.5f);
+                    else
+                        colorToAdd = Color.red;
+
 
                     //if (value > 0.9f)
                     //    colorToAdd = new Color(1f, 1f, 1f);

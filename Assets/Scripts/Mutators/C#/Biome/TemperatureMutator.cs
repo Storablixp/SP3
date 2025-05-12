@@ -7,11 +7,6 @@ public class TemperatureMutator : WorldMutatorSO
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
 
-    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
-    {
-        base.SetUp(worldGenerator, worldSize);
-    }
-
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
@@ -23,11 +18,12 @@ public class TemperatureMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D((float)arrayX, (float)arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
-                float depthFactor = (float)arrayY / (worldSize.y - 1);
-                float finalTemperature = noiseValue + depthFactor;
-                finalTemperature = Mathf.Clamp01(finalTemperature);
+                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
+                //float depthFactor = (float)arrayY / (worldSize.y - 1);
+                //float finalTemperature = noiseValue + depthFactor;
+                //finalTemperature = Mathf.Clamp01(finalTemperature);
                 pixels[arrayX, arrayY].Temperature = noiseValue;
+                Debug.Log(noiseValue);
             }
         }
 

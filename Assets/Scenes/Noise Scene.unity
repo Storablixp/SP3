@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightVariationStrength: 50
-  seed: 0
+  seed: 1
   imageSize: {x: 512, y: 512}
   noiseSettings: {fileID: 11400000, guid: 387c3e9042ebe8a4e8ca737d984a87d2, type: 2}
   saveImage: 0
