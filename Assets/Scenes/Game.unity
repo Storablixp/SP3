@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  testing: 1
+  testing: 0
   differentOffsets: 0
   seed: 1
   worldSize: {x: 512, y: 512}

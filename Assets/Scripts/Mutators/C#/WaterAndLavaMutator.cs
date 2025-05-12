@@ -6,11 +6,13 @@ public class WaterAndLavaMutator : WorldMutatorSO
 {
     [Header("Settings")]
     [SerializeField, Range(0.0f, 1.0f)] private float waterThreshold;
+    [SerializeField, Range(0.0f, 1.0f)] private float sandThreshold;
 
     [Header("Pixels")]
-    [SerializeField] private PixelSO WaterPixel;
     [SerializeField] private PixelSO HollowPixel;
     [SerializeField] private PixelSO AirPixel;
+    [SerializeField] private PixelSO WaterPixel;
+    [SerializeField] private PixelSO SandPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -26,6 +28,10 @@ public class WaterAndLavaMutator : WorldMutatorSO
                 if (pixels[arrayX, arrayY].Wetness > waterThreshold)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+                }
+                else if (pixels[arrayX, arrayY].Wetness < sandThreshold)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, SandPixel);
                 }
 
             }

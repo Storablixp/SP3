@@ -98,8 +98,9 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
                     float depthFactor = (float)y / (imageSize.y - 1);
-                    float finalTemperature = noiseValue;
-                    texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));
+                    float finalTemperature = noiseValue * depthFactor;
+                    finalTemperature = Mathf.Clamp01(finalTemperature);
+                    texture.SetPixel(x, y, new Color(finalTemperature, finalTemperature, finalTemperature));
                 }
                 else if (view == ViewType.humidityView)
                 {
