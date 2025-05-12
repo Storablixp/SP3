@@ -10,7 +10,8 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
     private Texture2D texture;
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int imageSize;
-    [SerializeField] private Perlin2DSettings noiseSettings;
+    [SerializeField] private Perlin2DSettings depthNoise;
+    [SerializeField] private Perlin2DSettings coreNoise;
     [SerializeField] private bool saveImage;
     [SerializeField] private bool oneTimeGeneration;
     [SerializeField] private bool oneTimeRandom;
@@ -49,7 +50,7 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
             {
                 if (view == ViewType.layerView)
                 {
-                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
+                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, depthNoise);
                     float value = noiseValue;
 
                     Color colorToAdd;
@@ -97,10 +98,27 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                 }
                 else if (view == ViewType.temperatureView)
                 {
-                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
-                    float baseTemperature = noiseValue;
+                    float depthNoiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, depthNoise);
+                    float depthbaseTemperature = depthNoiseValue;
                     float depthFactor = (float)y / (imageSize.y - 1);
-                    float finalTemperature = baseTemperature + depthFactor;
+                    float depthTemperature = depthbaseTemperature + depthFactor;
+
+                    //Radial gradient from center
+                    float coreNoiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, coreNoise);
+                    float coreBaseTemperature = coreNoiseValue;
+                    float centerX = imageSize.x / 2f;
+                    float centerY = imageSize.y / 2f;
+                    float dx = x - centerX;
+                    float dy = y - centerY;
+                    float distanceFromCenter = Mathf.Sqrt(dx * dx + dy * dy);
+                    float maxDistance = Mathf.Sqrt(centerX * centerX + centerY * centerY);
+                    float radialFactor = 1f - Mathf.InverseLerp(0f, maxDistance, distanceFromCenter);
+                    float coreTemperature = coreBaseTemperature * radialFactor;
+
+                    depthTemperature = Mathf.Clamp01(depthTemperature);
+                    coreTemperature = Mathf.Clamp01(coreTemperature);
+
+                    float finalTemperature = Mathf.Lerp(depthTemperature, coreTemperature, 0.2f);
 
                     Color tempColor;
                     float t = Mathf.InverseLerp(0f, 1f, finalTemperature);
@@ -117,11 +135,12 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     {
                         tempColor = Color.Lerp(Color.yellow, Color.red, (t - 0.66f) / 0.34f);
                     }
+
                     texture.SetPixel(x, y, tempColor);
                 }
                 else if (view == ViewType.humidityView)
                 {
-                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
+                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, depthNoise);
                     float t = Mathf.InverseLerp(0f, 1f, noiseValue);
 
                     Color tempColor;
@@ -146,7 +165,7 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                 }
                 else
                 {
-                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
+                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, depthNoise);
                     texture.SetPixel(x, y, new Color(noiseValue, noiseValue, noiseValue));
                 }
             }
@@ -155,9 +174,9 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
         texture.Apply();
         image.texture = texture;
 
-        if (saveImage && oneTimeGeneration)
-        {
-            System.IO.File.WriteAllBytes("Assets/Scripts/Testing/NoiseTexture.png", texture.EncodeToPNG());
-        }
+        //if (saveImage && oneTimeGeneration)
+        //{
+        //    System.IO.File.WriteAllBytes("Assets/Scripts/Testing/NoiseTexture.png", texture.EncodeToPNG());
+        //}
     }
 }
