@@ -50,26 +50,27 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                 if (view == ViewType.layerView)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
-                    float xMod = x + noiseValue * heightVariationStrength;
-                    float yMod = y + noiseValue * heightVariationStrength;
-
-                    float xNormalized = Mathf.Clamp01(xMod / imageSize.x);
-                    float yNormalized = Mathf.Clamp01(yMod / imageSize.y);
-
                     float value = noiseValue;
 
                     Color colorToAdd;
 
                     if (value > 0.8f)
                         colorToAdd = new Color(1f, 1f, 1f);
-                    else if (value > 0.6f)
-                        colorToAdd = new Color(0.8f, 0.8f, 0.8f);
-                    else if (value > 0.4f)
-                        colorToAdd = new Color(0.6f, 0.6f, 0.6f);
-                    else if (value > 0.2f)
-                        colorToAdd = new Color(0.4f, 0.4f, 0.4f);
+                    else if (value < 0.2f)
+                        colorToAdd = new Color(0.0f, 0.0f, 0.0f);
                     else
-                        colorToAdd = new Color(0.2f, 0.2f, 0.2f);
+                        colorToAdd = new Color(0.5f, 0.5f, 0.5f);
+
+                    //if (value > 0.8f)
+                    //    colorToAdd = new Color(1f, 1f, 1f);
+                    //else if (value > 0.6f)
+                    //    colorToAdd = new Color(0.8f, 0.8f, 0.8f);
+                    //else if (value > 0.4f)
+                    //    colorToAdd = new Color(0.6f, 0.6f, 0.6f);
+                    //else if (value > 0.2f)
+                    //    colorToAdd = new Color(0.4f, 0.4f, 0.4f);
+                    //else
+                    //    colorToAdd = new Color(0.2f, 0.2f, 0.2f);
 
                     //if (value > 0.9f)
                     //    colorToAdd = new Color(1f, 1f, 1f);
@@ -97,10 +98,26 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                 else if (view == ViewType.temperatureView)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(x, y, xOffset, yOffset, noiseSettings);
+                    float baseTemperature = noiseValue;
                     float depthFactor = (float)y / (imageSize.y - 1);
-                    float finalTemperature = noiseValue * depthFactor;
-                    finalTemperature = Mathf.Clamp01(finalTemperature);
-                    texture.SetPixel(x, y, new Color(finalTemperature, finalTemperature, finalTemperature));
+                    float finalTemperature = baseTemperature + depthFactor;
+
+                    Color tempColor;
+                    float t = Mathf.InverseLerp(0f, 1f, finalTemperature);
+
+                    if (finalTemperature < 0.33f)
+                    {
+                        tempColor = Color.Lerp(Color.blue, Color.green, t / 0.33f);
+                    }
+                    else if (finalTemperature < 0.66f)
+                    {
+                        tempColor = Color.Lerp(Color.green, Color.yellow, (t - 0.33f) / 0.33f);
+                    }
+                    else
+                    {
+                        tempColor = Color.Lerp(Color.yellow, Color.red, (t - 0.66f) / 0.34f);
+                    }
+                    texture.SetPixel(x, y, tempColor);
                 }
                 else if (view == ViewType.humidityView)
                 {

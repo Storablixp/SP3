@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 333bd8c8bdd3d634fa9a5fde3ca26ac9, type: 3}
-  m_Name: Temperature Noise
+  m_Script: {fileID: 11500000, guid: d6b537e053443ac44905b7263f486a81, type: 3}
+  m_Name: Lava Pixel
   m_EditorClassIdentifier: 
-  NoiseScale: 0.0296
-  Octaves: 2
-  EasingFunctionType: 0
-  EasingFunctionModifier: 0.9
-  Persistence: 0.5
-  Lacunarity: 2
+  Unchangeable: 0
+  Color: {r: 0.7924528, g: 0.17025153, b: 0, a: 1}

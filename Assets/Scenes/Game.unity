@@ -509,6 +509,8 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 30c567881c920ec43ab70079fb1c7b6e, type: 2}
   - pixel: {fileID: 11400000, guid: b8eeb08d9e459e44f9f321eed1656d42, type: 2}
     tile: {fileID: 11400000, guid: ce671808e7700f4438cc96324aeb9cd9, type: 2}
+  - pixel: {fileID: 11400000, guid: ba67130d78051bb489c59c3fecf63700, type: 2}
+    tile: {fileID: 11400000, guid: ace17e117d8063f4e9c8ca7afcb1bca8, type: 2}
 --- !u!61 &349933717
 BoxCollider2D:
   m_ObjectHideFlags: 0

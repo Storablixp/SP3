@@ -529,7 +529,7 @@ MonoBehaviour:
   saveImage: 0
   oneTimeGeneration: 0
   oneTimeRandom: 1
-  view: 2
+  view: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
