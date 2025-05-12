@@ -105,11 +105,11 @@ public class PerlinNoise2DVisualizer : MonoBehaviour
                     Color tempColor;
                     float t = Mathf.InverseLerp(0f, 1f, finalTemperature);
 
-                    if (finalTemperature < 0.33f)
+                    if (t < 0.33f)
                     {
                         tempColor = Color.Lerp(Color.blue, Color.green, t / 0.33f);
                     }
-                    else if (finalTemperature < 0.66f)
+                    else if (t < 0.66f)
                     {
                         tempColor = Color.Lerp(Color.green, Color.yellow, (t - 0.33f) / 0.33f);
                     }

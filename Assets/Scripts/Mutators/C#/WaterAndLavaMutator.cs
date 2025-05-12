@@ -15,6 +15,7 @@ public class WaterAndLavaMutator : WorldMutatorSO
     [SerializeField] private PixelSO SandPixel;
     [SerializeField] private PixelSO LavaPixel;
     [SerializeField] private PixelSO DeepStonePixel;
+    [SerializeField] private PixelSO IcePixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -33,7 +34,14 @@ public class WaterAndLavaMutator : WorldMutatorSO
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
                     }
-                    else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+                    else
+                    {
+                        if (pixelInstance.Temperature < 0.5f)
+                        {
+                            worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
+                        }
+                        else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+                    }
                 }
                 else if (pixelInstance.Wetness < sandThreshold)
                 {

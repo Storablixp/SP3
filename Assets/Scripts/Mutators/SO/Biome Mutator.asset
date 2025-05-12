@@ -15,7 +15,7 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  WarmBiomeThreshold: 0.169
-  ColdBiomeThreshold: 0.458
+  WarmBiomeThreshold: 0.612
+  ColdBiomeThreshold: 0.03
   WarmPixel: {fileID: 11400000, guid: 6aa451ba6d4943349b6e67528fd2d96f, type: 2}
   ColdPixel: {fileID: 11400000, guid: 78c7d0a4dc465a948a686cc9dce2dbaf, type: 2}

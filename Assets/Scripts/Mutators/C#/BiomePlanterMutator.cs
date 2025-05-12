@@ -21,8 +21,13 @@ public class BiomePlanterMutator : WorldMutatorSO
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 PixelInstance pixel = pixels[arrayX, arrayY];
+                
+                if (pixel.Temperature > WarmBiomeThreshold)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, WarmPixel);
+                }
 
-                if (0.2f <= pixel.Temperature)
+                if (pixel.Temperature < ColdBiomeThreshold)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, ColdPixel);
                 }
