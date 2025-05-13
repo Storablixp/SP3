@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333bd8c8bdd3d634fa9a5fde3ca26ac9, type: 3}
   m_Name: Sunlight Noise
   m_EditorClassIdentifier: 
-  NoiseScale: 0.002
+  NoiseScale: 0.003
   Octaves: 1
   EasingFunctionType: 2
   EasingFunctionModifier: 0.01

@@ -4,16 +4,7 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Terrain")]
 public class TerrainMutator : WorldMutatorSO
 {
-    [Header("Layer Settings")]
-    [Range(0.001f, 1f)] public float airLayerThreshold = 0.9f;
-    [Range(0.001f, 1f)] public float surfaceLayerThreshold = 0.75f;
-    [Range(0.001f, 1f)] public float stoneThreshold = 0.30f;
-
-    [Header("Other Settings")]
-    public Perlin2DSettings noiseSettings;
-    [Range(0, 100)] public int heightVariationStrength = 50;
-
-    [Header("Pixels")]
+     [Header("Pixels")]
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO dirtPixel;
     [SerializeField] private PixelSO sandPixel;
@@ -30,44 +21,49 @@ public class TerrainMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
-                float yMod = arrayY + (noiseValue - 0.5f) * 2f * heightVariationStrength;
-
                 PixelSO pixelToAdd;
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
 
-                if (yMod > worldSize.y * airLayerThreshold)
+                if (pixelInstance.Depth == 2)
+                {
                     pixelToAdd = airPixel;
-                else if (yMod > worldSize.y * surfaceLayerThreshold)
-                {
-                    if (pixelInstance.SunlightLevel == 2)
-                    {
-                        pixelToAdd = sandPixel;
-                    }
-                    else if (pixelInstance.SunlightLevel == -2)
-                    {
-                        pixelToAdd = snowPixel;
-                    }
-                    else
-                    {
-                        pixelToAdd = dirtPixel;
-                    }
                 }
-                    
-                else if (yMod > worldSize.y * stoneThreshold)
+                else if (pixelInstance.Depth == 1)
                 {
-                    if (pixelInstance.Pixel == hollowPixel)
-                    {
-                        continue;
-                    }
-                    else pixelToAdd = stonePixel;
+                    pixelToAdd = CalculateSurfacePixel(pixelInstance);
                 }
-                else pixelToAdd = deepStonePixel;
+                else if (pixelInstance.Depth == 0)
+                {
+                    pixelToAdd = stonePixel;
+                }
+                else
+                {
+                    pixelToAdd = deepStonePixel;
+                }
 
                 worldGenerator.ChangePixel(arrayX, arrayY, pixelToAdd);
             }
         }
 
         yield return null;
+    }
+
+    private PixelSO CalculateSurfacePixel(PixelInstance pixelInstance)
+    {
+        PixelSO pixelToAdd;
+        if (pixelInstance.SunlightLevel == 2)
+        {
+            pixelToAdd = sandPixel;
+        }
+        else if (pixelInstance.SunlightLevel == -2)
+        {
+            pixelToAdd = snowPixel;
+        }
+        else
+        {
+            pixelToAdd = dirtPixel;
+        }
+
+        return pixelToAdd;
     }
 }

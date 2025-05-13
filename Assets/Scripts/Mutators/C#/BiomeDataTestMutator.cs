@@ -21,23 +21,23 @@ public class BiomeDataTestMutator : WorldMutatorSO
             {
                 PixelInstance pixel = pixels[arrayX, arrayY];
                 
-                if (pixel.Wetness == 2)
+                if (pixel.Depth == 2)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, VeryHighValue);
                 }
-                else if (pixel.Wetness == 1)
+                else if (pixel.Depth == 1)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, HighValue);
                 }
-                else if (pixel.Wetness == 0)
+                else if (pixel.Depth == 0)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, ModerateValue);
                 }
-                else if (pixel.Wetness == -1)
+                else if (pixel.Depth == -1)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, LowValue);
                 }
-                else if (pixel.Wetness == -2)
+                else if (pixel.Depth == -2)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, VeryLowValue);
                 }

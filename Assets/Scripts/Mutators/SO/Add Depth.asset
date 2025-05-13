@@ -15,4 +15,9 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
+  airLayer: 0.861
+  surfaceLayer: 0.761
+  caveLayer: 0.353
+  deepLayer: 0.134
   noiseSettings: {fileID: 11400000, guid: 387c3e9042ebe8a4e8ca737d984a87d2, type: 2}
+  heightVariationStrength: 32
