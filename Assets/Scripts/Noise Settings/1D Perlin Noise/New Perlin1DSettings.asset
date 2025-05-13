@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ddcd901522f90b4890c91a5b8fef659, type: 3}
   m_Name: New Perlin1DSettings
   m_EditorClassIdentifier: 
-  NoiseScale: 0.1
-  Octaves: 3
+  NoiseScale: 0.01
+  Octaves: 1
   Frequency: 0.5
   Persistence: 0.5
   Lacunarity: 2
-  noiseRangeMin: 0.75
-  EasingFunctionType: 0
+  noiseRangeMin: 0.01
+  EasingFunctionType: 1
   EasingFunctionModifier: 3

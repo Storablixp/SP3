@@ -5,12 +5,15 @@ using System.Collections;
 public class BiomePlanterMutator : WorldMutatorSO
 {
     [Header("Settings")]
-    [Range(0.0f, 1.0f), SerializeField] private float WarmBiomeThreshold;
-    [Range(0.0f, 1.0f), SerializeField] private float ColdBiomeThreshold;
+    //[Range(0.0f, 1.0f), SerializeField] private float WarmBiomeThreshold;
+    //[Range(0.0f, 1.0f), SerializeField] private float ColdBiomeThreshold;
 
     [Header("Pixels")]
+    [SerializeField] private PixelSO VeryWarmPixel;
     [SerializeField] private PixelSO WarmPixel;
+    [SerializeField] private PixelSO HumidPixel;
     [SerializeField] private PixelSO ColdPixel;
+    [SerializeField] private PixelSO VeryColdPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -22,9 +25,25 @@ public class BiomePlanterMutator : WorldMutatorSO
             {
                 PixelInstance pixel = pixels[arrayX, arrayY];
                 
-                if (pixel.Temperature >= WarmBiomeThreshold)
+                if (pixel.Temperature == 2)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, VeryWarmPixel);
+                }
+                else if (pixel.Temperature == 1)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, WarmPixel);
+                }
+                else if (pixel.Temperature == 0)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, HumidPixel);
+                }
+                else if (pixel.Temperature == -1)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, ColdPixel);
+                }
+                else if (pixel.Temperature == -2)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, VeryColdPixel);
                 }
             }
         }

@@ -19,7 +19,32 @@ public class DepthMutator : WorldMutatorSO
                 float depthFactor = (float)arrayY / (worldSize.y - 1);
                 float finalDepth = noiseValue + depthFactor;
                 finalDepth = Mathf.Clamp01(finalDepth);
-                pixels[arrayX, arrayY].Depth = finalDepth;
+
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+                pixelInstance.Depth = finalDepth;
+
+                //if (finalDepth >= 0.8f)
+                //{
+                //    pixelInstance.Depth = 2;
+                //}
+                //else if (finalDepth >= 0.6f)
+                //{
+                //    pixelInstance.Depth = 0;
+                //}
+                //else if (finalDepth >= 0.4f)
+                //{
+                //    pixelInstance.Depth = 0;
+                //}
+                //else if (finalDepth >= 0.2f)
+                //{
+                //    pixelInstance.Depth = 0;
+                //}
+                //else
+                //{
+                //    pixelInstance.Depth = -1;
+                //}
+
+                pixels[arrayX, arrayY] = pixelInstance;
             }
         }
 

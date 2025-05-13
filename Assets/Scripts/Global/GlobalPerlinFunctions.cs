@@ -1,27 +1,31 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class GlobalPerlinFunctions
 {
     #region 1D
-    //public static float PerlinNoise1D(int x, float xOffset, Perlin1DSettings noiseSettings, int chunkHeight)
-    //{
-    //    float noiseValue = SumPerlinNoise1D(x, xOffset, noiseSettings);
-    //    float noiseInRange = RangeMap(noiseValue, 0, 1, noiseSettings.noiseRangeMin * chunkHeight, chunkHeight);
-    //    return noiseInRange;
-    //}
+    public static float PerlinNoise1D(float x, float xOffset, Perlin1DSettings noiseSettings, int chunkHeight)
+    {
+        float noiseValue = SumPerlinNoise1D(x, xOffset, noiseSettings);
+        float noiseInRange = RangeMap(noiseValue, 0, 1, noiseSettings.noiseRangeMin * chunkHeight, chunkHeight);
+        return noiseInRange;
+    }
 
-    private static float SumPerlinNoise1D(int x, float xOffset, Perlin1DSettings noiseSettings)
+    public static float SumPerlinNoise1D(float x, float xOffset, Perlin1DSettings noiseSettings)
     {
         float amplitude = 1;
         float frequency = noiseSettings.Frequency;
         float noiseSum = 0;
         float amplitudeSum = 0;
+
+        x = (x + xOffset) * noiseSettings.NoiseScale;
+
         for (int i = 0; i < noiseSettings.Octaves; i++)
         {
-            float sampleX = (x + xOffset) * frequency * noiseSettings.NoiseScale;
+            float sampleX = x * frequency;
 
-            noiseSum += amplitude * Mathf.PerlinNoise1D(sampleX);
+            noiseSum += amplitude * Mathf.Clamp01(Mathf.PerlinNoise1D(sampleX));
             amplitudeSum += amplitude;
             amplitude *= noiseSettings.Persistence;
             frequency *= noiseSettings.Lacunarity;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b537e053443ac44905b7263f486a81, type: 3}
-  m_Name: Cold Biome Pixel
+  m_Name: Humid Biome Pixel
   m_EditorClassIdentifier: 
   Unchangeable: 1
-  Color: {r: 0.3018868, g: 0, b: 0.26355198, a: 1}
+  Color: {r: 0.5471698, g: 0, b: 0.47850537, a: 1}
