@@ -20,4 +20,4 @@ MonoBehaviour:
   neutral: 0.537
   cold: 0.438
   noiseSettings: {fileID: 11400000, guid: ad20d17c2a49ba54f8fe6a5df6b39e93, type: 2}
-  randomXPosition: 0
+  randomXPosition: 1
