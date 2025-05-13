@@ -44,7 +44,7 @@ public class TerrainMutator : WorldMutatorSO
                     {
                         pixelToAdd = sandPixel;
                     }
-                    else if (pixelInstance.SunlightLevel == -1)
+                    else if (pixelInstance.SunlightLevel == -2)
                     {
                         pixelToAdd = snowPixel;
                     }
