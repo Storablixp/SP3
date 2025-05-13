@@ -18,6 +18,8 @@ public class TemperatureMutator : WorldMutatorSO
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
                 float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
                 float dx = arrayX - centerX;
                 float dy = arrayY - centerY;
@@ -25,7 +27,10 @@ public class TemperatureMutator : WorldMutatorSO
                 float maxDistance = Mathf.Sqrt(centerX * centerX + centerY * centerY);
                 float radialFactor = 1f - Mathf.InverseLerp(0f, maxDistance, distanceFromCenter);
                 float coreTemperature = noiseValue * radialFactor;
-                pixels[arrayX, arrayY].Temperature = Mathf.Clamp01(coreTemperature);
+
+                float finalTemperature = coreTemperature - ((1 - pixelInstance.Depth) * 2);
+                pixelInstance.Temperature = Mathf.Clamp01(finalTemperature);
+                pixels[arrayX, arrayY] = pixelInstance;
             }
         }
 

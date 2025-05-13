@@ -4,19 +4,23 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Terrain")]
 public class TerrainMutator : WorldMutatorSO
 {
-    [Header("Settings")]
-    public Perlin2DSettings noiseSettings;
-    [Range(0, 100)] public int heightVariationStrength = 50;
-    [Range(0.001f, 1f)] public float airThreshold = 0.9f;
-    [Range(0.001f, 1f)] public float dirtThreshold = 0.75f;
+    [Header("Layer Settings")]
+    [Range(0.001f, 1f)] public float airLayerThreshold = 0.9f;
+    [Range(0.001f, 1f)] public float surfaceLayerThreshold = 0.75f;
     [Range(0.001f, 1f)] public float stoneThreshold = 0.30f;
 
+    [Header("Other Settings")]
+    public Perlin2DSettings noiseSettings;
+    [Range(0, 100)] public int heightVariationStrength = 50;
+
     [Header("Pixels")]
-    public PixelSO hollowPixel;
-    public PixelSO airPixel;
-    public PixelSO dirtPixel;
-    public PixelSO stonePixel;
-    public PixelSO deepStonePixel;
+    [SerializeField] private PixelSO airPixel;
+    [SerializeField] private PixelSO dirtPixel;
+    [SerializeField] private PixelSO sandPixel;
+    [SerializeField] private PixelSO snowPixel;
+    [SerializeField] private PixelSO deepStonePixel;
+    [SerializeField] private PixelSO hollowPixel;
+    [SerializeField] private PixelSO stonePixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -30,14 +34,29 @@ public class TerrainMutator : WorldMutatorSO
                 float yMod = arrayY + (noiseValue - 0.5f) * 2f * heightVariationStrength;
 
                 PixelSO pixelToAdd;
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
 
-                if (yMod > worldSize.y * airThreshold)
+                if (yMod > worldSize.y * airLayerThreshold)
                     pixelToAdd = airPixel;
-                else if (yMod > worldSize.y * dirtThreshold)
-                    pixelToAdd = dirtPixel;
+                else if (yMod > worldSize.y * surfaceLayerThreshold)
+                {
+                    if (pixelInstance.Temperature > 0.2f)
+                    {
+                        pixelToAdd = sandPixel;
+                    }
+                    else if (pixelInstance.Temperature > 0.1f && pixelInstance.Temperature <= 0.2f)
+                    {
+                        pixelToAdd = dirtPixel;
+                    }
+                    else
+                    {
+                        pixelToAdd = snowPixel;
+                    }
+                }
+                    
                 else if (yMod > worldSize.y * stoneThreshold)
                 {
-                    if (pixels[arrayX, arrayY].Pixel == hollowPixel)
+                    if (pixelInstance.Pixel == hollowPixel)
                     {
                         continue;
                     }
