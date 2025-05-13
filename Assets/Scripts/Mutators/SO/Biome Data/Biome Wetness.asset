@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8607f0168bfe6f4bbd2c068742973a1, type: 3}
-  m_Name: Add Sunlight
+  m_Script: {fileID: 11500000, guid: 66057ae282f033849a1a168f017bbbe1, type: 3}
+  m_Name: Biome Wetness
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  veryWarm: 0.786
-  warm: 0.627
-  neutral: 0.537
-  cold: 0.438
-  noiseSettings: {fileID: 11400000, guid: ad20d17c2a49ba54f8fe6a5df6b39e93, type: 2}
+  veryWet: 0.65
+  wet: 0.6
+  neutral: 0.4
+  dry: 0.2
+  noiseSettings: {fileID: 11400000, guid: 10f7c021ea9409944a5ab8e4373d34da, type: 2}

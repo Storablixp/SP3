@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de2f7bc2de653ba418f628303d7958d4, type: 3}
-  m_Name: Randomizer
+  m_Script: {fileID: 11500000, guid: a8607f0168bfe6f4bbd2c068742973a1, type: 3}
+  m_Name: Biome Sunlight
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  PercentageForA: 62
-  PixelA: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
-  PixelB: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
+  veryWarm: 0.786
+  warm: 0.627
+  neutral: 0.537
+  cold: 0.438
+  noiseSettings: {fileID: 11400000, guid: ad20d17c2a49ba54f8fe6a5df6b39e93, type: 2}

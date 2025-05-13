@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66057ae282f033849a1a168f017bbbe1, type: 3}
-  m_Name: Add Wetness
+  m_Script: {fileID: 11500000, guid: e3ea6a69690db5049a6a8b0ef608830a, type: 3}
+  m_Name: Biome Depth
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  veryWet: 0.65
-  wet: 0.6
-  neutral: 0.4
-  dry: 0.2
-  noiseSettings: {fileID: 11400000, guid: 10f7c021ea9409944a5ab8e4373d34da, type: 2}
+  airLayer: 0.861
+  surfaceLayer: 0.761
+  caveLayer: 0.353
+  deepLayer: 0.134
+  noiseSettings: {fileID: 11400000, guid: 387c3e9042ebe8a4e8ca737d984a87d2, type: 2}
+  heightVariationStrength: 32
