@@ -3,7 +3,7 @@ using UnityEngine;
 public struct PixelInstance
 {
     public PixelSO Pixel;
-    public int Temperature;
+    public int SunlightLevel;
     public float Wetness;
     public float Depth;
 }

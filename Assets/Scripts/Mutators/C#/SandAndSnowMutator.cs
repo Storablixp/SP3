@@ -28,7 +28,7 @@ public class SandAndSnowMutator : WorldMutatorSO
 
                 if (pixel.Pixel == DirtPixel)
                 {
-                    if (pixel.Temperature > SandThreshold)
+                    if (pixel.SunlightLevel > SandThreshold)
                     {
                         if (pixel.Wetness > ClayThreshold)
                         {
@@ -38,7 +38,7 @@ public class SandAndSnowMutator : WorldMutatorSO
                     }
                     else
                     {
-                        if (pixel.Temperature < 0.2f)
+                        if (pixel.SunlightLevel < 0.2f)
                         {
                             worldGenerator.ChangePixel(arrayX, arrayY, SnowPixel);
                         }

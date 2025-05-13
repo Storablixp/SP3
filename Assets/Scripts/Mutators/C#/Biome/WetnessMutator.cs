@@ -1,16 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Wetness Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Wetness")]
+[CreateAssetMenu(fileName = "Wetness Mutator", menuName = "Scriptable Objects/World Mutator/Biome Data/Wetness")]
 public class WetnessMutator : WorldMutatorSO
 {
     [Header("Settings")]
     public Perlin2DSettings noiseSettings;
-
-    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
-    {
-        base.SetUp(worldGenerator, worldSize);
-    }
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {

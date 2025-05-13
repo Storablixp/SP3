@@ -242,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &189650678
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -378,7 +378,6 @@ MonoBehaviour:
   seed: 0
   worldSize: {x: 512, y: 512}
   worldMutators:
-  - {fileID: 11400000, guid: eb48c3cf9a97a394b9fb1275b8d62401, type: 2}
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
   - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
@@ -585,7 +584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &349933713
 MonoBehaviour:
   m_ObjectHideFlags: 0

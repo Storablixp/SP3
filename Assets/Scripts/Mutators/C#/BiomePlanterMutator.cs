@@ -25,23 +25,23 @@ public class BiomePlanterMutator : WorldMutatorSO
             {
                 PixelInstance pixel = pixels[arrayX, arrayY];
                 
-                if (pixel.Temperature == 2)
+                if (pixel.SunlightLevel == 2)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, VeryWarmPixel);
                 }
-                else if (pixel.Temperature == 1)
+                else if (pixel.SunlightLevel == 1)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, WarmPixel);
                 }
-                else if (pixel.Temperature == 0)
+                else if (pixel.SunlightLevel == 0)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, HumidPixel);
                 }
-                else if (pixel.Temperature == -1)
+                else if (pixel.SunlightLevel == -1)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, ColdPixel);
                 }
-                else if (pixel.Temperature == -2)
+                else if (pixel.SunlightLevel == -2)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, VeryColdPixel);
                 }

@@ -40,11 +40,11 @@ public class TerrainMutator : WorldMutatorSO
                     pixelToAdd = airPixel;
                 else if (yMod > worldSize.y * surfaceLayerThreshold)
                 {
-                    if (pixelInstance.Temperature == 2)
+                    if (pixelInstance.SunlightLevel == 2)
                     {
                         pixelToAdd = sandPixel;
                     }
-                    else if (pixelInstance.Temperature == -1)
+                    else if (pixelInstance.SunlightLevel == -1)
                     {
                         pixelToAdd = snowPixel;
                     }
