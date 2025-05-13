@@ -15,5 +15,6 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
+  airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   sandPixel: {fileID: 11400000, guid: ed960c5253adca347893d851aeab4d08, type: 2}
   quicksandPixel: {fileID: 11400000, guid: 160d61d603ce79b4898d8e226bb96788, type: 2}
