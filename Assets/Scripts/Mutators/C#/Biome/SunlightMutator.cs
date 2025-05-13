@@ -11,21 +11,19 @@ public class SunlightMutator : WorldMutatorSO
     [SerializeField, Range(0.0f, 1.0f)] private float cold = 0.2f;
 
     [Header("Settings")]
-    private float xPosition;
     [SerializeField] private Perlin2DSettings noiseSettings;
-    [SerializeField] private bool randomXPosition;
 
+    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
+    {
+        base.SetUp(worldGenerator, worldSize);
+
+    }
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
-        if (randomXPosition)
-        {
-            xPosition = Random.Range(worldSize.x / -2f, worldSize.x / 2f);
-        }
-
-        float centerX = worldSize.x / 2f + xPosition;
+        float centerX = worldSize.x;
         float centerY = worldSize.y;
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
