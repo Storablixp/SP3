@@ -10,7 +10,6 @@ public class SpaghettiCaveMutator : WorldMutatorSO
 
     [Header("Settings")]
     [SerializeField, Range(0.4f, 0.5f)] private float thickness;
-    [SerializeField, Range(0.01f, 1.0f)] private float depth;
     [SerializeField] private Perlin2DSettings noiseScettings;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
@@ -22,13 +21,23 @@ public class SpaghettiCaveMutator : WorldMutatorSO
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
-                if (pixelInstance.Depth < depth && pixelInstance.Pixel != airPixel)
+                if (pixelInstance.Pixel != airPixel)
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
 
-                    if (noiseValue > (0 + thickness) && noiseValue < (1 - thickness))
+                    if (pixelInstance.Depth < 0)
                     {
-                        worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
+                        if (noiseValue > (0 + (thickness)) && noiseValue < (1 - (thickness)))
+                        {
+                            worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
+                        }
+                    }
+                    else
+                    {
+                        if (noiseValue > (0 + thickness) && noiseValue < (1 - thickness))
+                        {
+                            worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
+                        }
                     }
                 }
             }

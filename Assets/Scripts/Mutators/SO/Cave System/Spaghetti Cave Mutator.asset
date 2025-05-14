@@ -17,6 +17,5 @@ MonoBehaviour:
   EndDepthLevel: 0
   hollowPixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  thickness: 0.4692
-  depth: 0.85
+  thickness: 0.4642
   noiseScettings: {fileID: 11400000, guid: 3d7befa46f44ae04f810630b206d4143, type: 2}

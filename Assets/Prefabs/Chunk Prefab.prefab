@@ -175,9 +175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8642db8d02de7b54e8068796c71ce304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ne: []
   Tilemap: {fileID: 364891070831370138}
   CenterPos: {x: 0, y: 0}
+  Bounds:
+    m_Position: {x: 0, y: 0, z: 0}
+    m_Size: {x: 0, y: 0, z: 0}
 --- !u!1 &6423891561179876222
 GameObject:
   m_ObjectHideFlags: 0
