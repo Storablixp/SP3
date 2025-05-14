@@ -9,15 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3ea6a69690db5049a6a8b0ef608830a, type: 3}
-  m_Name: Biome Depth
+  m_Script: {fileID: 11500000, guid: ee6afe36f95b0874f98813a506d9557c, type: 3}
+  m_Name: Remove Line
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  airLayer: 0.861
-  surfaceLayer: 0.726
-  caveLayer: 0.353
-  deepLayer: 0.134
-  noiseSettings: {fileID: 11400000, guid: 387c3e9042ebe8a4e8ca737d984a87d2, type: 2}
-  heightVariationStrength: 36
+  airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
+  borderPixel: {fileID: 11400000, guid: 05a18c895ea4d894995841d20a82a441, type: 2}
+  threshold: 3

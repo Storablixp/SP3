@@ -17,7 +17,7 @@ public class GlobalNeighborCheckFucntions : MonoBehaviour
         return false;
     }
 
-    public static bool MooreCheck(int arrayX, int arrayY, WorldGenerator worldGenerator, int mooreNeighborhoodSize, PixelSO pixelToCheckFor, int threshold)
+    public static bool MooreCheck(int arrayX, int arrayY, WorldGenerator worldGenerator, int mooreNeighborhoodSize, PixelSO pixelToCheckFor, uint threshold)
 {
     PixelInstance[,] pixels = worldGenerator.RetrievePixels();
     int amount = 0;

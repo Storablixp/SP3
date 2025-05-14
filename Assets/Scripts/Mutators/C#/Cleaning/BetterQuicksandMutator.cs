@@ -13,7 +13,7 @@ public class BetterQuicksandMutator : WorldMutatorSO
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
         MoveUp(worldSize, pixels);
-        RemoveLines(worldSize, pixels);
+        //RemoveLines(worldSize, pixels);
 
         yield return null;
     }

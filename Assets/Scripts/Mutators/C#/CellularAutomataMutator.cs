@@ -8,7 +8,7 @@ public class CellularAutomataMutator : WorldMutatorSO
     public PixelSO PixelToCheckFor;
 
     [Header("Settings")]
-    public int ReplacementThreshold = 4;
+    public uint ReplacementThreshold = 4;
     public int MooreNeighborhoodSize = 1;
     public uint Iterations = 5;
 
