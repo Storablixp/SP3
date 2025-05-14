@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Depth Noise
   m_EditorClassIdentifier: 
   NoiseScale: 0.01
-  Octaves: 3
+  Octaves: 2
   EasingFunctionType: 1
   EasingFunctionModifier: 1.01
   Persistence: 0.5

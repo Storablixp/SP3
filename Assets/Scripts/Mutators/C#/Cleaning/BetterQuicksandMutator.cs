@@ -1,79 +1,92 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Better Quicksand", menuName = "Scriptable Objects/World Mutator/Cleaning/Better Quicksand")]
+[CreateAssetMenu(fileName = "Voronoi", menuName = "Scriptable Objects/World Mutator/Biome Data/Voronoi")]
 public class BetterQuicksandMutator : WorldMutatorSO
 {
-    [Header("Pixels")]
-    [SerializeField] private PixelSO airPixel;
-    [SerializeField] private PixelSO sandPixel;
-    [SerializeField] private PixelSO quicksandPixel;
+    [SerializeField] private int gridSize = 16;
+    private int cellWidth;
+    private int cellHeight;
+    private Vector2Int[,] pointsPositions;
+
+    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
+    {
+        base.SetUp(worldGenerator, worldSize);
+
+        cellWidth = worldSize.x / gridSize;
+        cellHeight = worldSize.y / gridSize;
+
+        GeneratePoints();
+    }
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
-        MoveUp(worldSize, pixels);
-        //RemoveLines(worldSize, pixels);
 
+        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        {
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            {
+                int gridY = arrayY / cellHeight;
+                int gridX = arrayX / cellWidth;
+
+                float nearestDistance = Mathf.Infinity;
+                Vector2Int nearestPoint = new Vector2Int();
+                int nearestGridY = 0;
+                int nearestGridX = 0;
+
+                for (int a = -1; a <= 1; a++)
+                {
+                    for (int b = -1; b <= 1; b++)
+                    {
+                        int cellY = gridY + a;
+                        int cellX = gridX + b;
+
+                        if (cellX < 0 || cellY < 0 || cellX >= gridSize || cellY >= gridSize)
+                            continue;
+
+                        Vector2Int currentPoint = pointsPositions[cellX, cellY];
+                        float distance = Vector2Int.Distance(new Vector2Int(arrayX, arrayY), currentPoint);
+
+                        if (distance < nearestDistance)
+                        {
+                            nearestDistance = distance;
+                            nearestPoint = currentPoint;
+                            nearestGridX = cellX;
+                            nearestGridY = cellY;
+                        }
+                    }
+                }
+
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                //if (nearestGridY == startY)
+                //{
+                //    pixelInstance.Voronoi = 2;
+                //}
+                //else
+                //{
+                //    pixelInstance.Voronoi = -2;
+                //}
+
+
+                pixels[arrayX, arrayY] = pixelInstance;
+            }
+        }
         yield return null;
     }
 
-    private void MoveUp(Vector2Int worldSize, PixelInstance[,] pixels)
+    private void GeneratePoints()
     {
-        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        pointsPositions = new Vector2Int[gridSize, gridSize];
+
+        for (int i = 0; i < gridSize; i++)
         {
-            for (int arrayY = startY; arrayY >= endY; arrayY--)
+            for (int j = 0; j < gridSize; j++)
             {
-                PixelInstance pixel = pixels[arrayX, arrayY];
-                if (pixel.Pixel != quicksandPixel ||
-                    GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel)) continue;
-
-                if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, sandPixel))
-                {
-                    int i = 0;
-                    do
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY + 1 + i, quicksandPixel);
-                        worldGenerator.ChangePixel(arrayX, arrayY + i, sandPixel);
-                        i++;
-                    }
-
-
-                    while (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY + i, Vector2Int.up, worldGenerator, sandPixel));
-                }
-                else
-                {
-                    PixelSO pixelBeneath = pixels[arrayX, arrayY + 1].Pixel;
-                    worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
-                }
+                pointsPositions[i, j] = new Vector2Int(i * cellWidth + Random.Range(0, cellWidth), j * cellHeight + Random.Range(0, cellHeight));
             }
         }
     }
-    private void RemoveLines(Vector2Int worldSize, PixelInstance[,] pixels)
-    {
-        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
-        {
-            for (int arrayY = startY; arrayY >= endY; arrayY--)
-            {
-                PixelInstance pixel = pixels[arrayX, arrayY];
-                if (pixel.Pixel == quicksandPixel)
-                {
-                    if (!GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, quicksandPixel, 2))
-                    {
-                        PixelSO pixelBeneath = pixels[arrayX - 1, arrayY].Pixel;
-                        worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
-                    }
-                }
-                else if (pixel.Pixel == sandPixel)
-                {
-                    if (!GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, sandPixel, 2))
-                    {
-                        PixelSO pixelBeneath = pixels[arrayX - 1, arrayY].Pixel;
-                        worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
-                    }
-                }
-            }
-        }
-    }
-
 }
+

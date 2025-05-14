@@ -6,4 +6,5 @@ public struct PixelInstance
     public int SunlightLevel;
     public float Wetness;
     public float Depth;
+    //public int Voronoi;
 }

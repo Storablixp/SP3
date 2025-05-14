@@ -1,11 +1,10 @@
 using UnityEngine;
 using System.Collections;
-using static UnityEditor.LightingExplorerTableColumn;
 
 [CreateAssetMenu(fileName = "Biome Planter Mutator", menuName = "Scriptable Objects/World Mutator/Testing/Biome Data")]
 public class BiomeDataTestMutator : WorldMutatorSO
 {
-    private enum DataType { depth, sunlight, wetness }
+    private enum DataType { depth, sunlight, voronoi, wetness }
     [SerializeField] private DataType dataType;
 
     [Header("Pixels")]
@@ -30,6 +29,7 @@ public class BiomeDataTestMutator : WorldMutatorSO
                     case DataType.depth: DepthMap(arrayX, arrayY, pixel); break;
                     case DataType.sunlight: SunlightMap(arrayX, arrayY, pixel); break;
                     case DataType.wetness: WetnessMap(arrayX, arrayY, pixel); break;
+                    //case DataType.voronoi: VoronoiMap(arrayX, arrayY, pixel); break;
                 }
             }
         }
@@ -107,4 +107,27 @@ public class BiomeDataTestMutator : WorldMutatorSO
         }
     }
 
+    //private void VoronoiMap(int arrayX, int arrayY, PixelInstance pixel)
+    //{
+    //    if (pixel.Voronoi == 2)
+    //    {
+    //        worldGenerator.ChangePixel(arrayX, arrayY, VeryHighValue);
+    //    }
+    //    else if (pixel.Voronoi == 1)
+    //    {
+    //        worldGenerator.ChangePixel(arrayX, arrayY, HighValue);
+    //    }
+    //    else if (pixel.Voronoi == 0)
+    //    {
+    //        worldGenerator.ChangePixel(arrayX, arrayY, ModerateValue);
+    //    }
+    //    else if (pixel.Voronoi == -1)
+    //    {
+    //        worldGenerator.ChangePixel(arrayX, arrayY, LowValue);
+    //    }
+    //    else if (pixel.Voronoi == -2)
+    //    {
+    //        worldGenerator.ChangePixel(arrayX, arrayY, VeryLowValue);
+    //    }
+    //}
 }

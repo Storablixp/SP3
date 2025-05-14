@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 [CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Terrain")]
 public class TerrainMutator : WorldMutatorSO
 {
-     [Header("Pixels")]
+    [Header("Pixels")]
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO dirtPixel;
     [SerializeField] private PixelSO sandPixel;
@@ -42,6 +43,41 @@ public class TerrainMutator : WorldMutatorSO
                 }
 
                 worldGenerator.ChangePixel(arrayX, arrayY, pixelToAdd);
+            }
+        }
+
+        bool foundDirt = false;
+        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        {
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            {
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                if (pixelInstance.Depth != 1)
+                {
+                    continue;
+                }
+
+                if (pixelInstance.Pixel == dirtPixel)
+                {
+                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, sandPixel))
+                    {
+                        foundDirt = true;
+                    }
+                }
+
+                if (pixelInstance.Pixel == sandPixel)
+                {
+                    if (!foundDirt)
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
+                    }
+                }
+            }
+
+            if (foundDirt)
+            {
+                break;
             }
         }
 

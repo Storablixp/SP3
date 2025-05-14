@@ -35,6 +35,8 @@ public class WorldGenerator : MonoBehaviour
 
     private void Awake()
     {
+        Random.InitState(seed);
+
         foreach (WorldMutatorSO mutator in worldMutators)
         {
             mutator.SetUp(this, worldSize);
@@ -48,7 +50,6 @@ public class WorldGenerator : MonoBehaviour
         if (worldSize.x % 2 == 1) worldSize.x++;
         if (worldSize.y % 2 == 1) worldSize.y++;
 
-        Random.InitState(seed);
         XOffset = Random.Range(-100000f, 100000f);
         YOffset = Random.Range(-100000f, 100000f);
 

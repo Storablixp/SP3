@@ -15,7 +15,7 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  dataType: 2
+  dataType: 3
   VeryHighValue: {fileID: 11400000, guid: 75a8a42ea0212014a8e834eec041ea0d, type: 2}
   HighValue: {fileID: 11400000, guid: 6aa451ba6d4943349b6e67528fd2d96f, type: 2}
   ModerateValue: {fileID: 11400000, guid: 57f43e1fe3d966d4a87da5c9bc9664ae, type: 2}

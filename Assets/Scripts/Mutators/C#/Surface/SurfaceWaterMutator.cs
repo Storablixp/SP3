@@ -25,7 +25,7 @@ public class SurfaceWaterMutator : WorldMutatorSO
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         PlaceWater(worldSize, pixels);
-        MoveUp(worldSize, pixels);
+        //MoveUp(worldSize, pixels);
         yield return null;
     }
 
@@ -75,11 +75,11 @@ public class SurfaceWaterMutator : WorldMutatorSO
                     liquidPixel = QuicksandPixel,
                     terrainPixel = SandPixel
                 });
-                pair.Add(new PixelPair
-                {
-                    liquidPixel = WaterPixel,
-                    terrainPixel = DirtPixel
-                });
+                //pair.Add(new PixelPair
+                //{
+                //    liquidPixel = WaterPixel,
+                //    terrainPixel = DirtPixel
+                //});
                 pair.Add(new PixelPair
                 {
                     liquidPixel = IcePixel,
