@@ -12,6 +12,8 @@ public class SunlightMutator : WorldMutatorSO
 
     [Header("Settings")]
     [SerializeField] private Perlin2DSettings noiseSettings;
+    [SerializeField, Range(0.0f, 1.0f)] private float xModifer = 1f;
+    [SerializeField, Range(0.0f, 1.0f)] private float yModifer = 1f;
 
     public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
     {
@@ -23,7 +25,7 @@ public class SunlightMutator : WorldMutatorSO
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
-        float centerX = worldSize.x;
+        float centerX = worldSize.x / 2f;
         float centerY = worldSize.y;
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
@@ -36,7 +38,7 @@ public class SunlightMutator : WorldMutatorSO
 
                 float dx = arrayX - centerX;
                 float dy = arrayY - centerY;
-                float distanceFromCenter = Mathf.Sqrt(dx * dx + dy * dy);
+                float distanceFromCenter = Mathf.Sqrt(dx * dx * xModifer + dy * dy * yModifer);
                 float maxDistance = Mathf.Sqrt(centerX * centerX + centerY * centerY);
                 float radialFactor = 1f - Mathf.InverseLerp(0f, maxDistance, distanceFromCenter);
                 float coreTemperature = noiseValue * radialFactor;

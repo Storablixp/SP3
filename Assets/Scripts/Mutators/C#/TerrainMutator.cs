@@ -87,7 +87,7 @@ public class TerrainMutator : WorldMutatorSO
     private PixelSO CalculateSurfacePixel(PixelInstance pixelInstance)
     {
         PixelSO pixelToAdd;
-        if (pixelInstance.SunlightLevel == 2)
+        if (pixelInstance.SunlightLevel >= 1)
         {
             pixelToAdd = sandPixel;
         }
