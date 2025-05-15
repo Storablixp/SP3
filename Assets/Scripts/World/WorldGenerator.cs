@@ -56,7 +56,6 @@ public class WorldGenerator : MonoBehaviour
             mutator.SetUp(this, worldSize);
         }
 
-
         if (!disableCleaningMutators)
         {
             foreach (WorldMutatorSO mutator in cleaningMutators)

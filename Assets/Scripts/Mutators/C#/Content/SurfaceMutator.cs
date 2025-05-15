@@ -4,14 +4,11 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Surface Mutator", menuName = "Scriptable Objects/World Mutator/Surface")]
 public class SurfaceMutator : WorldMutatorSO
 {
-    [Header("Threshold")]
-    //[SerializeField, Range(0.0f, 1.0f)] private float grassThreshold;
-
     [Header("Pixels")]
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO dirtPixel;
     [SerializeField] private PixelSO grassPixel;
-    [SerializeField] private PixelSO sandPixel;
+    [SerializeField] private PixelSO hollowPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -30,8 +27,7 @@ public class SurfaceMutator : WorldMutatorSO
                     }
                     else
                     {
-                        worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
-                        worldGenerator.ChangePixel(arrayX, arrayY - 1, dirtPixel);
+                        worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
                     }
                 }
                 else if (pixels[arrayX, arrayY].Pixel == dirtPixel && arrayY == startY)
