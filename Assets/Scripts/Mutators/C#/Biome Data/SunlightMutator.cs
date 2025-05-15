@@ -42,7 +42,7 @@ public class SunlightMutator : WorldMutatorSO
                 float maxDistance = Mathf.Sqrt(centerX * centerX + centerY * centerY);
                 float radialFactor = 1f - Mathf.InverseLerp(0f, maxDistance, distanceFromCenter);
                 float coreTemperature = noiseValue * radialFactor;
-               
+
                 float finalTemperature = coreTemperature;
 
                 if (finalTemperature >= veryWarm)

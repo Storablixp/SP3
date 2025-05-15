@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &189650682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biomeMutators:
-  - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
+  - {fileID: 11400000, guid: 2aeda7b77c657bf4a8473026f6ca20d5, type: 2}
   - {fileID: 11400000, guid: a4ae04cb8078bc7459d31a35f8693dc3, type: 2}
   caveSystemMutators: []
   cleaningMutators: []
@@ -465,7 +465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &349933713
 MonoBehaviour:
   m_ObjectHideFlags: 0

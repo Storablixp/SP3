@@ -4,7 +4,7 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Biome Planter Mutator", menuName = "Scriptable Objects/World Mutator/Testing/Biome Data")]
 public class BiomeDataTestMutator : WorldMutatorSO
 {
-    private enum DataType { depth, sunlight, voronoi, wetness }
+    private enum DataType { biome, depth, sunlight, wetness }
     [SerializeField] private DataType dataType;
 
     [Header("Pixels")]
@@ -26,10 +26,10 @@ public class BiomeDataTestMutator : WorldMutatorSO
 
                 switch (dataType)
                 {
+                    case DataType.biome: BiomeMap(arrayX, arrayY, pixel); break;
                     case DataType.depth: DepthMap(arrayX, arrayY, pixel); break;
                     case DataType.sunlight: SunlightMap(arrayX, arrayY, pixel); break;
                     case DataType.wetness: WetnessMap(arrayX, arrayY, pixel); break;
-                    //case DataType.voronoi: VoronoiMap(arrayX, arrayY, pixel); break;
                 }
             }
         }
@@ -37,6 +37,29 @@ public class BiomeDataTestMutator : WorldMutatorSO
         yield return null;
     }
 
+    private void BiomeMap(int arrayX, int arrayY, PixelInstance pixel)
+    {
+        if (pixel.Biome == 2)
+        {
+            worldGenerator.ChangePixel(arrayX, arrayY, VeryHighValue);
+        }
+        else if (pixel.Biome == 1)
+        {
+            worldGenerator.ChangePixel(arrayX, arrayY, HighValue);
+        }
+        else if (pixel.Biome == 0)
+        {
+            worldGenerator.ChangePixel(arrayX, arrayY, ModerateValue);
+        }
+        else if (pixel.Biome == -1)
+        {
+            worldGenerator.ChangePixel(arrayX, arrayY, LowValue);
+        }
+        else if (pixel.Biome == -2)
+        {
+            worldGenerator.ChangePixel(arrayX, arrayY, VeryLowValue);
+        }
+    }
     private void DepthMap(int arrayX, int arrayY, PixelInstance pixel)
     {
         if (pixel.Depth == 2)
@@ -107,27 +130,4 @@ public class BiomeDataTestMutator : WorldMutatorSO
         }
     }
 
-    //private void VoronoiMap(int arrayX, int arrayY, PixelInstance pixel)
-    //{
-    //    if (pixel.Voronoi == 2)
-    //    {
-    //        worldGenerator.ChangePixel(arrayX, arrayY, VeryHighValue);
-    //    }
-    //    else if (pixel.Voronoi == 1)
-    //    {
-    //        worldGenerator.ChangePixel(arrayX, arrayY, HighValue);
-    //    }
-    //    else if (pixel.Voronoi == 0)
-    //    {
-    //        worldGenerator.ChangePixel(arrayX, arrayY, ModerateValue);
-    //    }
-    //    else if (pixel.Voronoi == -1)
-    //    {
-    //        worldGenerator.ChangePixel(arrayX, arrayY, LowValue);
-    //    }
-    //    else if (pixel.Voronoi == -2)
-    //    {
-    //        worldGenerator.ChangePixel(arrayX, arrayY, VeryLowValue);
-    //    }
-    //}
 }

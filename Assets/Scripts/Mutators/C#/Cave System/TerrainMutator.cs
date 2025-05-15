@@ -31,8 +31,8 @@ public class TerrainMutator : WorldMutatorSO
                 }
                 else if (pixelInstance.Depth == 1)
                 {
-                    //pixelToAdd = dirtPixel;
-                    pixelToAdd = CalculateSurfacePixel(pixelInstance);
+                    pixelToAdd = dirtPixel;
+                    //pixelToAdd = CalculateSurfacePixel(pixelInstance);
                 }
                 else if (pixelInstance.Depth == 0)
                 {

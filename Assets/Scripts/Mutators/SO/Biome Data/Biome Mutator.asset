@@ -9,17 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8607f0168bfe6f4bbd2c068742973a1, type: 3}
-  m_Name: Biome Sunlight
+  m_Script: {fileID: 11500000, guid: f2a5d5c880b3ec8419ff88db6f443a3f, type: 3}
+  m_Name: Biome Mutator
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
   veryWarm: 0.8
-  warm: 0.5
+  warm: 0.6
   neutral: 0.4
   cold: 0.2
-  noiseSettings: {fileID: 11400000, guid: ad20d17c2a49ba54f8fe6a5df6b39e93, type: 2}
-  perlin1DSettings: {fileID: 11400000, guid: 3b646fc0ee79080409814ba881d6f93d, type: 2}
-  xModifer: 0.358
-  yModifer: 0.308
+  noiseSettings: {fileID: 11400000, guid: 3b646fc0ee79080409814ba881d6f93d, type: 2}
