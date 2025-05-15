@@ -252,8 +252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biomeMutators: []
-  contentMutators: []
+  caveSystemMutators: []
   cleaningMutators: []
+  contentMutators: []
   isTesting: 0
   showChanges: 0
   differentOffsets: 0
@@ -479,7 +480,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
   - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
   - {fileID: 11400000, guid: eb48c3cf9a97a394b9fb1275b8d62401, type: 2}
-  contentMutators:
+  caveSystemMutators:
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
   - {fileID: 11400000, guid: f172c1444a0662b4baf2fa67c1012169, type: 2}
@@ -488,6 +489,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e802927fe7a0296498247e512ea89738, type: 2}
   - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
   - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
+  contentMutators:
+  - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
   isTesting: 1
   showChanges: 0
   differentOffsets: 0

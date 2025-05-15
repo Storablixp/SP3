@@ -7,8 +7,9 @@ public class WorldGenerator : MonoBehaviour
 {
     [Header("World Mutators")]
     [SerializeField] private List<WorldMutatorSO> biomeMutators = new();
-    [SerializeField] private List<WorldMutatorSO> contentMutators = new();
+    [SerializeField] private List<WorldMutatorSO> caveSystemMutators = new();
     [SerializeField] private List<WorldMutatorSO> cleaningMutators = new();
+    [SerializeField] private List<WorldMutatorSO> contentMutators = new();
 
 
     [Header("Testing")]
@@ -50,7 +51,7 @@ public class WorldGenerator : MonoBehaviour
             mutator.SetUp(this, worldSize);
         }
 
-        foreach (WorldMutatorSO mutator in contentMutators)
+        foreach (WorldMutatorSO mutator in caveSystemMutators)
         {
             mutator.SetUp(this, worldSize);
         }
@@ -62,6 +63,11 @@ public class WorldGenerator : MonoBehaviour
             {
                 mutator.SetUp(this, worldSize);
             }
+        }
+
+        foreach (WorldMutatorSO mutator in contentMutators)
+        {
+            mutator.SetUp(this, worldSize);
         }
 
         chunkManager = GetComponent<ChunkAndPlayerGenerator>();
@@ -89,7 +95,7 @@ public class WorldGenerator : MonoBehaviour
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
         }
 
-        foreach (WorldMutatorSO mutator in contentMutators)
+        foreach (WorldMutatorSO mutator in caveSystemMutators)
         {
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
         }
@@ -100,6 +106,11 @@ public class WorldGenerator : MonoBehaviour
             {
                 yield return StartCoroutine(mutator.ApplyMutator(worldSize));
             }
+        }
+
+        foreach (WorldMutatorSO mutator in contentMutators)
+        {
+            yield return StartCoroutine(mutator.ApplyMutator(worldSize));
         }
 
         GenerateTexture();
