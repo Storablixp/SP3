@@ -20,5 +20,5 @@ MonoBehaviour:
   dirtPixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
   stonePixel: {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}
   deepStonePixel: {fileID: 11400000, guid: 972d9ae8f4fe0cc4ab39143628ad7e7f, type: 2}
-  iterations: 6
+  iterations: 7
   minimumNeighborHoles: 10

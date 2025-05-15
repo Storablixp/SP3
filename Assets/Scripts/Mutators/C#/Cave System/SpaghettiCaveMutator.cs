@@ -25,19 +25,9 @@ public class SpaghettiCaveMutator : WorldMutatorSO
                 {
                     float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
 
-                    if (pixelInstance.Depth < 0)
+                    if (noiseValue > (0 + thickness) && noiseValue < (1 - thickness))
                     {
-                        if (noiseValue > (0 + (thickness)) && noiseValue < (1 - (thickness)))
-                        {
-                            worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
-                        }
-                    }
-                    else
-                    {
-                        if (noiseValue > (0 + thickness) && noiseValue < (1 - thickness))
-                        {
-                            worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
-                        }
+                        worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
                     }
                 }
             }

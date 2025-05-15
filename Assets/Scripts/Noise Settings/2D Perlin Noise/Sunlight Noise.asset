@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sunlight Noise
   m_EditorClassIdentifier: 
   NoiseScale: 0.002
-  Octaves: 5
-  EasingFunctionType: 4
-  EasingFunctionModifier: 0.55
+  Octaves: 3
+  EasingFunctionType: 2
+  EasingFunctionModifier: 0.49
   Persistence: 0.5
   Lacunarity: 2

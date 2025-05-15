@@ -251,15 +251,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9467f51c2c29f484091681ea8b5035d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomeMutators: []
+  biomeMutators:
+  - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
+  - {fileID: 11400000, guid: a4ae04cb8078bc7459d31a35f8693dc3, type: 2}
   caveSystemMutators: []
   cleaningMutators: []
   contentMutators: []
-  isTesting: 0
-  showChanges: 0
+  isTesting: 1
+  showChanges: 1
   differentOffsets: 0
   disableCleaningMutators: 0
-  defaultPixel: {fileID: 0}
+  defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 0
   worldSize: {x: 1024, y: 1024}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
@@ -496,7 +498,7 @@ MonoBehaviour:
   differentOffsets: 0
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  seed: 11
+  seed: 2
   worldSize: {x: 512, y: 512}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}
