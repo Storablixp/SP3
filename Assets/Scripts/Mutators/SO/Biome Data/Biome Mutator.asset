@@ -18,16 +18,16 @@ MonoBehaviour:
   biomes:
   - Name: Ice
     MinLength: 8
-    MaxLength: 16
+    MaxLength: 64
   - Name: Snow
-    MinLength: 8
-    MaxLength: 16
+    MinLength: 16
+    MaxLength: 64
   - Name: Forest
-    MinLength: 8
-    MaxLength: 16
+    MinLength: 32
+    MaxLength: 64
   - Name: Desert
-    MinLength: 8
-    MaxLength: 16
+    MinLength: 16
+    MaxLength: 64
   - Name: Vulcano
     MinLength: 8
-    MaxLength: 16
+    MaxLength: 64

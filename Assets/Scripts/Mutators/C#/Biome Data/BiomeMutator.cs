@@ -91,7 +91,7 @@ public class BiomeMutator : WorldMutatorSO
     private class BiomeInfo
     {
         public string Name;
-        [Range(8, 64)] public int MinLength;
-        [Range(8, 64)] public int MaxLength;
+        [Range(32, 256)] public int MinLength;
+        [Range(32, 256)] public int MaxLength;
     }
 }

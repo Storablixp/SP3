@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &189650682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &349933713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biomeMutators:
+  - {fileID: 11400000, guid: 2aeda7b77c657bf4a8473026f6ca20d5, type: 2}
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
   - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
   - {fileID: 11400000, guid: eb48c3cf9a97a394b9fb1275b8d62401, type: 2}
@@ -493,8 +494,8 @@ MonoBehaviour:
   contentMutators:
   - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
   isTesting: 1
-  showChanges: 1
-  differentOffsets: 1
+  showChanges: 0
+  differentOffsets: 0
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 2

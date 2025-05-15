@@ -13,6 +13,7 @@ public class TerrainMutator : WorldMutatorSO
     [SerializeField] private PixelSO deepStonePixel;
     [SerializeField] private PixelSO hollowPixel;
     [SerializeField] private PixelSO stonePixel;
+    [SerializeField] private PixelSO lavaPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -29,10 +30,10 @@ public class TerrainMutator : WorldMutatorSO
                 {
                     pixelToAdd = airPixel;
                 }
-                else if (pixelInstance.Depth == 1)
+                else if (pixelInstance.Depth == 1 && pixelInstance.Pixel != hollowPixel)
                 {
-                    pixelToAdd = dirtPixel;
-                    //pixelToAdd = CalculateSurfacePixel(pixelInstance);
+                    //pixelToAdd = dirtPixel;
+                    pixelToAdd = CalculateSurfacePixel(pixelInstance);
                 }
                 else if (pixelInstance.Depth == 0)
                 {
@@ -88,21 +89,25 @@ public class TerrainMutator : WorldMutatorSO
     private PixelSO CalculateSurfacePixel(PixelInstance pixelInstance)
     {
         PixelSO pixelToAdd;
-        if (pixelInstance.SunlightLevel == 2)
+        if (pixelInstance.Biome == 2)
         {
             pixelToAdd = deepStonePixel;
         }
-        else if (pixelInstance.SunlightLevel == 1)
+        else if (pixelInstance.Biome == 1)
         {
             pixelToAdd = sandPixel;
         }
-        else if (pixelInstance.SunlightLevel <= -1)
+        else if (pixelInstance.Biome == 0)
+        {
+            pixelToAdd = dirtPixel;
+        }
+        else if (pixelInstance.Biome == -1)
         {
             pixelToAdd = snowPixel;
         }
         else
         {
-            pixelToAdd = dirtPixel;
+            pixelToAdd = lavaPixel;
         }
 
         return pixelToAdd;
