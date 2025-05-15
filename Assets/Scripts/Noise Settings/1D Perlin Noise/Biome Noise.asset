@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ddcd901522f90b4890c91a5b8fef659, type: 3}
   m_Name: Biome Noise
   m_EditorClassIdentifier: 
-  NoiseScale: 0.0059
-  Octaves: 3
-  Frequency: 2.51
+  NoiseScale: 0.0104
+  Octaves: 1
+  Frequency: 3.03
   Persistence: 0.5
   Lacunarity: 2
   noiseRangeMin: 0.01
-  EasingFunctionType: 1
-  EasingFunctionModifier: 2
+  EasingFunctionType: 0
+  EasingFunctionModifier: 0.58

@@ -1,58 +1,97 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Biome Mutator", menuName = "Scriptable Objects/World Mutator/Biome Data/Biome")]
 public class BiomeMutator : WorldMutatorSO
 {
-    [Header("Thresholds")]
-    [SerializeField, Range(0.0f, 1.0f)] private float veryWarm = 0.8f;
-    [SerializeField, Range(0.0f, 1.0f)] private float warm = 0.6f;
-    [SerializeField, Range(0.0f, 1.0f)] private float neutral = 0.4f;
-    [SerializeField, Range(0.0f, 1.0f)] private float cold = 0.2f;
+    [SerializeField] private List<BiomeInfo> biomes = new();
+    private Dictionary<int, BiomeInfo> biomeLookup = new();
+    private int currentBiomeIndex;
+    private int currentSize = 0;
+    private int desiredSize;
 
-    [Header("Settings")]
-    [SerializeField] private Perlin1DSettings noiseSettings;
+    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
+    {
+        base.SetUp(worldGenerator, worldSize);
+        currentSize = 0;
+        biomeLookup.Clear();
+
+        int nr = -2;
+        for (int i = 0; i < biomes.Count; i++)
+        {
+            biomeLookup.Add(nr, biomes[i]);
+            nr++;
+        }
+
+        currentBiomeIndex = Random.Range(-2, 3);
+        desiredSize = Random.Range(biomeLookup[currentBiomeIndex].MinLength, biomeLookup[currentBiomeIndex].MaxLength + 1);
+    }
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
+        AssignValuesToFirstRow(worldSize, pixels);
+        AssignValuesToOtherRows(worldSize, pixels);
+        yield return null;
+    }
 
-        float centerX = worldSize.x / 2f;
-        float centerY = worldSize.y / 1.25f;
-
-        for (int arrayY = startY; arrayY >= endY; arrayY--)
+    private void AssignValuesToFirstRow(Vector2Int worldSize, PixelInstance[,] pixels)
+    {
+        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         {
-            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            PixelInstance pixelInstance = pixels[arrayX, 0];
+
+            if (currentSize >= desiredSize)
             {
-                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+                int nr = Random.Range(0, 2);
 
-                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise1D(arrayX, WorldGenerator.XOffset, noiseSettings);
-
-                if (noiseValue >= veryWarm)
+                if (nr == 0)
                 {
-                    pixelInstance.Biome = 2;
-                }
-                else if (noiseValue >= warm)
-                {
-                    pixelInstance.Biome = 1;
-                }
-                else if (noiseValue >= neutral)
-                {
-                    pixelInstance.Biome = 0;
-                }
-                else if (noiseValue >= cold)
-                {
-                    pixelInstance.Biome = -1;
+                    if (currentBiomeIndex - 1 < -2)
+                    {
+                        currentBiomeIndex = -1;
+                    }
+                    else currentBiomeIndex--;
                 }
                 else
                 {
-                    pixelInstance.Biome = -2;
+                    if (currentBiomeIndex + 1 > 2)
+                    {
+                        currentBiomeIndex = 1;
+                    }
+                    else currentBiomeIndex++;
                 }
 
+                currentSize = 0;
+                desiredSize = Random.Range(biomeLookup[currentBiomeIndex].MinLength, biomeLookup[currentBiomeIndex].MaxLength + 1);
+            }
+
+            pixelInstance.Biome = currentBiomeIndex;
+            pixels[arrayX, 0] = pixelInstance;
+            currentSize++;
+        }
+    }
+
+    private void AssignValuesToOtherRows(Vector2Int worldSize, PixelInstance[,] pixels)
+    {
+        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        {
+            for (int arrayY = startY; arrayY >= endY; arrayY--)
+            {
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+                pixelInstance.Biome = pixels[arrayX, 0].Biome;
                 pixels[arrayX, arrayY] = pixelInstance;
+
             }
         }
+    }
 
-        yield return null;
+    [System.Serializable]
+    private class BiomeInfo
+    {
+        public string Name;
+        [Range(8, 64)] public int MinLength;
+        [Range(8, 64)] public int MaxLength;
     }
 }

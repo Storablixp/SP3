@@ -15,8 +15,19 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  veryWarm: 0.8
-  warm: 0.6
-  neutral: 0.4
-  cold: 0.2
-  noiseSettings: {fileID: 11400000, guid: 3b646fc0ee79080409814ba881d6f93d, type: 2}
+  biomes:
+  - Name: Ice
+    MinLength: 8
+    MaxLength: 16
+  - Name: Snow
+    MinLength: 8
+    MaxLength: 16
+  - Name: Forest
+    MinLength: 8
+    MaxLength: 16
+  - Name: Desert
+    MinLength: 8
+    MaxLength: 16
+  - Name: Vulcano
+    MinLength: 8
+    MaxLength: 16
