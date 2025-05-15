@@ -4,7 +4,7 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Biome Planter Mutator", menuName = "Scriptable Objects/World Mutator/Testing/Biome Data")]
 public class BiomeDataTestMutator : WorldMutatorSO
 {
-    private enum DataType { biome, depth, sunlight, wetness }
+    private enum DataType { depth, sunlight, temperature, wetness }
     [SerializeField] private DataType dataType;
 
     [Header("Pixels")]
@@ -26,9 +26,9 @@ public class BiomeDataTestMutator : WorldMutatorSO
 
                 switch (dataType)
                 {
-                    case DataType.biome: BiomeMap(arrayX, arrayY, pixel); break;
                     case DataType.depth: DepthMap(arrayX, arrayY, pixel); break;
                     case DataType.sunlight: SunlightMap(arrayX, arrayY, pixel); break;
+                    case DataType.temperature: TemperatureMap(arrayX, arrayY, pixel); break;
                     case DataType.wetness: WetnessMap(arrayX, arrayY, pixel); break;
                 }
             }
@@ -37,7 +37,7 @@ public class BiomeDataTestMutator : WorldMutatorSO
         yield return null;
     }
 
-    private void BiomeMap(int arrayX, int arrayY, PixelInstance pixel)
+    private void TemperatureMap(int arrayX, int arrayY, PixelInstance pixel)
     {
         if (pixel.Temperature == 2)
         {
