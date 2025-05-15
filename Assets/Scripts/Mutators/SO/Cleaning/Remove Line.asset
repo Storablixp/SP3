@@ -17,4 +17,4 @@ MonoBehaviour:
   EndDepthLevel: 0
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   borderPixel: {fileID: 11400000, guid: 05a18c895ea4d894995841d20a82a441, type: 2}
-  threshold: 1
+  threshold: 3

@@ -31,7 +31,8 @@ public class TerrainMutator : WorldMutatorSO
                 }
                 else if (pixelInstance.Depth == 1)
                 {
-                    pixelToAdd = CalculateSurfacePixel(pixelInstance);
+                    pixelToAdd = dirtPixel;
+                    //pixelToAdd = CalculateSurfacePixel(pixelInstance);
                 }
                 else if (pixelInstance.Depth == 0)
                 {
@@ -46,40 +47,40 @@ public class TerrainMutator : WorldMutatorSO
             }
         }
 
-        bool foundDirt = false;
-        for (int arrayY = startY; arrayY >= endY; arrayY--)
-        {
-            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
-            {
-                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+        //bool foundDirt = false;
+        //for (int arrayY = startY; arrayY >= endY; arrayY--)
+        //{
+        //    for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        //    {
+        //        PixelInstance pixelInstance = pixels[arrayX, arrayY];
 
-                if (pixelInstance.Depth != 1)
-                {
-                    continue;
-                }
+        //        if (pixelInstance.Depth != 1)
+        //        {
+        //            continue;
+        //        }
 
-                if (pixelInstance.Pixel == dirtPixel)
-                {
-                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, sandPixel))
-                    {
-                        foundDirt = true;
-                    }
-                }
+        //        if (pixelInstance.Pixel == dirtPixel)
+        //        {
+        //            if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, sandPixel))
+        //            {
+        //                foundDirt = true;
+        //            }
+        //        }
 
-                if (pixelInstance.Pixel == sandPixel)
-                {
-                    if (!foundDirt)
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
-                    }
-                }
-            }
+        //        if (pixelInstance.Pixel == sandPixel)
+        //        {
+        //            if (!foundDirt)
+        //            {
+        //                worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
+        //            }
+        //        }
+        //    }
 
-            if (foundDirt)
-            {
-                break;
-            }
-        }
+        //    if (foundDirt)
+        //    {
+        //        break;
+        //    }
+        //}
 
         yield return null;
     }

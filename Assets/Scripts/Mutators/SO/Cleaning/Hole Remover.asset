@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44ecbc21275cd54b8f9a380fbe1daaf, type: 3}
+  m_Name: Hole Remover
+  m_EditorClassIdentifier: 
+  IncludeAllTiles: 1
+  StartingDepthLevel: 0
+  EndDepthLevel: 0
+  borderPixel: {fileID: 11400000, guid: 05a18c895ea4d894995841d20a82a441, type: 2}
+  hollowPixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
+  dirtPixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
+  stonePixel: {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}
+  deepStonePixel: {fileID: 11400000, guid: 972d9ae8f4fe0cc4ab39143628ad7e7f, type: 2}
+  iterations: 8
+  minimumNeighborHoles: 10
