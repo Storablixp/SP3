@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Depth Mutator", menuName = "Scriptable Objects/World Mutator/Biome Data/Depth")]
+[CreateAssetMenu(fileName = "Depth Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Depth")]
 public class DepthMutator : WorldMutatorSO
 {
     [Header("Thresholds")]

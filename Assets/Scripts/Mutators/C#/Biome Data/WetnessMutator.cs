@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.Burst.Intrinsics;
 
-[CreateAssetMenu(fileName = "Wetness Mutator", menuName = "Scriptable Objects/World Mutator/Biome Data/Wetness")]
+[CreateAssetMenu(fileName = "Wetness Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Wetness")]
 public class WetnessMutator : WorldMutatorSO
 {
     [Header("Thresholds")]

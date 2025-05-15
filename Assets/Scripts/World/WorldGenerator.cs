@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WorldGenerator : MonoBehaviour
 {
     [Header("World Mutators")]
-    [SerializeField] private List<WorldMutatorSO> biomeMutators = new();
+    [SerializeField] private List<WorldMutatorSO> PixelDataMutators = new();
     [SerializeField] private List<WorldMutatorSO> caveSystemMutators = new();
     [SerializeField] private List<WorldMutatorSO> cleaningMutators = new();
     [SerializeField] private List<WorldMutatorSO> contentMutators = new();
@@ -46,7 +46,7 @@ public class WorldGenerator : MonoBehaviour
     {
         Random.InitState(seed);
 
-        foreach (WorldMutatorSO mutator in biomeMutators)
+        foreach (WorldMutatorSO mutator in PixelDataMutators)
         {
             mutator.SetUp(this, worldSize);
         }
@@ -89,7 +89,7 @@ public class WorldGenerator : MonoBehaviour
         yield return StartCoroutine(FillWithAir());
 
 
-        foreach (WorldMutatorSO mutator in biomeMutators)
+        foreach (WorldMutatorSO mutator in PixelDataMutators)
         {
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
         }

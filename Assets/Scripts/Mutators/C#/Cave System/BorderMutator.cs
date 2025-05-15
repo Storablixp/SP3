@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Border Mutator", menuName = "Scriptable Objects/World Mutator/Border")]
+[CreateAssetMenu(fileName = "Border Mutator", menuName = "Scriptable Objects/World Mutator/Cave System/Border")]
 public class BorderMutator : WorldMutatorSO
 {
     [Header("Pixels")]

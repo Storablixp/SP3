@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Voronoi", menuName = "Scriptable Objects/World Mutator/Biome Data/Voronoi")]
+//[CreateAssetMenu(fileName = "Voronoi", menuName = "Scriptable Objects/World Mutator/Biome Data/Voronoi")]
 public class VoronoiMutator : WorldMutatorSO
 {
     [SerializeField] private int gridSize = 16;

@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Biome Mutator", menuName = "Scriptable Objects/World Mutator/Biome Data/Biome")]
-public class BiomeMutator : WorldMutatorSO
+[CreateAssetMenu(fileName = "Temperature Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Temperature")]
+public class TemperatureMutator : WorldMutatorSO
 {
-    [SerializeField] private List<BiomeInfo> biomes = new();
-    private Dictionary<int, BiomeInfo> biomeLookup = new();
+    [SerializeField] private List<TemperatureArea> temperatureAreas = new();
+    private Dictionary<int, TemperatureArea> temperatureAreaLookup = new();
     private int currentBiomeIndex;
     private int currentSize = 0;
     private int desiredSize;
@@ -15,17 +15,17 @@ public class BiomeMutator : WorldMutatorSO
     {
         base.SetUp(worldGenerator, worldSize);
         currentSize = 0;
-        biomeLookup.Clear();
+        temperatureAreaLookup.Clear();
 
         int nr = -2;
-        for (int i = 0; i < biomes.Count; i++)
+        for (int i = 0; i < temperatureAreas.Count; i++)
         {
-            biomeLookup.Add(nr, biomes[i]);
+            temperatureAreaLookup.Add(nr, temperatureAreas[i]);
             nr++;
         }
 
         currentBiomeIndex = Random.Range(-2, 3);
-        desiredSize = Random.Range(biomeLookup[currentBiomeIndex].MinLength, biomeLookup[currentBiomeIndex].MaxLength + 1);
+        desiredSize = Random.Range(temperatureAreaLookup[currentBiomeIndex].MinLength, temperatureAreaLookup[currentBiomeIndex].MaxLength + 1);
     }
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
@@ -64,7 +64,7 @@ public class BiomeMutator : WorldMutatorSO
                 }
 
                 currentSize = 0;
-                desiredSize = Random.Range(biomeLookup[currentBiomeIndex].MinLength, biomeLookup[currentBiomeIndex].MaxLength + 1);
+                desiredSize = Random.Range(temperatureAreaLookup[currentBiomeIndex].MinLength, temperatureAreaLookup[currentBiomeIndex].MaxLength + 1);
             }
 
             pixelInstance.Biome = currentBiomeIndex;
@@ -88,7 +88,7 @@ public class BiomeMutator : WorldMutatorSO
     }
 
     [System.Serializable]
-    private class BiomeInfo
+    private class TemperatureArea
     {
         public string Name;
         [Range(32, 256)] public int MinLength;

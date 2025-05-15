@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Sunlight Mutator", menuName = "Scriptable Objects/World Mutator/Biome Data/Sunlight")]
+[CreateAssetMenu(fileName = "Sunlight Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Sunlight")]
 public class SunlightMutator : WorldMutatorSO
 {
     [Header("Thresholds")]

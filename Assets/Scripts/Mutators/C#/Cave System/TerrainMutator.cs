@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-[CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Terrain")]
+[CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Cave System/Terrain")]
 public class TerrainMutator : WorldMutatorSO
 {
     [Header("Pixels")]
@@ -32,7 +32,6 @@ public class TerrainMutator : WorldMutatorSO
                 }
                 else if (pixelInstance.Depth == 1 && pixelInstance.Pixel != hollowPixel)
                 {
-                    //pixelToAdd = dirtPixel;
                     pixelToAdd = CalculateSurfacePixel(pixelInstance);
                 }
                 else if (pixelInstance.Depth == 0)

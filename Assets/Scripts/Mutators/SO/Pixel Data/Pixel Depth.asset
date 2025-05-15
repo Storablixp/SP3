@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3ea6a69690db5049a6a8b0ef608830a, type: 3}
-  m_Name: Biome Depth
+  m_Name: Pixel Depth
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0

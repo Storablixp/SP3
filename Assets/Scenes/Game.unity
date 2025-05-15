@@ -251,9 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9467f51c2c29f484091681ea8b5035d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomeMutators:
-  - {fileID: 11400000, guid: 2aeda7b77c657bf4a8473026f6ca20d5, type: 2}
-  - {fileID: 11400000, guid: a4ae04cb8078bc7459d31a35f8693dc3, type: 2}
+  PixelDataMutators: []
   caveSystemMutators: []
   cleaningMutators: []
   contentMutators: []
@@ -478,11 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9467f51c2c29f484091681ea8b5035d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomeMutators:
-  - {fileID: 11400000, guid: 2aeda7b77c657bf4a8473026f6ca20d5, type: 2}
-  - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
-  - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
+  PixelDataMutators:
   - {fileID: 11400000, guid: eb48c3cf9a97a394b9fb1275b8d62401, type: 2}
+  - {fileID: 11400000, guid: 2aeda7b77c657bf4a8473026f6ca20d5, type: 2}
   caveSystemMutators:
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}

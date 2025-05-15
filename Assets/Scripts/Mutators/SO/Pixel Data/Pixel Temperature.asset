@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2a5d5c880b3ec8419ff88db6f443a3f, type: 3}
-  m_Name: Biome Mutator
+  m_Name: Pixel Temperature
   m_EditorClassIdentifier: 
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  biomes:
-  - Name: Ice
+  temperatureAreas:
+  - Name: Very Cold
     MinLength: 8
     MaxLength: 64
-  - Name: Snow
+  - Name: Cold
     MinLength: 16
     MaxLength: 64
-  - Name: Forest
+  - Name: Neutral
     MinLength: 32
     MaxLength: 64
-  - Name: Desert
+  - Name: Warm
     MinLength: 16
     MaxLength: 64
-  - Name: Vulcano
+  - Name: Very Warm
     MinLength: 8
     MaxLength: 64

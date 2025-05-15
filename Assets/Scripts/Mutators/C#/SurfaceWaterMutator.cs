@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Surface Water", menuName = "Scriptable Objects/World Mutator/Surface/Surface Water")]
+//[CreateAssetMenu(fileName = "Surface Water", menuName = "Scriptable Objects/World Mutator/Surface/Surface Water")]
 public class SurfaceWaterMutator : WorldMutatorSO
 {
     [Header("Warm Pixels")]
