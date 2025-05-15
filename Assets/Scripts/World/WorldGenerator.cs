@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class WorldGenerator : MonoBehaviour
 {
     [Header("World Mutators")]
-    [SerializeField] private List<WorldMutatorSO> worldMutators = new();
+    [SerializeField] private List<WorldMutatorSO> biomeMutators = new();
+    [SerializeField] private List<WorldMutatorSO> contentMutators = new();
+    [SerializeField] private List<WorldMutatorSO> cleaningMutators = new();
+
 
     [Header("Testing")]
-    [SerializeField] private bool testing;
+    [SerializeField] private bool isTesting;
+    [SerializeField] private bool showChanges;
     [SerializeField] private bool differentOffsets;
+    [SerializeField] private bool disableCleaningMutators;
 
     [Header("World Settings")]
     [SerializeField] private PixelSO defaultPixel;
@@ -40,9 +45,23 @@ public class WorldGenerator : MonoBehaviour
     {
         Random.InitState(seed);
 
-        foreach (WorldMutatorSO mutator in worldMutators)
+        foreach (WorldMutatorSO mutator in biomeMutators)
         {
             mutator.SetUp(this, worldSize);
+        }
+
+        foreach (WorldMutatorSO mutator in contentMutators)
+        {
+            mutator.SetUp(this, worldSize);
+        }
+
+
+        if (!disableCleaningMutators)
+        {
+            foreach (WorldMutatorSO mutator in cleaningMutators)
+            {
+                mutator.SetUp(this, worldSize);
+            }
         }
 
         chunkManager = GetComponent<ChunkAndPlayerGenerator>();
@@ -65,16 +84,31 @@ public class WorldGenerator : MonoBehaviour
         yield return StartCoroutine(FillWithAir());
 
 
-        foreach (WorldMutatorSO mutator in worldMutators)
+        foreach (WorldMutatorSO mutator in biomeMutators)
         {
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+        }
+
+        foreach (WorldMutatorSO mutator in contentMutators)
+        {
+            yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+        }
+
+        if (!disableCleaningMutators)
+        {
+            foreach (WorldMutatorSO mutator in cleaningMutators)
+            {
+                yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+            }
         }
 
         GenerateTexture();
         worldMap.SetUp(worldSize, rawImage.texture);
 
-        if (testing)
+        if (isTesting)
         {
+            if (!showChanges) yield break;
+
             pixels = new PixelInstance[worldSize.x, worldSize.y];
             if (differentOffsets)
             {
@@ -82,6 +116,7 @@ public class WorldGenerator : MonoBehaviour
                 YOffset = Random.Range(-100000f, 100000f);
             }
             StartCoroutine(GenerateWorld());
+
             yield break;
         }
         else

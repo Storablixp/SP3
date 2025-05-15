@@ -251,15 +251,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9467f51c2c29f484091681ea8b5035d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldMutators:
-  - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
-  - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
-  - {fileID: 11400000, guid: eb48c3cf9a97a394b9fb1275b8d62401, type: 2}
-  - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
-  - {fileID: 11400000, guid: a4ae04cb8078bc7459d31a35f8693dc3, type: 2}
-  - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
-  testing: 1
+  biomeMutators: []
+  contentMutators: []
+  cleaningMutators: []
+  isTesting: 0
+  showChanges: 0
   differentOffsets: 0
+  disableCleaningMutators: 0
   defaultPixel: {fileID: 0}
   seed: 0
   worldSize: {x: 1024, y: 1024}
@@ -477,18 +475,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9467f51c2c29f484091681ea8b5035d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldMutators:
+  biomeMutators:
   - {fileID: 11400000, guid: 704cfe6781ebd5544a907aee8299ed0d, type: 2}
   - {fileID: 11400000, guid: c0bd34dfbfaa9024582a6f431fba87c2, type: 2}
   - {fileID: 11400000, guid: eb48c3cf9a97a394b9fb1275b8d62401, type: 2}
+  contentMutators:
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
   - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
   - {fileID: 11400000, guid: f172c1444a0662b4baf2fa67c1012169, type: 2}
   - {fileID: 11400000, guid: a187ea287bba8014b8137457f771f60b, type: 2}
+  cleaningMutators:
   - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
-  testing: 1
+  - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
+  isTesting: 1
+  showChanges: 1
   differentOffsets: 0
+  disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 4
   worldSize: {x: 512, y: 512}
