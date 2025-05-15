@@ -67,7 +67,7 @@ public class TemperatureMutator : WorldMutatorSO
                 desiredSize = Random.Range(temperatureAreaLookup[currentBiomeIndex].MinLength, temperatureAreaLookup[currentBiomeIndex].MaxLength + 1);
             }
 
-            pixelInstance.Biome = currentBiomeIndex;
+            pixelInstance.Temperature = currentBiomeIndex;
             pixels[arrayX, 0] = pixelInstance;
             currentSize++;
         }
@@ -80,7 +80,7 @@ public class TemperatureMutator : WorldMutatorSO
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
-                pixelInstance.Biome = pixels[arrayX, 0].Biome;
+                pixelInstance.Temperature = pixels[arrayX, 0].Temperature;
                 pixels[arrayX, arrayY] = pixelInstance;
 
             }

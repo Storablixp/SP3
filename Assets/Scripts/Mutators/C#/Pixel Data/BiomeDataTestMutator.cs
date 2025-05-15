@@ -39,23 +39,23 @@ public class BiomeDataTestMutator : WorldMutatorSO
 
     private void BiomeMap(int arrayX, int arrayY, PixelInstance pixel)
     {
-        if (pixel.Biome == 2)
+        if (pixel.Temperature == 2)
         {
             worldGenerator.ChangePixel(arrayX, arrayY, VeryHighValue);
         }
-        else if (pixel.Biome == 1)
+        else if (pixel.Temperature == 1)
         {
             worldGenerator.ChangePixel(arrayX, arrayY, HighValue);
         }
-        else if (pixel.Biome == 0)
+        else if (pixel.Temperature == 0)
         {
             worldGenerator.ChangePixel(arrayX, arrayY, ModerateValue);
         }
-        else if (pixel.Biome == -1)
+        else if (pixel.Temperature == -1)
         {
             worldGenerator.ChangePixel(arrayX, arrayY, LowValue);
         }
-        else if (pixel.Biome == -2)
+        else if (pixel.Temperature == -2)
         {
             worldGenerator.ChangePixel(arrayX, arrayY, VeryLowValue);
         }

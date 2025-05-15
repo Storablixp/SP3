@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System;
 
 [CreateAssetMenu(fileName = "Terrain Mutator", menuName = "Scriptable Objects/World Mutator/Cave System/Terrain")]
 public class TerrainMutator : WorldMutatorSO
@@ -8,12 +7,8 @@ public class TerrainMutator : WorldMutatorSO
     [Header("Pixels")]
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO dirtPixel;
-    [SerializeField] private PixelSO sandPixel;
-    [SerializeField] private PixelSO snowPixel;
     [SerializeField] private PixelSO deepStonePixel;
-    [SerializeField] private PixelSO hollowPixel;
     [SerializeField] private PixelSO stonePixel;
-    [SerializeField] private PixelSO lavaPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -30,9 +25,9 @@ public class TerrainMutator : WorldMutatorSO
                 {
                     pixelToAdd = airPixel;
                 }
-                else if (pixelInstance.Depth == 1 && pixelInstance.Pixel != hollowPixel)
+                else if (pixelInstance.Depth == 1 && pixelInstance.Pixel)
                 {
-                    pixelToAdd = CalculateSurfacePixel(pixelInstance);
+                    pixelToAdd = dirtPixel;
                 }
                 else if (pixelInstance.Depth == 0)
                 {
@@ -85,30 +80,4 @@ public class TerrainMutator : WorldMutatorSO
         yield return null;
     }
 
-    private PixelSO CalculateSurfacePixel(PixelInstance pixelInstance)
-    {
-        PixelSO pixelToAdd;
-        if (pixelInstance.Biome == 2)
-        {
-            pixelToAdd = deepStonePixel;
-        }
-        else if (pixelInstance.Biome == 1)
-        {
-            pixelToAdd = sandPixel;
-        }
-        else if (pixelInstance.Biome == 0)
-        {
-            pixelToAdd = dirtPixel;
-        }
-        else if (pixelInstance.Biome == -1)
-        {
-            pixelToAdd = snowPixel;
-        }
-        else
-        {
-            pixelToAdd = lavaPixel;
-        }
-
-        return pixelToAdd;
-    }
 }
