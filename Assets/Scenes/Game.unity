@@ -485,16 +485,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f172c1444a0662b4baf2fa67c1012169, type: 2}
   - {fileID: 11400000, guid: a187ea287bba8014b8137457f771f60b, type: 2}
   cleaningMutators:
-  - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
-  - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
   - {fileID: 11400000, guid: e802927fe7a0296498247e512ea89738, type: 2}
-  - {fileID: 11400000, guid: 60b177dce6d527a489dd998e6412aedf, type: 2}
+  - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
+  - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
   isTesting: 1
   showChanges: 0
   differentOffsets: 0
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  seed: 0
+  seed: 11
   worldSize: {x: 512, y: 512}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}
