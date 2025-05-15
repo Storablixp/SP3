@@ -26,7 +26,7 @@ public class SunlightMutator : WorldMutatorSO
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         float centerX = worldSize.x / 2f;
-        float centerY = worldSize.y;
+        float centerY = worldSize.y / 1.25f;
 
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {

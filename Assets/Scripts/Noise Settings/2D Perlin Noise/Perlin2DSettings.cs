@@ -7,7 +7,7 @@ public class Perlin2DSettings : ScriptableObject
     [Range(0.001f, 0.999f)] public float NoiseScale = 0.1f;
     [Range(1, 10)] public int Octaves = 3; //How many layers of nosie are stacked.
     public GlobalEasingFunctions.EasingType EasingFunctionType;
-    [Range(0.01f, 3f)] public float EasingFunctionModifier = 3;
+    [Range(0.01f, 10f)] public float EasingFunctionModifier = 3;
 
     [Header("Experimental")]
     [Range(0f, 1f)] public float Persistence = 0.5f; //A multiplier that determines how quickly the amplitudes diminish for each successive octave.

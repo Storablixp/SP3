@@ -259,7 +259,7 @@ MonoBehaviour:
   contentMutators: []
   isTesting: 1
   showChanges: 1
-  differentOffsets: 0
+  differentOffsets: 1
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 0
@@ -489,13 +489,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a187ea287bba8014b8137457f771f60b, type: 2}
   cleaningMutators:
   - {fileID: 11400000, guid: e802927fe7a0296498247e512ea89738, type: 2}
-  - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
   - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
   contentMutators:
   - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
   isTesting: 1
-  showChanges: 0
-  differentOffsets: 0
+  showChanges: 1
+  differentOffsets: 1
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 2

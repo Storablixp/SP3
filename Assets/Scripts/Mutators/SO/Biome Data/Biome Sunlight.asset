@@ -15,10 +15,10 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  veryWarm: 0.57
-  warm: 0.5
-  neutral: 0.45
-  cold: 0.3
+  veryWarm: 0.9
+  warm: 0.8
+  neutral: 0.6
+  cold: 0.4
   noiseSettings: {fileID: 11400000, guid: ad20d17c2a49ba54f8fe6a5df6b39e93, type: 2}
-  xModifer: 1
-  yModifer: 0.249
+  xModifer: 0.358
+  yModifer: 0.308
