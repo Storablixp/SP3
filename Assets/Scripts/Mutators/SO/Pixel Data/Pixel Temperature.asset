@@ -18,16 +18,16 @@ MonoBehaviour:
   temperatureAreas:
   - Name: Very Cold
     MinLength: 32
-    MaxLength: 64
+    MaxLength: 32
   - Name: Cold
     MinLength: 32
     MaxLength: 64
   - Name: Neutral
-    MinLength: 32
-    MaxLength: 64
+    MinLength: 64
+    MaxLength: 128
   - Name: Warm
     MinLength: 32
     MaxLength: 64
   - Name: Very Warm
     MinLength: 32
-    MaxLength: 64
+    MaxLength: 32

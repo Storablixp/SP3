@@ -11,6 +11,8 @@ public class TemperatureMutator : WorldMutatorSO
     private int currentSize = 0;
     private int desiredSize;
 
+    private int direction;
+
     public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
     {
         base.SetUp(worldGenerator, worldSize);
@@ -24,6 +26,8 @@ public class TemperatureMutator : WorldMutatorSO
             nr++;
         }
 
+        //currentBiomeIndex = -2;
+        //direction = 1;
         currentBiomeIndex = Random.Range(-2, 3);
         desiredSize = Random.Range(temperatureAreaLookup[currentBiomeIndex].MinLength, temperatureAreaLookup[currentBiomeIndex].MaxLength + 1);
     }
@@ -44,24 +48,43 @@ public class TemperatureMutator : WorldMutatorSO
 
             if (currentSize >= desiredSize)
             {
-                int nr = Random.Range(0, 2);
-
-                if (nr == 0)
-                {
-                    if (currentBiomeIndex - 1 < -2)
-                    {
-                        currentBiomeIndex = -1;
-                    }
-                    else currentBiomeIndex--;
-                }
-                else
+                if (direction == 1)
                 {
                     if (currentBiomeIndex + 1 > 2)
                     {
+                        direction = -1;
                         currentBiomeIndex = 1;
                     }
                     else currentBiomeIndex++;
                 }
+                else
+                {
+                    if (currentBiomeIndex - 1 < -2)
+                    {
+                        direction = 1;
+                        currentBiomeIndex = -1;
+                    }
+                    else currentBiomeIndex--;
+                }
+
+                //int nr = Random.Range(0, 2);
+
+                //if (nr == 0)
+                //{
+                //    if (currentBiomeIndex - 1 < -2)
+                //    {
+                //        currentBiomeIndex = -1;
+                //    }
+                //    else currentBiomeIndex--;
+                //}
+                //else
+                //{
+                //    if (currentBiomeIndex + 1 > 2)
+                //    {
+                //        currentBiomeIndex = 1;
+                //    }
+                //    else currentBiomeIndex++;
+                //}
 
                 currentSize = 0;
                 desiredSize = Random.Range(temperatureAreaLookup[currentBiomeIndex].MinLength, temperatureAreaLookup[currentBiomeIndex].MaxLength + 1);
