@@ -5,27 +5,30 @@ using UnityEngine.UI;
 
 public class WorldGenerator : MonoBehaviour
 {
-    [SerializeField] private PixelSO airPixel;
-    private PixelInstance[,] pixels;
-    public Dictionary<Vector2Int, TileInstance> Tiles = new();
+    [Header("World Mutators")]
+    [SerializeField] private List<WorldMutatorSO> worldMutators = new();
 
     [Header("Testing")]
     [SerializeField] private bool testing;
     [SerializeField] private bool differentOffsets;
 
     [Header("World Settings")]
+    [SerializeField] private PixelSO defaultPixel;
     [SerializeField] private int seed;
     [SerializeField] private Vector2Int worldSize;
-    [SerializeField] private List<WorldMutatorSO> worldMutators = new();
     private ChunkAndPlayerGenerator chunkManager;
     public static float XOffset;
     public static float YOffset;
 
-    [Header("Visualization")]
+    [Header("Components")]
     [SerializeField] private GameObject worldCanvasPrefab;
+    [SerializeField] private WorldMap worldMap;
+
+    [Header("Other Variables")]
+    private PixelInstance[,] pixels;
+    public Dictionary<Vector2Int, TileInstance> Tiles = new();
     private Texture2D worldTexture;
     private RawImage rawImage;
-    [SerializeField] private WorldMap worldMap;
 
     private void OnValidate()
     {
@@ -144,7 +147,7 @@ public class WorldGenerator : MonoBehaviour
         pixels[xCoord, yCoord].Pixel = pixel;
     }
 
-    public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord].Pixel = airPixel;
+    public void TurnToAir(int xCoord, int yCoord) => pixels[xCoord, yCoord].Pixel = defaultPixel;
 
     public PixelInstance[,] RetrievePixels() => pixels;
 
