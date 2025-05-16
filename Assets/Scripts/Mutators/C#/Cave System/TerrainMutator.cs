@@ -8,6 +8,12 @@ public class TerrainMutator : WorldMutatorSO
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO dirtPixel;
     [SerializeField] private PixelSO deepStonePixel;
+    [SerializeField] private PixelSO hollowPixel;
+    [SerializeField] private PixelSO icePixel;
+    [SerializeField] private PixelSO volcanicRock;
+    [SerializeField] private PixelSO sandPixel;
+    [SerializeField] private PixelSO scorchedRockPixel;
+    [SerializeField] private PixelSO snowPixel;
     [SerializeField] private PixelSO stonePixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
@@ -27,11 +33,12 @@ public class TerrainMutator : WorldMutatorSO
                 }
                 else if (pixelInstance.Depth == 1 && pixelInstance.Pixel)
                 {
-                    pixelToAdd = dirtPixel;
+                    pixelToAdd = DetermineSurfacePixels(arrayX, arrayY, pixelInstance);
                 }
                 else if (pixelInstance.Depth == 0)
                 {
                     pixelToAdd = stonePixel;
+                    //pixelToAdd = DetermineCavePixels(arrayX, arrayY, pixelInstance);
                 }
                 else
                 {
@@ -41,43 +48,54 @@ public class TerrainMutator : WorldMutatorSO
                 worldGenerator.ChangePixel(arrayX, arrayY, pixelToAdd);
             }
         }
-
-        //bool foundDirt = false;
-        //for (int arrayY = startY; arrayY >= endY; arrayY--)
-        //{
-        //    for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
-        //    {
-        //        PixelInstance pixelInstance = pixels[arrayX, arrayY];
-
-        //        if (pixelInstance.Depth != 1)
-        //        {
-        //            continue;
-        //        }
-
-        //        if (pixelInstance.Pixel == dirtPixel)
-        //        {
-        //            if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, sandPixel))
-        //            {
-        //                foundDirt = true;
-        //            }
-        //        }
-
-        //        if (pixelInstance.Pixel == sandPixel)
-        //        {
-        //            if (!foundDirt)
-        //            {
-        //                worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
-        //            }
-        //        }
-        //    }
-
-        //    if (foundDirt)
-        //    {
-        //        break;
-        //    }
-        //}
-
         yield return null;
     }
 
+    private PixelSO DetermineSurfacePixels(int arrayX, int arrayY, PixelInstance pixelInstance)
+    {
+        if (pixelInstance.Temperature == 2)
+        {
+            return volcanicRock;
+        }
+        else if (pixelInstance.Temperature == 1)
+        {
+            return sandPixel;
+        }
+        else if (pixelInstance.Temperature == 0)
+        {
+            return dirtPixel;
+        }
+        else if (pixelInstance.Temperature == -1)
+        {
+            return snowPixel;
+        }
+        else
+        {
+            return icePixel;
+        }
+    }
+
+    private PixelSO DetermineCavePixels(int arrayX, int arrayY, PixelInstance pixelInstance)
+    {
+        if (pixelInstance.Temperature == 2)
+        {
+            return volcanicRock;
+        }
+        else if (pixelInstance.Temperature == 1)
+        {
+            return stonePixel;
+        }
+        else if (pixelInstance.Temperature == 0)
+        {
+            return stonePixel;
+        }
+        else if (pixelInstance.Temperature == -1)
+        {
+            return snowPixel;
+        }
+        else
+        {
+            return icePixel;
+        }
+    }
 }

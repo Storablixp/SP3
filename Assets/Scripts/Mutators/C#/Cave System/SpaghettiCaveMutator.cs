@@ -32,7 +32,22 @@ public class SpaghettiCaveMutator : WorldMutatorSO
                             worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
                         }
                     }
+                    //else if (pixelInstance.Depth < 1)
+                    //{
+                    //    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
 
+                    //    if (noiseValue > (0 + thickness) && noiseValue < (1 - thickness))
+                    //    {
+                    //        if (pixelInstance.Temperature == 2)
+                    //        {
+                    //            if (arrayY + 1 < worldSize.y)
+                    //            {
+                    //                worldGenerator.ChangePixel(arrayX, arrayY, pixels[arrayX, arrayY + 1].Pixel);
+                    //            }
+                    //        }
+                    //        else worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
+                    //    }
+                    //}
                 }
             }
         }
