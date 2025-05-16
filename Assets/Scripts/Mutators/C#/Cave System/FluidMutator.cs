@@ -130,8 +130,11 @@ public class FluidMutator : WorldMutatorSO
                     }
                     else
                     {
-                        PixelSO pixelBeneath = pixels[arrayX, arrayY + 1].Pixel;
-                        worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
+                        if (arrayY + 1 < startY)
+                        {
+                            PixelSO pixelBeneath = pixels[arrayX, arrayY + 1].Pixel;
+                            worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
+                        }
                     }
                 }
             }

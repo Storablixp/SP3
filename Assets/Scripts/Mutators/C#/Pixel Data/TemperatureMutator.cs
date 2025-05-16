@@ -19,6 +19,7 @@ public class TemperatureMutator : WorldMutatorSO
         base.SetUp(worldGenerator, worldSize);
         temperatures.Clear();
 
+        //Fortsätt här.
         while (true)
         {
             int currentValue = 0;
@@ -44,6 +45,7 @@ public class TemperatureMutator : WorldMutatorSO
                     {
                         temperatures.Add(-1);
                     }
+                    else temperatures.Add(0);
                 }
 
                 else
