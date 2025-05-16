@@ -34,18 +34,19 @@ public class FluidMutator : WorldMutatorSO
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
                 if (pixelInstance.Pixel == AirPixel) continue;
 
-                if (pixelInstance.Depth == 1)
+                if (pixelInstance.Wetness >= 1)
                 {
-                    if (pixelInstance.Wetness >= 1)
+                    if (pixelInstance.Depth <= 1 && pixelInstance.Depth > -2)
                     {
-                        if (pixelInstance.Temperature >= 2)
-                        {
-                            if (pixelInstance.Wetness >= 2)
-                            {
-                                worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
-                            }
-                        }
-                        else if (pixelInstance.Temperature == 1)
+
+                        //if (pixelInstance.Temperature >= 2)
+                        //{
+                        //    if (pixelInstance.Wetness >= 2)
+                        //    {
+                        //        worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
+                        //    }
+                        //}
+                        if (pixelInstance.Temperature == 1)
                         {
                             if (pixelInstance.Wetness >= 2)
                             {
@@ -56,21 +57,23 @@ public class FluidMutator : WorldMutatorSO
                         {
                             worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
                         }
-                        else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+                        else if (pixelInstance.Temperature == 0) worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
 
                         if (pixelInstance.Temperature == 0)
                         {
-                            if (!GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.down, worldGenerator, HollowPixel))
+                            if (pixelInstance.Wetness == 1 && pixelInstance.Depth == 1)
                             {
-                                if (pixelInstance.Wetness >= 2)
-                                {
-                                    worldGenerator.ChangePixel(arrayX, arrayY, ClayPixel);
-                                }
-                                else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
-
+                                worldGenerator.ChangePixel(arrayX, arrayY, ClayPixel);
                             }
+                            else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
                         }
 
+
+                    }
+
+                    else
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
                     }
                 }
             }
