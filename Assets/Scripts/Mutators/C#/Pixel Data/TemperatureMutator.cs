@@ -111,7 +111,7 @@ public class TemperatureMutator : WorldMutatorSO
     }
 
     [System.Serializable]
-    public class TemperatureArea
+    public struct TemperatureArea
     {
         public string Name;
         [Range(32, 256)] public int MinLength;

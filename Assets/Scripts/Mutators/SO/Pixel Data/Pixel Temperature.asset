@@ -31,4 +31,3 @@ MonoBehaviour:
   - Name: Very Warm
     MinLength: 32
     MaxLength: 32
-  noiseSettings: {fileID: 11400000, guid: 9389e5b33003db841a4ca089bd0c5225, type: 2}
