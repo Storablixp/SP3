@@ -23,11 +23,14 @@ public class CheeseCaveMutator : WorldMutatorSO
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
                 if (pixelInstance.Pixel != airPixel)
                 {
-                    float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
-
-                    if (noiseValue > holeThreshold)
+                    if (pixelInstance.Temperature == 0 || pixelInstance.Depth < 1)
                     {
-                        worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
+                        float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseScettings);
+
+                        if (noiseValue > holeThreshold)
+                        {
+                            worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
+                        }
                     }
                 }
             }
