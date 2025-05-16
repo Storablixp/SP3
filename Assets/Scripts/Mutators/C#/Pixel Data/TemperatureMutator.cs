@@ -1,106 +1,36 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "Temperature Mutator", menuName = "Scriptable Objects/World Mutator/Pixel Data/Temperature")]
 public class TemperatureMutator : WorldMutatorSO
 {
-    [SerializeField] private List<TemperatureArea> temperatureAreas = new();
-    private Dictionary<int, TemperatureArea> temperatureAreaLookup = new();
-    private int currentBiomeIndex;
-    private int currentSize = 0;
-    private int desiredSize;
-    private int direction;
    
     [Header("Settings")]
     [SerializeField] private Perlin2DSettings noiseSettings;
     [SerializeField, Range(0, 100)] private int heightVariationStrength = 50;
-    
-    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
-    {
-        base.SetUp(worldGenerator, worldSize);
-        currentSize = 0;
-        temperatureAreaLookup.Clear();
-
-        int nr = -2;
-        for (int i = 0; i < temperatureAreas.Count; i++)
-        {
-            temperatureAreaLookup.Add(nr, temperatureAreas[i]);
-            nr++;
-        }
-
-        //currentBiomeIndex = -2;
-        //direction = 1;
-        currentBiomeIndex = Random.Range(-2, 3);
-        desiredSize = Random.Range(temperatureAreaLookup[currentBiomeIndex].MinLength, temperatureAreaLookup[currentBiomeIndex].MaxLength + 1);
-    }
+    [SerializeField] private List<int> temperatureList = new();
+    private int startIndex;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
-        AssignValuesToFirstRow(worldSize, pixels);
-        AssignValuesToOtherRows(worldSize, pixels);
-        yield return null;
-    }
-
-    private void AssignValuesToFirstRow(Vector2Int worldSize, PixelInstance[,] pixels)
-    {
-        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        
+        startIndex = Random.Range(0, temperatureList.Count);
+        List<int> newTemperatureList = new List<int>();
+        
+        for (int i = startIndex; i < temperatureList.Count; i++)
         {
-            PixelInstance pixelInstance = pixels[arrayX, 0];
-
-            if (currentSize >= desiredSize)
-            {
-                if (direction == 1)
-                {
-                    if (currentBiomeIndex + 1 > 2)
-                    {
-                        direction = -1;
-                        currentBiomeIndex = 1;
-                    }
-                    else currentBiomeIndex++;
-                }
-                else
-                {
-                    if (currentBiomeIndex - 1 < -2)
-                    {
-                        direction = 1;
-                        currentBiomeIndex = -1;
-                    }
-                    else currentBiomeIndex--;
-                }
-
-                //int nr = Random.Range(0, 2);
-
-                //if (nr == 0)
-                //{
-                //    if (currentBiomeIndex - 1 < -2)
-                //    {
-                //        currentBiomeIndex = -1;
-                //    }
-                //    else currentBiomeIndex--;
-                //}
-                //else
-                //{
-                //    if (currentBiomeIndex + 1 > 2)
-                //    {
-                //        currentBiomeIndex = 1;
-                //    }
-                //    else currentBiomeIndex++;
-                //}
-
-                currentSize = 0;
-                desiredSize = Random.Range(temperatureAreaLookup[currentBiomeIndex].MinLength, temperatureAreaLookup[currentBiomeIndex].MaxLength + 1);
-            }
-
-            pixelInstance.Temperature = currentBiomeIndex;
-            pixels[arrayX, 0] = pixelInstance;
-            currentSize++;
+            newTemperatureList.Add(temperatureList[i]);
         }
-    }
+        for (int i = 0; i < startIndex; i++)
+        {
+            newTemperatureList.Add(temperatureList[i]);
+        }
 
-    private void AssignValuesToOtherRows(Vector2Int worldSize, PixelInstance[,] pixels)
-    {
+        float biomeSize = 1f / newTemperatureList.Count;
+
         for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         {
             for (int arrayY = startY; arrayY >= endY; arrayY--)
@@ -110,37 +40,33 @@ public class TemperatureMutator : WorldMutatorSO
                 float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
                 float xMod = arrayX + (noiseValue - 0.5f) * 2f * heightVariationStrength;
 
-                if (xMod > worldSize.x * 0.8f)
+                bool didBreak = false;
+                for (int i = 1; i < newTemperatureList.Count; i++)
                 {
-                    pixelInstance.Temperature = 2;
+                    if (xMod > worldSize.x * (1 - (biomeSize * i)))
+                    {
+                        pixelInstance.Temperature = newTemperatureList[i - 1];
+                        didBreak = true;
+                        break;
+                    }
                 }
-                else if (xMod > worldSize.x * 0.6)
+
+                if (!didBreak)
                 {
-                    pixelInstance.Temperature = 1;
-                }
-                else if (xMod > worldSize.x * 0.4)
-                {
-                    pixelInstance.Temperature = 0;
-                }
-                else if (xMod > worldSize.x * 0.2)
-                {
-                    pixelInstance.Temperature = -1;
-                }
-                else
-                {
-                    pixelInstance.Temperature = -2;
+                    pixelInstance.Temperature = newTemperatureList[newTemperatureList.Count - 1];
                 }
 
                 pixels[arrayX, arrayY] = pixelInstance;
             }
         }
+        yield return null;
     }
 
-    [System.Serializable]
-    public struct TemperatureArea
-    {
-        public string Name;
-        [Range(32, 256)] public int MinLength;
-        [Range(32, 256)] public int MaxLength;
-    }
+    //[System.Serializable]
+    //public struct TemperatureArea
+    //{
+    //    public string Name;
+    //    [Range(32, 256)] public int MinLength;
+    //    [Range(32, 256)] public int MaxLength;
+    //}
 }

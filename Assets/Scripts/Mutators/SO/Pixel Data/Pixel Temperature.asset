@@ -15,19 +15,6 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  temperatureAreas:
-  - Name: Very Cold
-    MinLength: 32
-    MaxLength: 32
-  - Name: Cold
-    MinLength: 32
-    MaxLength: 64
-  - Name: Neutral
-    MinLength: 64
-    MaxLength: 128
-  - Name: Warm
-    MinLength: 32
-    MaxLength: 64
-  - Name: Very Warm
-    MinLength: 32
-    MaxLength: 32
+  noiseSettings: {fileID: 11400000, guid: 717b601fcf4c652478fb6a3020414e95, type: 2}
+  heightVariationStrength: 32
+  temperatureList: 00000000000000000100000001000000020000000100000000000000000000000000000000000000fffffffffffffffffeffffffffffffff0000000000000000
