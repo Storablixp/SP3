@@ -15,8 +15,8 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  veryWet: 0.617
-  wet: 0.567
+  veryWet: 0.7
+  wet: 0.6
   neutral: 0.4
   dry: 0.2
   noiseSettings: {fileID: 11400000, guid: 10f7c021ea9409944a5ab8e4373d34da, type: 2}
