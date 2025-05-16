@@ -10,9 +10,12 @@ public class TemperatureMutator : WorldMutatorSO
     private int currentBiomeIndex;
     private int currentSize = 0;
     private int desiredSize;
-
     private int direction;
-
+   
+    [Header("Settings")]
+    [SerializeField] private Perlin2DSettings noiseSettings;
+    [SerializeField, Range(0, 100)] private int heightVariationStrength = 50;
+    
     public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
     {
         base.SetUp(worldGenerator, worldSize);
@@ -103,9 +106,32 @@ public class TemperatureMutator : WorldMutatorSO
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
-                pixelInstance.Temperature = pixels[arrayX, 0].Temperature;
-                pixels[arrayX, arrayY] = pixelInstance;
 
+                float noiseValue = GlobalPerlinFunctions.SumPerlinNoise2D(arrayX, arrayY, WorldGenerator.XOffset, WorldGenerator.YOffset, noiseSettings);
+                float xMod = arrayX + (noiseValue - 0.5f) * 2f * heightVariationStrength;
+
+                if (xMod > worldSize.x * 0.8f)
+                {
+                    pixelInstance.Temperature = 2;
+                }
+                else if (xMod > worldSize.x * 0.6)
+                {
+                    pixelInstance.Temperature = 1;
+                }
+                else if (xMod > worldSize.x * 0.4)
+                {
+                    pixelInstance.Temperature = 0;
+                }
+                else if (xMod > worldSize.x * 0.2)
+                {
+                    pixelInstance.Temperature = -1;
+                }
+                else
+                {
+                    pixelInstance.Temperature = -2;
+                }
+
+                pixels[arrayX, arrayY] = pixelInstance;
             }
         }
     }
