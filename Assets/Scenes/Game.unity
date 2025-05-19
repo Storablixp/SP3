@@ -498,7 +498,7 @@ MonoBehaviour:
   isTesting: 1
   showChanges: 0
   differentOffsets: 0
-  disableCleaningMutators: 0
+  disableCleaningMutators: 1
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 7
   worldSize: {x: 512, y: 512}
