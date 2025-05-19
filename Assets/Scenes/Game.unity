@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &189650682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &349933713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,11 +488,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b866820e45899104eb42b485c4327152, type: 2}
   - {fileID: 11400000, guid: f172c1444a0662b4baf2fa67c1012169, type: 2}
   - {fileID: 11400000, guid: a187ea287bba8014b8137457f771f60b, type: 2}
+  - {fileID: 11400000, guid: 3ee5b41cb25ca1b47ae393ed05c8c038, type: 2}
   cleaningMutators:
   - {fileID: 11400000, guid: 268b0d145c7ea7b43900b29d2033f6e4, type: 2}
   - {fileID: 11400000, guid: e802927fe7a0296498247e512ea89738, type: 2}
   - {fileID: 11400000, guid: 430e595b2d503bd488431e8fd5f92bc9, type: 2}
   - {fileID: 11400000, guid: 0dbcd8cbb02624c45bcf393278201064, type: 2}
+  - {fileID: 11400000, guid: 58adbac82a902214e9fc6401d8ba2958, type: 2}
   contentMutators:
   - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
   - {fileID: 11400000, guid: cb5c66e433b1a6a48be6acb7f0c7a343, type: 2}
@@ -501,7 +503,7 @@ MonoBehaviour:
   differentOffsets: 0
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  seed: 3
+  seed: 123
   worldSize: {x: 512, y: 512}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}
@@ -597,6 +599,8 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f3c76466db5bbcb478d50c4a14dedf5e, type: 2}
   - pixel: {fileID: 11400000, guid: 3aec0065c6df1a340acc596acbf7ff21, type: 2}
     tile: {fileID: 11400000, guid: 407f7760705d1184c9e9d3bc5d7effd1, type: 2}
+  - pixel: {fileID: 11400000, guid: 7ddaaa47b2e4a4a4e80a61b4165fa4ae, type: 2}
+    tile: {fileID: 11400000, guid: 3d4445054e79a1e44ba144331e81b224, type: 2}
 --- !u!61 &349933717
 BoxCollider2D:
   m_ObjectHideFlags: 0

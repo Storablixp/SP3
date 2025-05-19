@@ -5,11 +5,14 @@ using System.Collections;
 public class LavaNeighborMutator : WorldMutatorSO
 {
     [Header("Pixels")]
+    [SerializeField] private PixelSO deepstonePixel;
     [SerializeField] private PixelSO hollowPixel;
     [SerializeField] private PixelSO lavaPixel;
+    [SerializeField] private PixelSO obsidianPixel;
     [SerializeField] private PixelSO sandPixel;
     [SerializeField] private PixelSO stonePixel;
     [SerializeField] private PixelSO scorchedRockPixel;
+    [SerializeField] private PixelSO waterPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -20,14 +23,28 @@ public class LavaNeighborMutator : WorldMutatorSO
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 PixelInstance pixel = pixels[arrayX, arrayY];
-                
+
                 if (pixel.Pixel == lavaPixel)
                 {
-                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, sandPixel, 0) ||
-                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, stonePixel, 0) ||
-                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, hollowPixel, 0))
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, sandPixel, 1) ||
+                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, stonePixel, 1))
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, scorchedRockPixel);
+                    }
+                    else if(GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, hollowPixel, 1))
+                    {
+                        if(pixel.Depth <= 0)
+                        {
+                            worldGenerator.ChangePixel(arrayX, arrayY, deepstonePixel);
+                        }
+                        else worldGenerator.ChangePixel(arrayX, arrayY, scorchedRockPixel);
+                    }
+                }
+                if (pixel.Pixel == waterPixel)
+                {
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, lavaPixel, 0))
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, obsidianPixel);
                     }
                 }
             }

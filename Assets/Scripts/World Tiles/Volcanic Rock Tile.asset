@@ -15,4 +15,4 @@ MonoBehaviour:
   Unbreakable: 0
   CurrentSprite: {fileID: 21300000, guid: 60ae6afc60d3928478c1c00462c23a02, type: 3}
   Color: {r: 0.6392157, g: 0.38431373, b: 0.3764706, a: 1}
-  ColliderType: 0
+  ColliderType: 2
