@@ -15,6 +15,7 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
+  treeObj: {fileID: 1502722807972549493, guid: 98066877efa4aae418f842b4a4592bfc, type: 3}
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   dirtPixel: {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
   grassPixel: {fileID: 11400000, guid: eb25c22980f91b740801d5628ac92daa, type: 2}

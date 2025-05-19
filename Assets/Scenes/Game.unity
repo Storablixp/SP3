@@ -495,6 +495,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0dbcd8cbb02624c45bcf393278201064, type: 2}
   contentMutators:
   - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
+  - {fileID: 11400000, guid: cb5c66e433b1a6a48be6acb7f0c7a343, type: 2}
   isTesting: 1
   showChanges: 0
   differentOffsets: 0
@@ -586,6 +587,16 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 5de2fbd3f6b2be14194ee5ece5dad703, type: 2}
   - pixel: {fileID: 11400000, guid: fc4f5eaa32ddccc4f97ab01dd235f6aa, type: 2}
     tile: {fileID: 11400000, guid: b0533927a3dfddb499fc23c806400a24, type: 2}
+  - pixel: {fileID: 11400000, guid: 7787fd704fa3fbe46b7c4ced446fbdec, type: 2}
+    tile: {fileID: 11400000, guid: 38e2dd8ff5b88f946bf134c87fc74562, type: 2}
+  - pixel: {fileID: 11400000, guid: f50254cf2780e444fbed47c3ce5ae496, type: 2}
+    tile: {fileID: 11400000, guid: ea9a836d99e22ea4d8b96fa662aa4388, type: 2}
+  - pixel: {fileID: 11400000, guid: 1b4f25601237970448f3e605f1ec7ae7, type: 2}
+    tile: {fileID: 11400000, guid: 6587506f3178fc94a9df3340ef1c17f8, type: 2}
+  - pixel: {fileID: 11400000, guid: 0707a077fa3916941aee0c34ad380cd3, type: 2}
+    tile: {fileID: 11400000, guid: f3c76466db5bbcb478d50c4a14dedf5e, type: 2}
+  - pixel: {fileID: 11400000, guid: 3aec0065c6df1a340acc596acbf7ff21, type: 2}
+    tile: {fileID: 11400000, guid: 407f7760705d1184c9e9d3bc5d7effd1, type: 2}
 --- !u!61 &349933717
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7734245ea3ee2e4eabb8f8c540fd4d4, type: 3}
+  m_Name: Tree Mutator
+  m_EditorClassIdentifier: 
+  IncludeAllTiles: 1
+  StartingDepthLevel: 0
+  EndDepthLevel: 0
+  treePlacementRate: 16
+  grassPixel: {fileID: 11400000, guid: eb25c22980f91b740801d5628ac92daa, type: 2}
+  woodPixel: {fileID: 11400000, guid: 3aec0065c6df1a340acc596acbf7ff21, type: 2}
+  leaf_1Pixel: {fileID: 11400000, guid: 7787fd704fa3fbe46b7c4ced446fbdec, type: 2}
+  leaf_2Pixel: {fileID: 11400000, guid: f50254cf2780e444fbed47c3ce5ae496, type: 2}
+  leaf_3Pixel: {fileID: 11400000, guid: 1b4f25601237970448f3e605f1ec7ae7, type: 2}
+  leaf_4Pixel: {fileID: 11400000, guid: 0707a077fa3916941aee0c34ad380cd3, type: 2}
