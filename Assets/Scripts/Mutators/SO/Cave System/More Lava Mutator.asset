@@ -17,9 +17,9 @@ MonoBehaviour:
   EndDepthLevel: 0
   ReplacementThreshold: 3
   MooreNeighborhoodSize: 2
-  Iterations: 2
-  veinThreshold: 25
-  veinLength: {x: 15, y: 25}
+  Iterations: 3
+  veinThreshold: 10
+  veinLength: {x: 20, y: 50}
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   lavaPixel: {fileID: 11400000, guid: ba67130d78051bb489c59c3fecf63700, type: 2}
   volcanicRockPixel: {fileID: 11400000, guid: 604d64678660bae438a2fe3fd80d7656, type: 2}

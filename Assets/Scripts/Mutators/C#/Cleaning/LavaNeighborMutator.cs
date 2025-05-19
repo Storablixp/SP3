@@ -33,7 +33,7 @@ public class LavaNeighborMutator : WorldMutatorSO
                     }
                     else if(GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, hollowPixel, 1))
                     {
-                        if(pixel.Depth <= 0)
+                        if(pixel.Depth < 0)
                         {
                             worldGenerator.ChangePixel(arrayX, arrayY, deepstonePixel);
                         }

@@ -52,13 +52,14 @@ public class MoreLavaMutator : WorldMutatorSO
     {
         int placementCooldown = 0;
 
-        for (int x = -1; x <= 1; x++)
+        for (int arrayY = centerRock.y; arrayY >= endY; arrayY--)
         {
-            for (int arrayY = centerRock.y; arrayY >= endY; arrayY--)
-            {
-                PixelInstance pixelInstance = pixels[centerRock.x, arrayY];
 
-                if (pixelInstance.Pixel == volcanicRockPixel)
+            PixelInstance pixelInstance = pixels[centerRock.x, arrayY];
+
+            if (pixelInstance.Pixel == volcanicRockPixel)
+            {
+                for (int x = -1; x <= 1; x++)
                 {
                     worldGenerator.ChangePixel(centerRock.x + x, arrayY, lavaPixel);
 
@@ -78,78 +79,79 @@ public class MoreLavaMutator : WorldMutatorSO
                             worldGenerator.ChangePixel(centerRock.x + x + (i * direction), arrayY + i, lavaPixel);
                         }
 
-                        placementCooldown = 32;
+                        placementCooldown = 50;
                     }
 
-                    placementCooldown--;
                 }
-                else break;
+                placementCooldown--;
             }
+            else break;
         }
     }
-    private void BiggerVeins(Vector2Int worldSize, PixelInstance[,] pixels)
+
+private void BiggerVeins(Vector2Int worldSize, PixelInstance[,] pixels)
+{
+    PixelInstance[,] currentPixels = pixels;
+    PixelInstance[,] updatedPixels = new PixelInstance[worldSize.x, worldSize.y];
+
+    for (int i = 0; i < Iterations; i++)
     {
-        PixelInstance[,] currentPixels = pixels;
-        PixelInstance[,] updatedPixels = new PixelInstance[worldSize.x, worldSize.y];
-
-        for (int i = 0; i < Iterations; i++)
+        // First pass: calculate new states
+        for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
-            // First pass: calculate new states
-            for (int arrayY = startY; arrayY >= endY; arrayY--)
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
-                {
-                    PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
-                    if (pixel == null || pixel == lavaPixel) continue;
+                PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
+                if (pixel == null || pixel == lavaPixel) continue;
 
-                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, lavaPixel, ReplacementThreshold))
-                    {
-                        updatedPixels[arrayX, arrayY].Pixel = lavaPixel;
-                    }
-                    else
-                    {
-                        updatedPixels[arrayX, arrayY].Pixel = pixel;
-                    }
+                if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, lavaPixel, ReplacementThreshold))
+                {
+                    updatedPixels[arrayX, arrayY].Pixel = lavaPixel;
                 }
-            }
-
-            // Second pass: apply changes
-            for (int arrayY = startY; arrayY >= endY; arrayY--)
-            {
-                for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+                else
                 {
-                    PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
-                    if (pixel == null) continue;
-
-                    PixelSO newPixel = updatedPixels[arrayX, arrayY].Pixel;
-                    if (newPixel == null) continue;
-
-                    pixel = newPixel;
-
-                    worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
+                    updatedPixels[arrayX, arrayY].Pixel = pixel;
                 }
             }
         }
-    }
 
-    private void CleanUpSpills(Vector2Int worldSize, PixelInstance[,] pixels)
+        // Second pass: apply changes
+        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        {
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            {
+                PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
+                if (pixel == null) continue;
+
+                PixelSO newPixel = updatedPixels[arrayX, arrayY].Pixel;
+                if (newPixel == null) continue;
+
+                pixel = newPixel;
+
+                worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
+            }
+        }
+    }
+}
+
+private void CleanUpSpills(Vector2Int worldSize, PixelInstance[,] pixels)
+{
+    for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
     {
-        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        for (int arrayY = endY; arrayY < startY; arrayY++)
         {
-            for (int arrayY = endY; arrayY < startY; arrayY++)
-            {
-                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+            PixelInstance pixelInstance = pixels[arrayX, arrayY];
 
-                if (pixelInstance.Pixel == lavaPixel)
+            if (pixelInstance.Pixel == lavaPixel)
+            {
+                if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, airPixel) ||
+                    GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, airPixel) ||
+                    GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
                 {
-                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, airPixel) ||
-                        GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, airPixel) ||
-                        GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
-                    }
+                    worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
                 }
             }
         }
     }
+}
 }
