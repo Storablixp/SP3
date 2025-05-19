@@ -45,7 +45,7 @@ public class FluidMutator : WorldMutatorSO
             }
         }
 
-        MoveUpIce(worldSize, pixels);
+        MoveIce(worldSize, pixels);
         yield return null;
     }
 
@@ -62,10 +62,10 @@ public class FluidMutator : WorldMutatorSO
             //}
             if (pixelInstance.Temperature == 1)
             {
-                if (pixelInstance.Wetness >= 2 && pixelInstance.Depth == 1)
-                {
-                    worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
-                }
+                //if (pixelInstance.Wetness >= 2 && pixelInstance.Depth == 1)
+                //{
+                //    worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
+                //}
             }
             else if (pixelInstance.Temperature == -2)
             {
@@ -88,7 +88,6 @@ public class FluidMutator : WorldMutatorSO
             worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
         }
     }
-
     private void AddDryPixels(int arrayX, int arrayY, PixelInstance pixelInstance)
     {
         if (pixelInstance.Wetness == -2)
@@ -99,8 +98,7 @@ public class FluidMutator : WorldMutatorSO
             }
         }
     }
-
-    private void MoveUpIce(Vector2Int worldSize, PixelInstance[,] pixels)
+    private void MoveIce(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         {
@@ -135,4 +133,5 @@ public class FluidMutator : WorldMutatorSO
             }
         }
     }
+   
 }
