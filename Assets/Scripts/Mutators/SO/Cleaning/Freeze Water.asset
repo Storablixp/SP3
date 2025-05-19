@@ -18,5 +18,3 @@ MonoBehaviour:
   IcePixel: {fileID: 11400000, guid: 3f0819ad19b644e47bd27eb7cf67a3ea, type: 2}
   SnowPixel: {fileID: 11400000, guid: b8eeb08d9e459e44f9f321eed1656d42, type: 2}
   WaterPixel: {fileID: 11400000, guid: 37823c6f62e244c4294199690223e120, type: 2}
-  snowThreshold: 2
-  iceThreshold: 0

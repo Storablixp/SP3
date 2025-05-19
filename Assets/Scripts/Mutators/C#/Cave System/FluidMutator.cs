@@ -45,7 +45,7 @@ public class FluidMutator : WorldMutatorSO
             }
         }
 
-        MoveUp(worldSize, pixels);
+        MoveUpIce(worldSize, pixels);
         yield return null;
     }
 
@@ -63,12 +63,12 @@ public class FluidMutator : WorldMutatorSO
             //}
             if (pixelInstance.Temperature == 1)
             {
-                if (pixelInstance.Wetness >= 2)
+                if (pixelInstance.Wetness >= 2 && pixelInstance.Depth == 1)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
                 }
             }
-            else if (pixelInstance.Temperature <= -1)
+            else if (pixelInstance.Temperature == -2)
             {
                 worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
             }
@@ -80,9 +80,8 @@ public class FluidMutator : WorldMutatorSO
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, ClayPixel);
                 }
-                else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+                else if (pixelInstance.Wetness == 2) worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
             }
-
 
         }
 
@@ -91,19 +90,19 @@ public class FluidMutator : WorldMutatorSO
             worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
         }
     }
-    
+
     private void AddDryPixels(int arrayX, int arrayY, PixelInstance pixelInstance)
     {
         if (pixelInstance.Wetness == -2)
         {
-            if (pixelInstance.Temperature == 0)
+            if (pixelInstance.Temperature >= 0 && pixelInstance.Temperature < 2 && pixelInstance.Depth > -1)
             {
                 worldGenerator.ChangePixel(arrayX, arrayY, SandPixel);
             }
         }
     }
 
-    private void MoveUp(Vector2Int worldSize, PixelInstance[,] pixels)
+    private void MoveUpIce(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         {
@@ -111,41 +110,21 @@ public class FluidMutator : WorldMutatorSO
             {
                 PixelInstance pixel = pixels[arrayX, arrayY];
 
-                List<PixelPair> pair = new List<PixelPair>();
-                pair.Add(new PixelPair
-                {
-                    liquidPixel = QuicksandPixel,
-                    terrainPixel = SandPixel
-                });
-                //pair.Add(new PixelPair
-                //{
-                //    liquidPixel = WaterPixel,
-                //    terrainPixel = DirtPixel
-                //});
-                pair.Add(new PixelPair
-                {
-                    liquidPixel = IcePixel,
-                    terrainPixel = SnowPixel
-                });
-
-                for (int i = 0; i < pair.Count; i++)
-                {
-
-                    if (pixel.Pixel != pair[i].liquidPixel ||
+                    if (pixel.Pixel != IcePixel ||
                    GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, AirPixel)) continue;
 
-                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, pair[i].terrainPixel))
+                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, SnowPixel))
                     {
                         int y = 0;
                         do
                         {
-                            worldGenerator.ChangePixel(arrayX, arrayY + 1 + y, pair[i].liquidPixel);
-                            worldGenerator.ChangePixel(arrayX, arrayY + y, pair[i].terrainPixel);
+                            worldGenerator.ChangePixel(arrayX, arrayY + 1 + y, IcePixel);
+                            worldGenerator.ChangePixel(arrayX, arrayY + y, SnowPixel);
                             y++;
                         }
 
 
-                        while (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY + y, Vector2Int.up, worldGenerator, pair[i].terrainPixel));
+                        while (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY + y, Vector2Int.up, worldGenerator, SnowPixel));
                     }
                     else
                     {
@@ -155,14 +134,7 @@ public class FluidMutator : WorldMutatorSO
                             worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
                         }
                     }
-                }
             }
         }
-    }
-
-    private class PixelPair
-    {
-        public PixelSO liquidPixel;
-        public PixelSO terrainPixel;
     }
 }

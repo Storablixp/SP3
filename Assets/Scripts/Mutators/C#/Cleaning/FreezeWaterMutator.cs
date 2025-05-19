@@ -9,10 +9,6 @@ public class FreezeWaterMutator : WorldMutatorSO
     [SerializeField] private PixelSO SnowPixel;
     [SerializeField] private PixelSO WaterPixel;
 
-    [Header("Settings")]
-    [Header("Thresholds")]
-    [SerializeField, Range(0, 25)] private uint snowThreshold = 2;
-    [SerializeField, Range(0, 25)] private uint iceThreshold = 2;
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
@@ -26,8 +22,8 @@ public class FreezeWaterMutator : WorldMutatorSO
 
                 if (pixel.Pixel == WaterPixel)
                 {
-                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, IcePixel, iceThreshold) ||
-                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, SnowPixel, snowThreshold))
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, IcePixel, 0) ||
+                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, SnowPixel, 0))
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
                     }
