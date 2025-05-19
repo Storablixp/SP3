@@ -10,11 +10,11 @@ public class TerrainMutator : WorldMutatorSO
     [SerializeField] private PixelSO deepStonePixel;
     [SerializeField] private PixelSO hollowPixel;
     [SerializeField] private PixelSO icePixel;
-    [SerializeField] private PixelSO lavaPixel;
     [SerializeField] private PixelSO sandPixel;
     [SerializeField] private PixelSO scorchedRockPixel;
     [SerializeField] private PixelSO snowPixel;
     [SerializeField] private PixelSO stonePixel;
+    [SerializeField] private PixelSO volcanicRock;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -55,7 +55,7 @@ public class TerrainMutator : WorldMutatorSO
     {
         if (pixelInstance.Temperature == 2)
         {
-            return lavaPixel;
+            return volcanicRock;
         }
         else if (pixelInstance.Temperature == 1)
         {
@@ -79,7 +79,7 @@ public class TerrainMutator : WorldMutatorSO
     {
         if (pixelInstance.Temperature == 2)
         {
-            return lavaPixel;
+            return volcanicRock;
         }
         else if (pixelInstance.Temperature == 1)
         {
