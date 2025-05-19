@@ -36,45 +36,11 @@ public class FluidMutator : WorldMutatorSO
 
                 if (pixelInstance.Wetness >= 1)
                 {
-                    if (pixelInstance.Depth <= 1 && pixelInstance.Depth > -2)
-                    {
-
-                        //if (pixelInstance.Temperature >= 2)
-                        //{
-                        //    if (pixelInstance.Wetness >= 2)
-                        //    {
-                        //        worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
-                        //    }
-                        //}
-                        if (pixelInstance.Temperature == 1)
-                        {
-                            if (pixelInstance.Wetness >= 2)
-                            {
-                                worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
-                            }
-                        }
-                        else if (pixelInstance.Temperature <= -1)
-                        {
-                            worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
-                        }
-                        else if (pixelInstance.Temperature == 0) worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
-
-                        if (pixelInstance.Temperature == 0)
-                        {
-                            if (pixelInstance.Wetness == 1 && pixelInstance.Depth == 1)
-                            {
-                                worldGenerator.ChangePixel(arrayX, arrayY, ClayPixel);
-                            }
-                            else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
-                        }
-
-
-                    }
-
-                    else
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
-                    }
+                    AddWetPixels(arrayX, arrayY, pixelInstance);
+                }
+                else
+                {
+                    AddDryPixels(arrayX, arrayY, pixelInstance);
                 }
             }
         }
@@ -83,6 +49,59 @@ public class FluidMutator : WorldMutatorSO
         yield return null;
     }
 
+    private void AddWetPixels(int arrayX, int arrayY, PixelInstance pixelInstance)
+    {
+        if (pixelInstance.Depth <= 1 && pixelInstance.Depth > -2)
+        {
+
+            //if (pixelInstance.Temperature >= 2)
+            //{
+            //    if (pixelInstance.Wetness >= 2)
+            //    {
+            //        worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
+            //    }
+            //}
+            if (pixelInstance.Temperature == 1)
+            {
+                if (pixelInstance.Wetness >= 2)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
+                }
+            }
+            else if (pixelInstance.Temperature <= -1)
+            {
+                worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
+            }
+            else if (pixelInstance.Temperature == 0) worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+
+            if (pixelInstance.Temperature == 0)
+            {
+                if (pixelInstance.Wetness == 1 && pixelInstance.Depth == 1)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, ClayPixel);
+                }
+                else worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+            }
+
+
+        }
+
+        else
+        {
+            worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
+        }
+    }
+    
+    private void AddDryPixels(int arrayX, int arrayY, PixelInstance pixelInstance)
+    {
+        if (pixelInstance.Wetness == -2)
+        {
+            if (pixelInstance.Temperature == 0)
+            {
+                worldGenerator.ChangePixel(arrayX, arrayY, SandPixel);
+            }
+        }
+    }
 
     private void MoveUp(Vector2Int worldSize, PixelInstance[,] pixels)
     {
