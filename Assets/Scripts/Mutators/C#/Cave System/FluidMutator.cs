@@ -32,7 +32,7 @@ public class FluidMutator : WorldMutatorSO
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
-                if (pixelInstance.Pixel == AirPixel) continue;
+                if (pixelInstance.Pixel == AirPixel || pixelInstance.Pixel == HollowPixel) continue;
 
                 if (pixelInstance.Wetness >= 1)
                 {
@@ -53,7 +53,6 @@ public class FluidMutator : WorldMutatorSO
     {
         if (pixelInstance.Depth <= 1 && pixelInstance.Depth > -2)
         {
-
             //if (pixelInstance.Temperature >= 2)
             //{
             //    if (pixelInstance.Wetness >= 2)
@@ -82,7 +81,6 @@ public class FluidMutator : WorldMutatorSO
                 }
                 else if (pixelInstance.Wetness == 2) worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
             }
-
         }
 
         else
