@@ -8,11 +8,13 @@ public class FluidMutator : WorldMutatorSO
     [Header("Other Pixels")]
     [SerializeField] private PixelSO AirPixel;
     [SerializeField] private PixelSO HollowPixel;
+    [SerializeField] private PixelSO DeepStonePixel;
 
     [Header("Terrain Pixels")]
     [SerializeField] private PixelSO DirtPixel;
     [SerializeField] private PixelSO SandPixel;
     [SerializeField] private PixelSO SnowPixel;
+    [SerializeField] private PixelSO VolcanicPixel;
 
 
     [Header("Fluid Pixels")]
@@ -60,14 +62,14 @@ public class FluidMutator : WorldMutatorSO
             //        worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
             //    }
             //}
-            if (pixelInstance.Temperature == 1)
-            {
-                //if (pixelInstance.Wetness >= 2 && pixelInstance.Depth == 1)
-                //{
-                //    worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
-                //}
-            }
-            else if (pixelInstance.Temperature == -2)
+            //if (pixelInstance.Temperature == 1)
+            //{
+            //    //if (pixelInstance.Wetness >= 2 && pixelInstance.Depth == 1)
+            //    //{
+            //    //    worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
+            //    //}
+            //}
+            if (pixelInstance.Temperature == -2)
             {
                 worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
             }
@@ -133,5 +135,5 @@ public class FluidMutator : WorldMutatorSO
             }
         }
     }
-   
+ 
 }
