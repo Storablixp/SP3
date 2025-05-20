@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936c068e21df0db478141ebb406f8b74, type: 3}
   m_Name: Leaf_1 Tile
   m_EditorClassIdentifier: 
+  AirWhenRemoved: 1
   Unbreakable: 0
   CurrentSprite: {fileID: 21300000, guid: 60ae6afc60d3928478c1c00462c23a02, type: 3}
   Color: {r: 0.21176471, g: 0.5254902, b: 0.4, a: 1}
