@@ -165,6 +165,7 @@ public class ChunkAndPlayerGenerator : MonoBehaviour
         cameraBox.offset = new Vector2(0, 8);
         confiner2D.BoundingShape2D = cameraBox;
 
+        playerTrans.GetComponentInChildren<PlayerMovement>().SetUp(worldGenerator, worldSize);
         playerTrans.GetComponentInChildren<AreaRemover>().SetUp(worldGenerator, worldSize, worldMap);
         worldMap.SetPlayer(playerTrans);
         yield return null;

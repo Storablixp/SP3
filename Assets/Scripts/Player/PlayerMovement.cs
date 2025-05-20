@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private WorldTile waterTile;
+    [Header("Player Status")]
     [SerializeField] private float speed = 5f;
+    private Vector2Int worldSize;
+    private bool isGrounded;
+    private bool isInWater;
+    private float dirX;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 10.0f;
@@ -11,26 +15,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 1f;
     [SerializeField] private Transform groundCheckTrans;
     [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded;
-    private bool isInWater;
 
+    [Header("Components")]
     [SerializeField] private Transform bodyTrans;
+    [SerializeField] private WorldTile waterTile;
     private ChunkInstance currentChunk;
     private WorldTile currentTile;
-    private float dirX;
     private Rigidbody2D rb;
     private WorldGenerator worldGenerator;
 
-    private void Awake()
-    {
-        worldGenerator = FindAnyObjectByType<WorldGenerator>();
-    }
 
-    void Start()
+    public void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
     {
+        this.worldGenerator = worldGenerator;
+        this.worldSize = worldSize;
         rb = GetComponent<Rigidbody2D>();
-    }
 
+    }
     void Update()
     {
         dirX = Input.GetAxisRaw("Horizontal");
@@ -71,8 +72,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3Int tilePos = currentChunk.Tilemap.WorldToCell(transform.position);
 
-        int pixelX = tilePos.x + worldGenerator.worldSize.x / 2;
-        int pixelY = tilePos.y + worldGenerator.worldSize.y / 2;
+        int pixelX = tilePos.x + worldSize.x / 2;
+        int pixelY = tilePos.y + worldSize.y / 2;
         Vector2Int lookupKey = new Vector2Int(pixelX, pixelY);
 
         if (worldGenerator.Tiles.TryGetValue(lookupKey, out TileInstance tileInstance))
@@ -87,10 +88,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
-   
+
     private void FixedUpdate()
     {
-       rb.linearVelocity = new Vector2(dirX * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(dirX * speed, rb.linearVelocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

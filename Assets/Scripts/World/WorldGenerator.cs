@@ -21,7 +21,7 @@ public class WorldGenerator : MonoBehaviour
     [Header("World Settings")]
     [SerializeField] private PixelSO defaultPixel;
     [SerializeField] private int seed;
-    [SerializeField] public Vector2Int worldSize;
+    [SerializeField] private Vector2Int worldSize;
     private ChunkAndPlayerGenerator chunkManager;
     public static float XOffset;
     public static float YOffset;
