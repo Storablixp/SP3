@@ -16,7 +16,6 @@ public class MoreLavaMutator : WorldMutatorSO
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO lavaPixel;
     [SerializeField] private PixelSO volcanicRockPixel;
-    [SerializeField] private PixelSO scorchedRockPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -165,7 +164,7 @@ public class MoreLavaMutator : WorldMutatorSO
                     else if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, airPixel) ||
                         GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, airPixel))
                     {
-                        worldGenerator.ChangePixel(arrayX, arrayY, scorchedRockPixel);
+                        worldGenerator.ChangePixel(arrayX, arrayY, volcanicRockPixel);
                     }
                 }
             }

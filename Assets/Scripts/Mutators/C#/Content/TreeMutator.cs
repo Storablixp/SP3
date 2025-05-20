@@ -8,6 +8,7 @@ public class TreeMutator : WorldMutatorSO
     [SerializeField, Min(0)] private int treePlacementRate = 16;
 
     [Header("Other Pixels")]
+    [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO grassPixel;
 
     [Header("Tree Pixels")]
@@ -17,7 +18,6 @@ public class TreeMutator : WorldMutatorSO
     [SerializeField] private PixelSO leaf_3Pixel;
     [SerializeField] private PixelSO leaf_4Pixel;
 
-
     private int pixelsBeforeCanPlace;
 
     public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
@@ -25,27 +25,35 @@ public class TreeMutator : WorldMutatorSO
         base.SetUp(worldGenerator, worldSize);
         pixelsBeforeCanPlace = Random.Range(0, treePlacementRate - 1);
     }
+
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
-
         for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         {
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
+
                 PixelInstance pixel = pixels[arrayX, arrayY];
 
-                if (pixel.Pixel == grassPixel && pixelsBeforeCanPlace <= 0)
+                if (pixel.Pixel == grassPixel)
                 {
-                    if(GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, grassPixel) &&
-                        GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, grassPixel))
+                    if (pixelsBeforeCanPlace <= 0)
                     {
-                        PlaceTree(arrayX - 5, arrayY + 1);
-                        pixelsBeforeCanPlace = treePlacementRate;
+                        if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, grassPixel) &&
+                            GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, grassPixel))
+                        {
+                            PlaceTree(arrayX - 5, arrayY + 1);
+                            pixelsBeforeCanPlace = treePlacementRate;
+                        }
+                    }
+
+                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
+                    {
+                        pixelsBeforeCanPlace--;
                     }
                 }
             }
-            pixelsBeforeCanPlace--;
         }
         yield return null;
     }

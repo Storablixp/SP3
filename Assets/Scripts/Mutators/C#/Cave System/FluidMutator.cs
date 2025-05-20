@@ -69,7 +69,7 @@ public class FluidMutator : WorldMutatorSO
             //    //    worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
             //    //}
             //}
-            else if (pixelInstance.Temperature == -2)
+            if (pixelInstance.Temperature == -2)
             {
                 worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
             }

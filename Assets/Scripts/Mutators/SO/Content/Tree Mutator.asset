@@ -16,6 +16,7 @@ MonoBehaviour:
   StartingDepthLevel: 0
   EndDepthLevel: 0
   treePlacementRate: 16
+  airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   grassPixel: {fileID: 11400000, guid: eb25c22980f91b740801d5628ac92daa, type: 2}
   woodPixel: {fileID: 11400000, guid: 3aec0065c6df1a340acc596acbf7ff21, type: 2}
   leaf_1Pixel: {fileID: 11400000, guid: 7787fd704fa3fbe46b7c4ced446fbdec, type: 2}

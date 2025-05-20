@@ -27,7 +27,7 @@ public class SurfaceMutator : WorldMutatorSO
                     }
                     else
                     {
-                        worldGenerator.ChangePixel(arrayX, arrayY, hollowPixel);
+                        worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
                     }
                 }
                 else if (pixels[arrayX, arrayY].Pixel == dirtPixel && arrayY == startY)

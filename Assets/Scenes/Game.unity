@@ -498,6 +498,7 @@ MonoBehaviour:
   contentMutators:
   - {fileID: 11400000, guid: a07c4671b8fdb7140991ad056243aabb, type: 2}
   - {fileID: 11400000, guid: cb5c66e433b1a6a48be6acb7f0c7a343, type: 2}
+  - {fileID: 11400000, guid: 009b87b2beee7394b8ae89c5559ba8a6, type: 2}
   isTesting: 1
   showChanges: 0
   differentOffsets: 0
@@ -601,6 +602,12 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 407f7760705d1184c9e9d3bc5d7effd1, type: 2}
   - pixel: {fileID: 11400000, guid: 7ddaaa47b2e4a4a4e80a61b4165fa4ae, type: 2}
     tile: {fileID: 11400000, guid: 3d4445054e79a1e44ba144331e81b224, type: 2}
+  - pixel: {fileID: 11400000, guid: 3af690310abc8b5449fc06814c43c219, type: 2}
+    tile: {fileID: 11400000, guid: aa9b1b19dc9c5224ea3dcbe3b0022b29, type: 2}
+  - pixel: {fileID: 11400000, guid: d3baf9040208c4e40a856571865daf62, type: 2}
+    tile: {fileID: 11400000, guid: 08c6a89af0bd6e1478c4d7374e114065, type: 2}
+  - pixel: {fileID: 11400000, guid: c41edeb233f52534fae74f511c36b4f6, type: 2}
+    tile: {fileID: 11400000, guid: b242ae43ab83d9d449492ffd4df1e46b, type: 2}
 --- !u!61 &349933717
 BoxCollider2D:
   m_ObjectHideFlags: 0
