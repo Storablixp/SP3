@@ -12,6 +12,7 @@ public class LavaNeighborMutator : WorldMutatorSO
     [SerializeField] private PixelSO sandPixel;
     [SerializeField] private PixelSO stonePixel;
     [SerializeField] private PixelSO scorchedRockPixel;
+    [SerializeField] private PixelSO volcanicRockPixel;
     [SerializeField] private PixelSO waterPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
@@ -26,16 +27,20 @@ public class LavaNeighborMutator : WorldMutatorSO
 
                 if (pixel.Pixel == lavaPixel)
                 {
-                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, sandPixel, 1) ||
-                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, stonePixel, 1))
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, sandPixel, 0) ||
+                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, stonePixel, 0))
                     {
-                        worldGenerator.ChangePixel(arrayX, arrayY, scorchedRockPixel);
-                    }
-                    else if(GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, hollowPixel, 1))
-                    {
-                        if(pixel.Depth < 0)
+                        if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, volcanicRockPixel, 1))
                         {
-                            worldGenerator.ChangePixel(arrayX, arrayY, deepstonePixel);
+                            worldGenerator.ChangePixel(arrayX, arrayY, lavaPixel);
+                        }
+                        else worldGenerator.ChangePixel(arrayX, arrayY, scorchedRockPixel);
+                    }
+                    else if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, hollowPixel, 0))
+                    {
+                        if (pixel.Depth < 0)
+                        {
+                            worldGenerator.ChangePixel(arrayX, arrayY, obsidianPixel);
                         }
                         else worldGenerator.ChangePixel(arrayX, arrayY, scorchedRockPixel);
                     }

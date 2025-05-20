@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wetness Noise
   m_EditorClassIdentifier: 
   NoiseScale: 0.026
-  Octaves: 2
-  EasingFunctionType: 1
+  Octaves: 1
+  EasingFunctionType: 0
   EasingFunctionModifier: 1
   Persistence: 0.5
   Lacunarity: 2
