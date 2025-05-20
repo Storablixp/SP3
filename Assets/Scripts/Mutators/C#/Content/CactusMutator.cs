@@ -5,7 +5,6 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "Cactus Mutator", menuName = "Scriptable Objects/World Mutator/Content/Cactus")]
 public class CactusMutator : WorldMutatorSO
 {
-
     [Header("Settings")]
     [SerializeField, Min(0)] private int cactusPlacementRate = 16;
     [SerializeField] private TextAsset textFile;
