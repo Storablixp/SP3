@@ -16,13 +16,15 @@ public class MoreLavaMutator : WorldMutatorSO
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO lavaPixel;
     [SerializeField] private PixelSO volcanicRockPixel;
+    [SerializeField] private PixelSO scorchedRockPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         Vector2Int centerRock = FindCenterVolcanicRock(worldSize, pixels);
-        CreateVeins(pixels, centerRock);
+        int lowestY = CreateVeins(pixels, centerRock);
+        AddLavaPoolAtBottom(worldSize, pixels, centerRock, lowestY);
         BiggerVeins(worldSize, pixels);
         CleanUpSpills(worldSize, pixels);
         yield return null;
@@ -48,16 +50,16 @@ public class MoreLavaMutator : WorldMutatorSO
 
         return volcanicRocksAtTheTop[volcanicRocksAtTheTop.Count / 2];
     }
-    private void CreateVeins(PixelInstance[,] pixels, Vector2Int centerRock)
+    private int CreateVeins(PixelInstance[,] pixels, Vector2Int centerRock)
     {
+        int lowestY = 0;
         int placementCooldown = 0;
 
         for (int arrayY = centerRock.y; arrayY >= endY; arrayY--)
         {
-
             PixelInstance pixelInstance = pixels[centerRock.x, arrayY];
 
-            if (pixelInstance.Pixel == volcanicRockPixel)
+            if (pixelInstance.Pixel == volcanicRockPixel || pixelInstance.Pixel == lavaPixel)
             {
                 for (int x = -1; x <= 1; x++)
                 {
@@ -83,75 +85,90 @@ public class MoreLavaMutator : WorldMutatorSO
                     }
 
                 }
+                lowestY = arrayY;
                 placementCooldown--;
             }
             else break;
         }
+
+        return lowestY;
     }
-
-private void BiggerVeins(Vector2Int worldSize, PixelInstance[,] pixels)
-{
-    PixelInstance[,] currentPixels = pixels;
-    PixelInstance[,] updatedPixels = new PixelInstance[worldSize.x, worldSize.y];
-
-    for (int i = 0; i < Iterations; i++)
+    private void AddLavaPoolAtBottom(Vector2Int worldSize, PixelInstance[,] pixels, Vector2Int centerRock, int lowestY)
     {
-        // First pass: calculate new states
-        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        for (int y = -10; y < 20; y++)
         {
-            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            for (int x = -25; x <= 25; x++)
             {
-                PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
-                if (pixel == null || pixel == lavaPixel) continue;
-
-                if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, lavaPixel, ReplacementThreshold))
-                {
-                    updatedPixels[arrayX, arrayY].Pixel = lavaPixel;
-                }
-                else
-                {
-                    updatedPixels[arrayX, arrayY].Pixel = pixel;
-                }
-            }
-        }
-
-        // Second pass: apply changes
-        for (int arrayY = startY; arrayY >= endY; arrayY--)
-        {
-            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
-            {
-                PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
-                if (pixel == null) continue;
-
-                PixelSO newPixel = updatedPixels[arrayX, arrayY].Pixel;
-                if (newPixel == null) continue;
-
-                pixel = newPixel;
-
-                worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
+                worldGenerator.ChangePixel(centerRock.x + x, lowestY + y, lavaPixel);
             }
         }
     }
-}
-
-private void CleanUpSpills(Vector2Int worldSize, PixelInstance[,] pixels)
-{
-    for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+    private void BiggerVeins(Vector2Int worldSize, PixelInstance[,] pixels)
     {
-        for (int arrayY = endY; arrayY < startY; arrayY++)
-        {
-            PixelInstance pixelInstance = pixels[arrayX, arrayY];
+        PixelInstance[,] currentPixels = pixels;
+        PixelInstance[,] updatedPixels = new PixelInstance[worldSize.x, worldSize.y];
 
-            if (pixelInstance.Pixel == lavaPixel)
+        for (int i = 0; i < Iterations; i++)
+        {
+            // First pass: calculate new states
+            for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
-                if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, airPixel) ||
-                    GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, airPixel) ||
-                    GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
+                for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
+                    PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
+                    if (pixel == null || pixel == lavaPixel) continue;
+
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, MooreNeighborhoodSize, lavaPixel, ReplacementThreshold))
+                    {
+                        updatedPixels[arrayX, arrayY].Pixel = lavaPixel;
+                    }
+                    else
+                    {
+                        updatedPixels[arrayX, arrayY].Pixel = pixel;
+                    }
+                }
+            }
+
+            // Second pass: apply changes
+            for (int arrayY = startY; arrayY >= endY; arrayY--)
+            {
+                for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+                {
+                    PixelSO pixel = currentPixels[arrayX, arrayY].Pixel;
+                    if (pixel == null || pixel == lavaPixel) continue;
+
+                    PixelSO newPixel = updatedPixels[arrayX, arrayY].Pixel;
+                    if (newPixel == null) continue;
+
+                    pixel = newPixel;
+
+                    worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
                 }
             }
         }
     }
-}
+
+    private void CleanUpSpills(Vector2Int worldSize, PixelInstance[,] pixels)
+    {
+        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        {
+            for (int arrayY = endY; arrayY < startY; arrayY++)
+            {
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                if (pixelInstance.Pixel == lavaPixel)
+                {
+                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
+                    }
+                    else if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, airPixel) ||
+                        GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, airPixel))
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, scorchedRockPixel);
+                    }
+                }
+            }
+        }
+    }
 }

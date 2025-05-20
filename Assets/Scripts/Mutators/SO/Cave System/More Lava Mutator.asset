@@ -23,3 +23,4 @@ MonoBehaviour:
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   lavaPixel: {fileID: 11400000, guid: ba67130d78051bb489c59c3fecf63700, type: 2}
   volcanicRockPixel: {fileID: 11400000, guid: 604d64678660bae438a2fe3fd80d7656, type: 2}
+  scorchedRockPixel: {fileID: 11400000, guid: fc4f5eaa32ddccc4f97ab01dd235f6aa, type: 2}

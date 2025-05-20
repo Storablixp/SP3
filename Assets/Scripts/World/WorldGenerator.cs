@@ -184,7 +184,8 @@ public class WorldGenerator : MonoBehaviour
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
     {
-        if (pixels[xCoord, yCoord].Pixel == null || pixels[xCoord, yCoord].Pixel.Unchangeable) //Return if pixel can't be changed.
+        
+        if (!IsInBounds(xCoord, yCoord) || pixels[xCoord, yCoord].Pixel == null || pixels[xCoord, yCoord].Pixel.Unchangeable) //Return if pixel can't be changed.
         {
             return;
         }

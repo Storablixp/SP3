@@ -55,13 +55,13 @@ public class FluidMutator : WorldMutatorSO
     {
         if (pixelInstance.Depth <= 1 && pixelInstance.Depth > -2)
         {
-            //if (pixelInstance.Temperature >= 2)
-            //{
-            //    if (pixelInstance.Wetness >= 2)
-            //    {
-            //        worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
-            //    }
-            //}
+            if (pixelInstance.Temperature >= 2)
+            {
+                if (pixelInstance.Wetness >= 2)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, LavaPixel);
+                }
+            }
             //if (pixelInstance.Temperature == 1)
             //{
             //    //if (pixelInstance.Wetness >= 2 && pixelInstance.Depth == 1)
@@ -69,7 +69,7 @@ public class FluidMutator : WorldMutatorSO
             //    //    worldGenerator.ChangePixel(arrayX, arrayY, QuicksandPixel);
             //    //}
             //}
-            if (pixelInstance.Temperature == -2)
+            else if (pixelInstance.Temperature == -2)
             {
                 worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
             }
