@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85d3b79b70e6c4438ae46559e9a2be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldMap: {fileID: 0}
   hollowTile: {fileID: 11400000, guid: 7a0e41f16b36e074a8dee7efd3a38b18, type: 2}
   removeArea: {fileID: 5771274587383877973}
   digParticle: {fileID: 1279120283845368153, guid: 71f4f83b9a8a03e48aea51380c6f8846, type: 3}
@@ -644,6 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119728577bd63f244a19bd1d99b5218b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterTile: {fileID: 11400000, guid: 30c567881c920ec43ab70079fb1c7b6e, type: 2}
   speed: 5
   jumpForce: 10
   groundCheckDistance: 0.2

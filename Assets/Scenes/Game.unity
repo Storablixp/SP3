@@ -485,8 +485,8 @@ MonoBehaviour:
   caveSystemMutators:
   - {fileID: 11400000, guid: dbc933503cec28a4eb843a975a97fb07, type: 2}
   - {fileID: 11400000, guid: b22d1f7befaea3f4fa7de02f8c87a6a9, type: 2}
-  - {fileID: 11400000, guid: b866820e45899104eb42b485c4327152, type: 2}
   - {fileID: 11400000, guid: f172c1444a0662b4baf2fa67c1012169, type: 2}
+  - {fileID: 11400000, guid: b866820e45899104eb42b485c4327152, type: 2}
   - {fileID: 11400000, guid: a187ea287bba8014b8137457f771f60b, type: 2}
   - {fileID: 11400000, guid: 3ee5b41cb25ca1b47ae393ed05c8c038, type: 2}
   cleaningMutators:
@@ -500,10 +500,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb5c66e433b1a6a48be6acb7f0c7a343, type: 2}
   - {fileID: 11400000, guid: 009b87b2beee7394b8ae89c5559ba8a6, type: 2}
   - {fileID: 11400000, guid: e250112f1f94d1c49818caa2a642fa2b, type: 2}
-  isTesting: 1
+  isTesting: 0
   showChanges: 0
   differentOffsets: 0
-  disableCleaningMutators: 0
+  disableCleaningMutators: 1
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   seed: 123
   worldSize: {x: 512, y: 512}
