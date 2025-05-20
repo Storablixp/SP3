@@ -16,6 +16,7 @@ public class MoreLavaMutator : WorldMutatorSO
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO lavaPixel;
     [SerializeField] private PixelSO volcanicRockPixel;
+    [SerializeField] private PixelSO deepStonePixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -58,7 +59,7 @@ public class MoreLavaMutator : WorldMutatorSO
         {
             PixelInstance pixelInstance = pixels[centerRock.x, arrayY];
 
-            if (pixelInstance.Pixel == volcanicRockPixel || pixelInstance.Pixel == lavaPixel)
+            if (pixelInstance.Pixel != deepStonePixel)
             {
                 for (int x = -1; x <= 1; x++)
                 {
