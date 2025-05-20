@@ -55,7 +55,7 @@ public class FluidMutator : WorldMutatorSO
     {
         if (pixelInstance.Depth <= 1 && pixelInstance.Depth > -2)
         {
-            if (pixelInstance.Temperature >= 2)
+            if (pixelInstance.Temperature >= 2 && pixelInstance.Depth <= 0)
             {
                 if (pixelInstance.Wetness >= 2)
                 {

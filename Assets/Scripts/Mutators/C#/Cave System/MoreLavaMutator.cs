@@ -64,6 +64,8 @@ public class MoreLavaMutator : WorldMutatorSO
                 {
                     worldGenerator.ChangePixel(centerRock.x + x, arrayY, lavaPixel);
 
+                    if (pixelInstance.Depth >= 1) continue;
+
                     if (veinThreshold >= Random.Range(0, 101) && placementCooldown <= 0 && arrayY < centerRock.y - 32)
                     {
                         int direction = Random.Range(-1, 2);
@@ -157,11 +159,8 @@ public class MoreLavaMutator : WorldMutatorSO
 
                 if (pixelInstance.Pixel == lavaPixel)
                 {
-                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
-                    }
-                    else if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, airPixel) ||
+                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel) ||
+                        GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.left, worldGenerator, airPixel) ||
                         GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, airPixel))
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, volcanicRockPixel);

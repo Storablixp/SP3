@@ -73,18 +73,13 @@ public class CactusMutator : WorldMutatorSO
                 switch (line[x])
                 {
                     case '1':
-                        if (Random.Range(0, 10) > 0)
-                        {
-                            worldGenerator.ChangePixel(arrayX + x, arrayY - y, cactus_1Pixel);
-                        }
-                        else worldGenerator.ChangePixel(arrayX + x, arrayY - y, cactus_3Pixel);
+                        worldGenerator.ChangePixel(arrayX + x, arrayY - y, cactus_1Pixel);
                         break;
                     case '2':
-                        if (Random.Range(0, 10) > 0)
-                        {
-                            worldGenerator.ChangePixel(arrayX + x, arrayY - y, cactus_2Pixel);
-                        }
-                        else worldGenerator.ChangePixel(arrayX + x, arrayY - y, cactus_3Pixel);
+                        worldGenerator.ChangePixel(arrayX + x, arrayY - y, cactus_2Pixel);
+                        break;
+                    case '3':
+                        worldGenerator.ChangePixel(arrayX + x, arrayY - y, cactus_3Pixel);
                         break;
                 }
             }
