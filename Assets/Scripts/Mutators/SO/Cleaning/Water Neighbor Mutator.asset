@@ -15,6 +15,12 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  moorseSize: 1
-  threshold: 1
-  waterPixel: {fileID: 11400000, guid: 37823c6f62e244c4294199690223e120, type: 2}
+  iterations: 2
+  moorseSize: 2
+  threshold: 10
+  pixelsToCheckFor:
+  - {fileID: 11400000, guid: ed960c5253adca347893d851aeab4d08, type: 2}
+  - {fileID: 11400000, guid: b8eeb08d9e459e44f9f321eed1656d42, type: 2}
+  - {fileID: 11400000, guid: 37823c6f62e244c4294199690223e120, type: 2}
+  - {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}
+  - {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}

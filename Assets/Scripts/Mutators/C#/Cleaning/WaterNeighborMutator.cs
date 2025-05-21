@@ -5,30 +5,37 @@ using System.Collections;
 public class WaterNeighborMutator : WorldMutatorSO
 {
     [Header("Settings")]
+    public int iterations = 1;
     public int moorseSize = 1;
     public uint threshold = 1;
 
 
     [Header("Pixels")]
-    [SerializeField] private PixelSO waterPixel;
+    [SerializeField] private PixelSO[] pixelsToCheckFor;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
-        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        for (int i = 0; i < iterations; i++)
         {
-            for (int arrayY = startY; arrayY >= endY; arrayY--)
+            foreach (var pixel in pixelsToCheckFor)
             {
-                PixelInstance pixelInstance = pixels[arrayX, arrayY];
-
-                if (pixelInstance.Pixel == waterPixel)
+                for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
-                    if (!GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, moorseSize, waterPixel, threshold))
+                    for (int arrayY = startY; arrayY >= endY; arrayY--)
                     {
-                        if(worldGenerator.IsInBounds(arrayX, arrayY - 1))
+                        PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                        if (pixelInstance.Pixel == pixel)
                         {
-                            worldGenerator.ChangePixel(arrayX, arrayY, pixels[arrayX, arrayY -1].Pixel);
+                            if (!GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, moorseSize, pixel, threshold))
+                            {
+                                if (worldGenerator.IsInBounds(arrayX, arrayY + 1))
+                                {
+                                    worldGenerator.ChangePixel(arrayX, arrayY, pixels[arrayX, arrayY + 1].Pixel);
+                                }
+                            }
                         }
                     }
                 }
