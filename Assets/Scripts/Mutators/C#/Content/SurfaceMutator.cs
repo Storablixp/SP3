@@ -34,6 +34,12 @@ public class SurfaceMutator : WorldMutatorSO
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
                 }
+
+                if(pixels[arrayX, arrayY].Pixel == hollowPixel &&
+                    GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, airPixel, 3))
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
+                }
             }
         }
 

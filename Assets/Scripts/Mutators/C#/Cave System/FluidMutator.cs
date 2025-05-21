@@ -80,7 +80,7 @@ public class FluidMutator : WorldMutatorSO
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
                 }
-                else if(pixelInstance.Depth <= 1 && pixelInstance.Wetness >= 2)
+                else if(pixelInstance.Depth < 1 && pixelInstance.Wetness >= 2)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
 

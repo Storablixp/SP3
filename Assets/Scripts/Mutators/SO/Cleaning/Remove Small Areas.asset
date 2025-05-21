@@ -27,6 +27,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 972d9ae8f4fe0cc4ab39143628ad7e7f, type: 2}
   - {fileID: 11400000, guid: e72b86e442bb1104597935edb64a8e88, type: 2}
   - {fileID: 11400000, guid: 3f0819ad19b644e47bd27eb7cf67a3ea, type: 2}
-  - {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
   - {fileID: 11400000, guid: ba67130d78051bb489c59c3fecf63700, type: 2}
+  - {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
+  - {fileID: 11400000, guid: 604d64678660bae438a2fe3fd80d7656, type: 2}
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}

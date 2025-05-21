@@ -7,6 +7,8 @@ public class SpaghettiCaveMutator : WorldMutatorSO
     [Header("Pixels")]
     [SerializeField] private PixelSO hollowPixel;
     [SerializeField] private PixelSO airPixel;
+    [SerializeField] private PixelSO waterPixel;
+    [SerializeField] private PixelSO sandPixel;
 
     [Header("Settings")]
     [SerializeField, Range(0.4f, 0.5f)] private float thickness;
@@ -21,7 +23,7 @@ public class SpaghettiCaveMutator : WorldMutatorSO
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
                 PixelInstance pixelInstance = pixels[arrayX, arrayY];
-                if (pixelInstance.Pixel != airPixel)
+                if (pixelInstance.Pixel != airPixel && pixelInstance.Pixel != sandPixel && pixelInstance.Pixel != waterPixel)
                 {
                     if (pixelInstance.Temperature == 0)
                     {

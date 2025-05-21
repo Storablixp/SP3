@@ -506,7 +506,7 @@ MonoBehaviour:
   differentOffsets: 0
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  seed: -2
+  seed: 13
   worldSize: {x: 512, y: 512}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}
