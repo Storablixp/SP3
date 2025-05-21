@@ -27,6 +27,7 @@ public class MoreLavaMutator : WorldMutatorSO
         AddLavaPoolAtBottom(worldSize, pixels, centerRock, lowestY);
         BiggerVeins(worldSize, pixels);
         CleanUpSpills(worldSize, pixels);
+        MoreLavaAtLowestDepth(worldSize, pixels);
         yield return null;
     }
 
@@ -149,7 +150,6 @@ public class MoreLavaMutator : WorldMutatorSO
             }
         }
     }
-
     private void CleanUpSpills(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
@@ -165,6 +165,26 @@ public class MoreLavaMutator : WorldMutatorSO
                         GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.right, worldGenerator, airPixel))
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, volcanicRockPixel);
+                    }
+                }
+            }
+        }
+    }
+    private void MoreLavaAtLowestDepth(Vector2Int worldSize, PixelInstance[,] pixels)
+    {
+        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        {
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            {
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                if (pixelInstance.Depth <= -2)
+                {
+                    if (arrayY < endY + 64 ||
+                       (arrayY < endY + 96 && pixelInstance.Pixel != deepStonePixel))
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, lavaPixel);
+
                     }
                 }
             }
