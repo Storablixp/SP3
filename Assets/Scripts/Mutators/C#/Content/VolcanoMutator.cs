@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 [CreateAssetMenu(fileName = "Volcano Mutator", menuName = "Scriptable Objects/World Mutator/Content/Volcano")]
 
@@ -56,6 +57,8 @@ public class VolcanoMutator : WorldMutatorSO
             string line = lines[y];
             for (int x = 0; x < 17; x++)
             {
+                if (!worldGenerator.IsInBounds(arrayX + x, arrayY - y)) continue;
+
                 switch (line[x])
                 {
                     case '1':

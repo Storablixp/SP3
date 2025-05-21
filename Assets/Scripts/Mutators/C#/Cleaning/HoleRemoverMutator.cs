@@ -15,6 +15,8 @@ public class HoleRemoverMutator : WorldMutatorSO
 
     [Header("Fill Pixels")]
     [SerializeField] private PixelSO dirtPixel;
+    [SerializeField] private PixelSO snowPixel;
+    [SerializeField] private PixelSO sandPixel;
     [SerializeField] private PixelSO stonePixel;
     [SerializeField] private PixelSO deepStonePixel;
     [SerializeField] private PixelSO waterPixel;
@@ -66,17 +68,25 @@ public class HoleRemoverMutator : WorldMutatorSO
 
                             if (currentPixel.Pixel != hollowPixel) continue;
 
-                            if (iteration == 0)
+                            if (GlobalNeighborCheckFucntions.MooreCheck(pos.x, pos.y, worldGenerator, 1, waterPixel, 0))
                             {
-                                if (GlobalNeighborCheckFucntions.MooreCheck(pos.x, pos.y, worldGenerator, 1, waterPixel, 0))
-                                {
-                                    worldGenerator.ChangePixel(pos.x, pos.y, waterPixel);
-                                }
+                                worldGenerator.ChangePixel(pos.x, pos.y, waterPixel);
                             }
                             else
                             {
                                 PixelSO pixelToReplaceWith;
-                                if (currentPixel.Depth == 1) pixelToReplaceWith = dirtPixel;
+                                if (currentPixel.Depth == 1)
+                                {
+                                    if (currentPixel.Temperature < 0)
+                                    {
+                                        pixelToReplaceWith = snowPixel;
+                                    }
+                                    else if (currentPixel.Temperature > 0)
+                                    {
+                                        pixelToReplaceWith = sandPixel;
+                                    }
+                                    else pixelToReplaceWith = dirtPixel;
+                                }
                                 else if (currentPixel.Depth == 0) pixelToReplaceWith = stonePixel;
                                 else if (currentPixel.Depth <= -1) pixelToReplaceWith = deepStonePixel;
                                 else continue;

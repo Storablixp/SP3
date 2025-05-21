@@ -501,12 +501,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb5c66e433b1a6a48be6acb7f0c7a343, type: 2}
   - {fileID: 11400000, guid: 009b87b2beee7394b8ae89c5559ba8a6, type: 2}
   - {fileID: 11400000, guid: e250112f1f94d1c49818caa2a642fa2b, type: 2}
-  isTesting: 0
+  isTesting: 1
   showChanges: 0
   differentOffsets: 0
   disableCleaningMutators: 0
   defaultPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
-  seed: 0
+  seed: 1
   worldSize: {x: 512, y: 512}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}

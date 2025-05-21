@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Water Neighbor Mutator", menuName = "Scriptable Objects/World Mutator/Cleaning/Water Neighbor")]
-public class WaterNeighborMutator : WorldMutatorSO
+[CreateAssetMenu(fileName = "Remove Small Areas Mutator", menuName = "Scriptable Objects/World Mutator/Cleaning/Remove Small Areas")]
+public class RemoveSmallAreasMutator : WorldMutatorSO
 {
     [Header("Settings")]
     public int iterations = 1;
@@ -12,6 +12,7 @@ public class WaterNeighborMutator : WorldMutatorSO
 
     [Header("Pixels")]
     [SerializeField] private PixelSO[] pixelsToCheckFor;
+    [SerializeField] private PixelSO airPixel;
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
@@ -29,13 +30,17 @@ public class WaterNeighborMutator : WorldMutatorSO
 
                         if (pixelInstance.Pixel == pixel)
                         {
-                            if (!GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, moorseSize, pixel, threshold))
+                            if (worldGenerator.IsInBounds(arrayX, arrayY + 1))
                             {
-                                if (worldGenerator.IsInBounds(arrayX, arrayY + 1))
+                                if (pixels[arrayX, arrayY + 1].Pixel != airPixel)
                                 {
-                                    worldGenerator.ChangePixel(arrayX, arrayY, pixels[arrayX, arrayY + 1].Pixel);
+                                    if (!GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, moorseSize, pixel, threshold))
+                                    {
+                                        worldGenerator.ChangePixel(arrayX, arrayY, pixels[arrayX, arrayY + 1].Pixel);
+                                    }
                                 }
                             }
+
                         }
                     }
                 }
