@@ -189,5 +189,20 @@ public class MoreLavaMutator : WorldMutatorSO
                 }
             }
         }
+
+
+            for (int arrayY = endY + 96; arrayY >= endY; arrayY--)
+            {
+                for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+                {
+                    PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, lavaPixel, 10))
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, lavaPixel);
+                    }
+                }
+            }
+        
     }
 }

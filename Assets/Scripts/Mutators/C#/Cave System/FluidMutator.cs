@@ -73,11 +73,18 @@ public class FluidMutator : WorldMutatorSO
             {
                 worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
             }
-            else if (pixelInstance.Temperature == 0) worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
 
             if (pixelInstance.Temperature == 0)
             {
-                worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+                if (pixelInstance.Depth == 1)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+                }
+                else if(pixelInstance.Depth <= 1 && pixelInstance.Wetness >= 2)
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
+
+                }
             }
         }
 
