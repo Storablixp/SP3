@@ -24,10 +24,10 @@ public class MoreLavaMutator : WorldMutatorSO
 
         Vector2Int centerRock = FindCenterVolcanicRock(worldSize, pixels);
         int lowestY = CreateVeins(pixels, centerRock);
-        AddLavaPoolAtBottom(worldSize, pixels, centerRock, lowestY);
+        AddLavaPoolAtBottomOfVolcano(worldSize, pixels, centerRock, lowestY);
         BiggerVeins(worldSize, pixels);
         CleanUpSpills(worldSize, pixels);
-        MoreLavaAtLowestDepth(worldSize, pixels);
+        MoreLavaAtNegativeDepth(worldSize, pixels);
         yield return null;
     }
 
@@ -96,7 +96,7 @@ public class MoreLavaMutator : WorldMutatorSO
 
         return lowestY;
     }
-    private void AddLavaPoolAtBottom(Vector2Int worldSize, PixelInstance[,] pixels, Vector2Int centerRock, int lowestY)
+    private void AddLavaPoolAtBottomOfVolcano(Vector2Int worldSize, PixelInstance[,] pixels, Vector2Int centerRock, int lowestY)
     {
         for (int y = -10; y < 20; y++)
         {
@@ -170,7 +170,7 @@ public class MoreLavaMutator : WorldMutatorSO
             }
         }
     }
-    private void MoreLavaAtLowestDepth(Vector2Int worldSize, PixelInstance[,] pixels)
+    private void MoreLavaAtNegativeDepth(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
@@ -189,7 +189,6 @@ public class MoreLavaMutator : WorldMutatorSO
                 }
             }
         }
-
 
             for (int arrayY = endY + 96; arrayY >= endY; arrayY--)
             {

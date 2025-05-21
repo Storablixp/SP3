@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332d5aba7731b9741a55df0e3fd1a4f6, type: 3}
+  m_Name: Water Neighbor Mutator
+  m_EditorClassIdentifier: 
+  IncludeAllTiles: 1
+  StartingDepthLevel: 0
+  EndDepthLevel: 0
+  moorseSize: 1
+  threshold: 1
+  waterPixel: {fileID: 11400000, guid: 37823c6f62e244c4294199690223e120, type: 2}

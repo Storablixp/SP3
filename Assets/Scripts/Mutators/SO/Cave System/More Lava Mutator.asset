@@ -17,7 +17,7 @@ MonoBehaviour:
   EndDepthLevel: 0
   ReplacementThreshold: 3
   MooreNeighborhoodSize: 2
-  Iterations: 3
+  Iterations: 4
   veinThreshold: 10
   veinLength: {x: 20, y: 50}
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
