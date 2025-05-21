@@ -15,7 +15,7 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  iterations: 10
+  iterations: 15
   moorseSize: 2
   threshold: 10
   pixelsToCheckFor:

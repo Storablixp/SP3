@@ -37,6 +37,7 @@ public class RemoveSmallAreasMutator : WorldMutatorSO
                                     if (!GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, moorseSize, pixel, threshold))
                                     {
                                         worldGenerator.ChangePixel(arrayX, arrayY, pixels[arrayX, arrayY + 1].Pixel);
+
                                     }
                                 }
                             }

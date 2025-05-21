@@ -120,5 +120,22 @@ public class VolcanoMutator : WorldMutatorSO
 
             }
         }
+
+        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        {
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            {
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                if (pixelInstance.Pixel == lavaPixel)
+                {
+                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY,worldGenerator, 1, airPixel, 1))
+                    {
+                        worldGenerator.ChangePixel(arrayX, arrayY, volcanicRockPixel);
+                    }
+                }
+
+            }
+        }
     }
 }
