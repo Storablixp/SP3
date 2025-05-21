@@ -15,7 +15,7 @@ MonoBehaviour:
   IncludeAllTiles: 1
   StartingDepthLevel: 0
   EndDepthLevel: 0
-  iterations: 2
+  iterations: 15
   moorseSize: 2
   threshold: 10
   pixelsToCheckFor:
@@ -24,3 +24,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37823c6f62e244c4294199690223e120, type: 2}
   - {fileID: 11400000, guid: ec8ddedef7bfe5e4c9b718254eaab6f3, type: 2}
   - {fileID: 11400000, guid: 42765fa6e2324e44da6cc8af9105f276, type: 2}
+  - {fileID: 11400000, guid: 972d9ae8f4fe0cc4ab39143628ad7e7f, type: 2}
+  - {fileID: 11400000, guid: ba67130d78051bb489c59c3fecf63700, type: 2}
+  - {fileID: 11400000, guid: e72b86e442bb1104597935edb64a8e88, type: 2}
+  - {fileID: 11400000, guid: 3f0819ad19b644e47bd27eb7cf67a3ea, type: 2}
+  - {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}

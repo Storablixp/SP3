@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+using System;
 
 [CreateAssetMenu(fileName = "Hole Remover", menuName = "Scriptable Objects/World Mutator/Cleaning/Hole Remover")]
 
@@ -35,23 +37,17 @@ public class HoleRemoverMutator : WorldMutatorSO
                     if (pixel.Pixel != hollowPixel) continue;
 
                     List<Vector2Int> pixelsWithinCircle = new();
-                    for (int y = -2; y <= 2; y++)
+
+                    foreach (var circlePixel in GetPixelsInCircle(arrayX, arrayY))
                     {
-                        for (int x = -2; x <= 2; x++)
+                        if (!worldGenerator.IsInBounds(circlePixel.x, circlePixel.y)) continue;
+
+                        if (pixels[circlePixel.x, circlePixel.y].Pixel == hollowPixel)
                         {
-                            if ((y == -2 || y == 2) && (x == -2 || x == 2)) continue;
-
-                            int neighborX = arrayX + x;
-                            int neighborY = arrayY + y;
-
-                            if (!worldGenerator.IsInBounds(neighborX, neighborY)) continue;
-
-                            if (pixels[neighborX, neighborY].Pixel == hollowPixel)
-                            {
-                                pixelsWithinCircle.Add(new Vector2Int(neighborX, neighborY));
-                            }
+                            pixelsWithinCircle.Add(new Vector2Int(circlePixel.x, circlePixel.y));
                         }
                     }
+
 
                     uint hollowPixelsWithinCircle = 0;
                     foreach (var pos in pixelsWithinCircle)
@@ -96,7 +92,7 @@ public class HoleRemoverMutator : WorldMutatorSO
         yield return null;
     }
 
-    private Vector2Int[] GetCircleNeigbhors()
+    private Vector2Int[] GetPixelsInCircle(int arrayX, int arrayY)
     {
         List<Vector2Int> pixelCoord = new();
         for (int y = -2; y <= 2; y++)
@@ -104,8 +100,7 @@ public class HoleRemoverMutator : WorldMutatorSO
             for (int x = -2; x <= 2; x++)
             {
                 if ((y == -2 || y == 2) && (x == -2 || x == 2)) continue;
-                if (x == 0 && y == 0) continue;
-                pixelCoord.Add(new Vector2Int(x, y));
+                pixelCoord.Add(new Vector2Int(arrayX + x, arrayY + y));
             }
         }
         return pixelCoord.ToArray();
