@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "New WorldTile", menuName = "Scriptable Objects/World Tile")]
 public class WorldTile : TileBase
 {
-    public bool AirWhenRemoved = false;
+    public WorldTile BackgroundTile;
     public bool Unbreakable;
     public Sprite CurrentSprite;
     public Color Color = Color.white;

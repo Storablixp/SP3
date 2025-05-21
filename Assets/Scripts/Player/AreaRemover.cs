@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 public class AreaRemover : MonoBehaviour
 {
     private WorldMap worldMap;
-    [SerializeField] private WorldTile hollowTile;
-    [SerializeField] private WorldTile airTile;
     [SerializeField] private CircleCollider2D removeArea;
     [SerializeField] private ParticleSystem digParticle;
     private Tilemap currentTilemap;
@@ -71,18 +69,9 @@ public class AreaRemover : MonoBehaviour
                                 ParticleSystem ps = Instantiate(digParticle, transform.position, spawnRotation);
                                 ps.GetComponent<ParticleSystemRenderer>().material.color = tileInstance.Tile.Color;
 
-                                if (tileInstance.Tile.AirWhenRemoved)
-                                {
-                                    currentTilemap.SetTile(tilePos, airTile);
-                                    currentTilemap.SetColor(tilePos, airTile.Color);
-                                    worldGenerator.ReplaceTile(lookupKey, airTile);
-                                }
-                                else
-                                {
-                                    currentTilemap.SetTile(tilePos, hollowTile);
-                                    currentTilemap.SetColor(tilePos, hollowTile.Color);
-                                    worldGenerator.ReplaceTile(lookupKey, hollowTile);
-                                }
+                                currentTilemap.SetTile(tilePos, tileInstance.Tile.BackgroundTile);
+                                currentTilemap.SetColor(tilePos, tileInstance.Tile.BackgroundTile.Color);
+                                worldGenerator.ReplaceTile(lookupKey, tileInstance.Tile.BackgroundTile);
 
                                 worldMap.ChangePixel(lookupKey);
                             }
