@@ -53,6 +53,11 @@ public class SpaghettiCaveMutator : WorldMutatorSO
                         }
                     }
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
 

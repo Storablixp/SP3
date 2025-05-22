@@ -18,5 +18,5 @@ MonoBehaviour:
   veryWet: 0.6
   wet: 0.5
   neutral: 0.4
-  dry: 0.1
+  dry: 0.2
   noiseSettings: {fileID: 11400000, guid: 10f7c021ea9409944a5ab8e4373d34da, type: 2}

@@ -44,10 +44,28 @@ public class FluidMutator : WorldMutatorSO
                 {
                     AddDryPixels(arrayX, arrayY, pixelInstance);
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
 
-        MoveIce(worldSize, pixels);
+        for (int arrayY = startY; arrayY >= endY; arrayY--)
+        {
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+            {
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
+
+                MoveIce(arrayX, arrayY, pixelInstance, pixels);
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
+            }
+        }
         yield return null;
     }
 
@@ -80,7 +98,7 @@ public class FluidMutator : WorldMutatorSO
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
                 }
-                else if(pixelInstance.Depth < 1 && pixelInstance.Wetness >= 2)
+                else if (pixelInstance.Depth < 1 && pixelInstance.Wetness >= 2)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, WaterPixel);
 
@@ -103,40 +121,31 @@ public class FluidMutator : WorldMutatorSO
             }
         }
     }
-    private void MoveIce(Vector2Int worldSize, PixelInstance[,] pixels)
+    private void MoveIce(int arrayX, int arrayY, PixelInstance pixelInstance, PixelInstance[,] pixels)
     {
-        for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
+        if (pixelInstance.Pixel != IcePixel ||
+       GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, AirPixel)) return;
+
+        if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, SnowPixel))
         {
-            for (int arrayY = startY; arrayY >= endY; arrayY--)
+            int y = 0;
+            do
             {
-                PixelInstance pixel = pixels[arrayX, arrayY];
-
-                if (pixel.Pixel != IcePixel ||
-               GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, AirPixel)) continue;
-
-                if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, SnowPixel))
-                {
-                    int y = 0;
-                    do
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY + 1 + y, IcePixel);
-                        worldGenerator.ChangePixel(arrayX, arrayY + y, SnowPixel);
-                        y++;
-                    }
+                worldGenerator.ChangePixel(arrayX, arrayY + 1 + y, IcePixel);
+                worldGenerator.ChangePixel(arrayX, arrayY + y, SnowPixel);
+                y++;
+            }
 
 
-                    while (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY + y, Vector2Int.up, worldGenerator, SnowPixel));
-                }
-                else
-                {
-                    if (arrayY + 1 < startY)
-                    {
-                        PixelSO pixelBeneath = pixels[arrayX, arrayY + 1].Pixel;
-                        worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
-                    }
-                }
+            while (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY + y, Vector2Int.up, worldGenerator, SnowPixel));
+        }
+        else
+        {
+            if (arrayY + 1 < startY)
+            {
+                PixelSO pixelBeneath = pixels[arrayX, arrayY + 1].Pixel;
+                worldGenerator.ChangePixel(arrayX, arrayY, pixelBeneath);
             }
         }
     }
-
 }
