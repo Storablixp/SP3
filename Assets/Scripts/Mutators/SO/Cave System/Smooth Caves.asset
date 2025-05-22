@@ -18,4 +18,4 @@ MonoBehaviour:
   PixelToCheckFor: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
   ReplacementThreshold: 12
   MooreNeighborhoodSize: 2
-  Iterations: 30
+  Iterations: 10

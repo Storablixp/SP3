@@ -515,8 +515,8 @@ MonoBehaviour:
   worldSize: {x: 512, y: 512}
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}
-  VisualizeGeneration: 1
-  pixelsPerFrame: 1000
+  VisualizeGeneration: 0
+  pixelsPerFrame: 100000
   progressbarManager: {fileID: 1237344294}
 --- !u!4 &349933714
 Transform:
@@ -1170,7 +1170,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:

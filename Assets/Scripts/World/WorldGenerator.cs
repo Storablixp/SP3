@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class WorldGenerator : MonoBehaviour
         foreach (WorldMutatorSO mutator in caveSystemMutators)
         {
             mutator.SetUp(this, worldSize);
+            progressbarManager.IncreaseTotalSliderMaxValue(1);
         }
 
         if (!disableCleaningMutators)
@@ -70,12 +72,14 @@ public class WorldGenerator : MonoBehaviour
             foreach (WorldMutatorSO mutator in cleaningMutators)
             {
                 mutator.SetUp(this, worldSize);
+                progressbarManager.IncreaseTotalSliderMaxValue(1);
             }
         }
 
         foreach (WorldMutatorSO mutator in contentMutators)
         {
             mutator.SetUp(this, worldSize);
+            progressbarManager.IncreaseTotalSliderMaxValue(1);
         }
 
         chunkManager = GetComponent<ChunkAndPlayerGenerator>();
@@ -97,10 +101,7 @@ public class WorldGenerator : MonoBehaviour
 
     private IEnumerator GenerateWorld()
     {
-        //progressbarManager.IncreaseTotalSliderMaxValue(3);
-
         yield return StartCoroutine(FillWithAir());
-
 
         foreach (WorldMutatorSO mutator in PixelDataMutators)
         {
@@ -111,6 +112,7 @@ public class WorldGenerator : MonoBehaviour
         {
             if (VisualizeGeneration) ResetCounterValues();
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+            UpdateProgressbar(true);
         }
 
         if (!disableCleaningMutators)
@@ -119,6 +121,7 @@ public class WorldGenerator : MonoBehaviour
             {
                 if (VisualizeGeneration) ResetCounterValues();
                 yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+                UpdateProgressbar(true);
             }
         }
 
@@ -126,7 +129,10 @@ public class WorldGenerator : MonoBehaviour
         {
             if (VisualizeGeneration) ResetCounterValues();
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+            UpdateProgressbar(true);
         }
+
+        UpdateProgressbar(true);
 
         GenerateTexture();
         worldMap.SetUp(worldSize, rawImage.texture);
