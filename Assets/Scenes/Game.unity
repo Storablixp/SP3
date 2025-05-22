@@ -516,7 +516,7 @@ MonoBehaviour:
   worldCanvasPrefab: {fileID: 5830103922245252849, guid: e1bbbeb22e438d24a8bb5d3f1f3160b3, type: 3}
   worldMap: {fileID: 218749492}
   VisualizeGeneration: 1
-  pixelsPerFrame: 100000
+  pixelsPerFrame: 1000
   progressbarManager: {fileID: 1237344294}
 --- !u!4 &349933714
 Transform:

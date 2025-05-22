@@ -19,6 +19,8 @@ public class CellularAutomataMutator : WorldMutatorSO
 
         for (int i = 0; i < Iterations; i++)
         {
+            worldGenerator.ResetCounterValues();
+
             // First pass: calculate new states
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {

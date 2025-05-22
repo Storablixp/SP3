@@ -52,6 +52,8 @@ public class FluidMutator : WorldMutatorSO
             }
         }
 
+        worldGenerator.ResetCounterValues();
+
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
             for (int arrayX = 0; arrayX < worldSize.x; arrayX++)

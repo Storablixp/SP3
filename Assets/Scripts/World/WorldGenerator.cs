@@ -109,23 +109,23 @@ public class WorldGenerator : MonoBehaviour
 
         foreach (WorldMutatorSO mutator in caveSystemMutators)
         {
+            if (VisualizeGeneration) ResetCounterValues();
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
-            if (VisualizeGeneration) GenerateTexture();
         }
 
         if (!disableCleaningMutators)
         {
             foreach (WorldMutatorSO mutator in cleaningMutators)
             {
+                if (VisualizeGeneration) ResetCounterValues();
                 yield return StartCoroutine(mutator.ApplyMutator(worldSize));
-                if (VisualizeGeneration) GenerateTexture();
             }
         }
 
         foreach (WorldMutatorSO mutator in contentMutators)
         {
+            if (VisualizeGeneration) ResetCounterValues();
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
-            if (VisualizeGeneration) GenerateTexture();
         }
 
         GenerateTexture();

@@ -31,6 +31,8 @@ public class HoleRemoverMutator : WorldMutatorSO
 
         for (int iteration = 0; iteration < iterations; iteration++)
         {
+            worldGenerator.ResetCounterValues();
+
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)

@@ -25,9 +25,17 @@ public class MoreLavaMutator : WorldMutatorSO
 
         Vector2Int centerRock = FindCenterVolcanicRock(worldSize, pixels);
         yield return CreateVeins(pixels, centerRock);
+        worldGenerator.ResetCounterValues();
+
         yield return AddLavaPoolAtBottomOfVolcano(worldSize, pixels, centerRock, lowestY);
+        worldGenerator.ResetCounterValues();
+        
         yield return BiggerVeins(worldSize, pixels);
+        worldGenerator.ResetCounterValues();
+        
         yield return CleanUpSpills(worldSize, pixels);
+        worldGenerator.ResetCounterValues();
+        
         yield return MoreLavaAtNegativeDepth(worldSize, pixels);
         yield return null;
     }

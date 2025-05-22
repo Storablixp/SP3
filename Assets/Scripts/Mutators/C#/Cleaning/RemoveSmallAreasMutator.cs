@@ -22,6 +22,8 @@ public class RemoveSmallAreasMutator : WorldMutatorSO
         {
             foreach (var pixel in pixelsToCheckFor)
             {
+                worldGenerator.ResetCounterValues();
+
                 for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
                 {
                     for (int arrayY = startY; arrayY >= endY; arrayY--)
