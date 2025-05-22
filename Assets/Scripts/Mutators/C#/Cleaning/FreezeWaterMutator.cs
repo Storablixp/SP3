@@ -23,7 +23,7 @@ public class FreezeWaterMutator : WorldMutatorSO
                 if (pixel.Pixel == WaterPixel)
                 {
                     if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, IcePixel, 0) ||
-                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, SnowPixel, 0))
+                        GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, SnowPixel, 0))
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, IcePixel);
                     }
