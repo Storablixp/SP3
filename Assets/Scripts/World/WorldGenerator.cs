@@ -167,7 +167,7 @@ public class WorldGenerator : MonoBehaviour
         yield return null;
     }
 
-    private void GenerateTexture()
+    public void GenerateTexture()
     {
         if (worldTexture == null)
         {
@@ -251,6 +251,8 @@ public class WorldGenerator : MonoBehaviour
 
     public bool UpdateProgressbar(bool completed)
     {
+        if (!VisualizeGeneration) return false;
+
         if (completed)
         {
             progressbarManager.UpdateFunctionSlider(1f);
@@ -265,6 +267,7 @@ public class WorldGenerator : MonoBehaviour
         {
             progressbarManager.UpdateFunctionSlider((float)pixelsDone / totalPixels);
             pixelCounter = 0;
+            GenerateTexture();
             return true;
         }
         else return false;

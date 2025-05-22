@@ -37,7 +37,6 @@ public class TerrainMutator : WorldMutatorSO
                 }
                 else if (pixelInstance.Depth == 0)
                 {
-                    //pixelToAdd = stonePixel;
                     pixelToAdd = DetermineCavePixels(arrayX, arrayY, pixelInstance);
                 }
                 else
@@ -46,9 +45,13 @@ public class TerrainMutator : WorldMutatorSO
                 }
 
                 worldGenerator.ChangePixel(arrayX, arrayY, pixelToAdd);
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
-        yield return null;
     }
 
     private PixelSO DetermineSurfacePixels(int arrayX, int arrayY, PixelInstance pixelInstance)

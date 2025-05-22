@@ -16,7 +16,6 @@ public class WorldMutatorSO : ScriptableObject
     public virtual void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
     {
         this.worldGenerator = worldGenerator;
-
         if (IncludeAllTiles)
         {
             startY = worldSize.y - 1;

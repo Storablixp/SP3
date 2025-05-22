@@ -15,12 +15,6 @@ public class SunlightMutator : WorldMutatorSO
     [SerializeField, Range(0.0f, 1.0f)] private float xModifer = 1f;
     [SerializeField, Range(0.0f, 1.0f)] private float yModifer = 1f;
 
-    public override void SetUp(WorldGenerator worldGenerator, Vector2Int worldSize)
-    {
-        base.SetUp(worldGenerator, worldSize);
-
-    }
-
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
     {
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();

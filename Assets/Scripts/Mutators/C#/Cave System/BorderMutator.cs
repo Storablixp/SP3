@@ -15,10 +15,13 @@ public class BorderMutator : WorldMutatorSO
                 if (arrayX == 0 ||arrayX == worldSize.x - 1 || arrayY == endY)
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, BorderPixel);
+
+                    if (worldGenerator.UpdateProgressbar(false))
+                    {
+                        yield return null;
+                    }
                 }
             }
         }
-
-        yield return null;
     }
 }

@@ -23,7 +23,6 @@ public class CactusMutator : WorldMutatorSO
     {
         base.SetUp(worldGenerator, worldSize);
         pixelsBeforeCanPlace = Random.Range(0, cactusPlacementRate - 1);
-
     }
 
     public override IEnumerator ApplyMutator(Vector2Int worldSize)
