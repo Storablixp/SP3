@@ -36,6 +36,15 @@ public class WorldGenerator : MonoBehaviour
     private Texture2D worldTexture;
     private RawImage rawImage;
 
+    [Header("Visualization")]
+    public bool VisualizeGeneration;
+    [SerializeField] private int pixelsPerFrame = 100000;
+    [SerializeField] private ProgressbarManager progressbarManager;
+    private int pixelCounter;
+    private int pixelsDone;
+    private int totalPixels;
+
+
     private void OnValidate()
     {
         if (worldSize.x <= 0) worldSize.x = 1;
@@ -77,6 +86,8 @@ public class WorldGenerator : MonoBehaviour
         if (worldSize.x % 2 == 1) worldSize.x++;
         if (worldSize.y % 2 == 1) worldSize.y++;
 
+        progressbarManager.ResetSlider();
+
         XOffset = Random.Range(-100000f, 100000f);
         YOffset = Random.Range(-100000f, 100000f);
 
@@ -86,6 +97,8 @@ public class WorldGenerator : MonoBehaviour
 
     private IEnumerator GenerateWorld()
     {
+        //progressbarManager.IncreaseTotalSliderMaxValue(3);
+
         yield return StartCoroutine(FillWithAir());
 
 
@@ -97,6 +110,7 @@ public class WorldGenerator : MonoBehaviour
         foreach (WorldMutatorSO mutator in caveSystemMutators)
         {
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+            if (VisualizeGeneration) GenerateTexture();
         }
 
         if (!disableCleaningMutators)
@@ -104,12 +118,14 @@ public class WorldGenerator : MonoBehaviour
             foreach (WorldMutatorSO mutator in cleaningMutators)
             {
                 yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+                if (VisualizeGeneration) GenerateTexture();
             }
         }
 
         foreach (WorldMutatorSO mutator in contentMutators)
         {
             yield return StartCoroutine(mutator.ApplyMutator(worldSize));
+            if (VisualizeGeneration) GenerateTexture();
         }
 
         GenerateTexture();
@@ -184,7 +200,7 @@ public class WorldGenerator : MonoBehaviour
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
     {
-        
+
         if (!IsInBounds(xCoord, yCoord) || pixels[xCoord, yCoord].Pixel == null || pixels[xCoord, yCoord].Pixel.Unchangeable) //Return if pixel can't be changed.
         {
             return;
@@ -223,5 +239,34 @@ public class WorldGenerator : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void ResetCounterValues()
+    {
+        pixelCounter = 0;
+        pixelsDone = 0;
+        totalPixels = worldSize.x * worldSize.y;
+        progressbarManager.ResetSlider();
+    }
+
+    public bool UpdateProgressbar(bool completed)
+    {
+        if (completed)
+        {
+            progressbarManager.UpdateFunctionSlider(1f);
+            progressbarManager.UpdateTotalSlider();
+            return true;
+        }
+
+        pixelCounter++;
+        pixelsDone++;
+
+        if (pixelCounter >= pixelsPerFrame)
+        {
+            progressbarManager.UpdateFunctionSlider((float)pixelsDone / totalPixels);
+            pixelCounter = 0;
+            return true;
+        }
+        else return false;
     }
 }
