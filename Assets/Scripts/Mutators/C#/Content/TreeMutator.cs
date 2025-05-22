@@ -33,7 +33,6 @@ public class TreeMutator : WorldMutatorSO
         {
             for (int arrayY = startY; arrayY >= endY; arrayY--)
             {
-
                 PixelInstance pixel = pixels[arrayX, arrayY];
 
                 if (pixel.Pixel == grassPixel)
@@ -52,6 +51,11 @@ public class TreeMutator : WorldMutatorSO
                     {
                         pixelsBeforeCanPlace--;
                     }
+                }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
                 }
             }
         }

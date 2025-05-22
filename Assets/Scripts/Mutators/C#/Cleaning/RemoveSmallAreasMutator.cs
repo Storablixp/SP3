@@ -43,6 +43,11 @@ public class RemoveSmallAreasMutator : WorldMutatorSO
                             }
 
                         }
+
+                        if (worldGenerator.UpdateProgressbar(false))
+                        {
+                            yield return null;
+                        }
                     }
                 }
             }

@@ -30,6 +30,11 @@ public class CleanBorderMutator : WorldMutatorSO
                         worldGenerator.TurnToAir(arrayX, arrayY);
                     }
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
 

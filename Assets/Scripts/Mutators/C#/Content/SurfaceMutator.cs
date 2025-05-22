@@ -40,6 +40,11 @@ public class SurfaceMutator : WorldMutatorSO
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
 

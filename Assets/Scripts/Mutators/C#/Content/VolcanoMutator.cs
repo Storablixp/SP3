@@ -22,7 +22,7 @@ public class VolcanoMutator : WorldMutatorSO
         Vector2Int centerRock = FindCenterVolcanicRock(worldSize, pixels);
 
         PlaceVolcano(centerRock.x - 8, centerRock.y + 8, pixels);
-        CleanNearbyVolcanicRock(worldSize, pixels);
+        yield return CleanNearbyVolcanicRock(worldSize, pixels);
 
         yield return null;
     }
@@ -79,7 +79,7 @@ public class VolcanoMutator : WorldMutatorSO
         }
     }
 
-    private void CleanNearbyVolcanicRock(Vector2Int worldSize, PixelInstance[,] pixels)
+    private IEnumerator CleanNearbyVolcanicRock(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
@@ -93,6 +93,11 @@ public class VolcanoMutator : WorldMutatorSO
                     GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, volcanoPixel, 0))
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, volcanoPixel);
+                }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
                 }
             }
         }

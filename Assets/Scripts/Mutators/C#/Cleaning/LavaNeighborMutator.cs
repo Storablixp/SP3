@@ -52,6 +52,11 @@ public class LavaNeighborMutator : WorldMutatorSO
                         worldGenerator.ChangePixel(arrayX, arrayY, obsidianPixel);
                     }
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
 

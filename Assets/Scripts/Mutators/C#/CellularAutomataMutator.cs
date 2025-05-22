@@ -52,6 +52,10 @@ public class CellularAutomataMutator : WorldMutatorSO
                     pixel = newPixel;
 
                     worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
+                    if (worldGenerator.UpdateProgressbar(false))
+                    {
+                        yield return null;
+                    }
                 }
             }
         }

@@ -55,6 +55,11 @@ public class CactusMutator : WorldMutatorSO
                         pixelsBeforeCanPlace--;
                     }
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
         yield return null;

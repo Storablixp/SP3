@@ -29,6 +29,10 @@ public class FreezeWaterMutator : WorldMutatorSO
                     }
                 }
 
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
 

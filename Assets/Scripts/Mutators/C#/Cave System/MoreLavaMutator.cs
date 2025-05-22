@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "More Lava Mutator", menuName = "Scriptable Objects/World Mutator/Cave System/More Lava")]
 public class MoreLavaMutator : WorldMutatorSO
 {
+    int lowestY;
     [Header("Settings")]
     public uint ReplacementThreshold = 4;
     public int MooreNeighborhoodSize = 1;
@@ -23,11 +24,11 @@ public class MoreLavaMutator : WorldMutatorSO
         PixelInstance[,] pixels = worldGenerator.RetrievePixels();
 
         Vector2Int centerRock = FindCenterVolcanicRock(worldSize, pixels);
-        int lowestY = CreateVeins(pixels, centerRock);
-        AddLavaPoolAtBottomOfVolcano(worldSize, pixels, centerRock, lowestY);
-        BiggerVeins(worldSize, pixels);
-        CleanUpSpills(worldSize, pixels);
-        MoreLavaAtNegativeDepth(worldSize, pixels);
+        yield return CreateVeins(pixels, centerRock);
+        yield return AddLavaPoolAtBottomOfVolcano(worldSize, pixels, centerRock, lowestY);
+        yield return BiggerVeins(worldSize, pixels);
+        yield return CleanUpSpills(worldSize, pixels);
+        yield return MoreLavaAtNegativeDepth(worldSize, pixels);
         yield return null;
     }
 
@@ -51,9 +52,8 @@ public class MoreLavaMutator : WorldMutatorSO
 
         return volcanicRocksAtTheTop[volcanicRocksAtTheTop.Count / 2];
     }
-    private int CreateVeins(PixelInstance[,] pixels, Vector2Int centerRock)
+    private IEnumerator CreateVeins(PixelInstance[,] pixels, Vector2Int centerRock)
     {
-        int lowestY = 0;
         int placementCooldown = 0;
 
         for (int arrayY = centerRock.y; arrayY >= endY; arrayY--)
@@ -87,26 +87,32 @@ public class MoreLavaMutator : WorldMutatorSO
                         placementCooldown = 50;
                     }
 
+                    if (worldGenerator.UpdateProgressbar(false))
+                    {
+                        yield return null;
+                    }
                 }
                 lowestY = arrayY;
                 placementCooldown--;
             }
             else break;
         }
-
-        return lowestY;
     }
-    private void AddLavaPoolAtBottomOfVolcano(Vector2Int worldSize, PixelInstance[,] pixels, Vector2Int centerRock, int lowestY)
+    private IEnumerator AddLavaPoolAtBottomOfVolcano(Vector2Int worldSize, PixelInstance[,] pixels, Vector2Int centerRock, int lowestY)
     {
         for (int y = -10; y < 20; y++)
         {
             for (int x = -25; x <= 25; x++)
             {
                 worldGenerator.ChangePixel(centerRock.x + x, lowestY + y, lavaPixel);
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
     }
-    private void BiggerVeins(Vector2Int worldSize, PixelInstance[,] pixels)
+    private IEnumerator BiggerVeins(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         PixelInstance[,] currentPixels = pixels;
         PixelInstance[,] updatedPixels = new PixelInstance[worldSize.x, worldSize.y];
@@ -148,9 +154,14 @@ public class MoreLavaMutator : WorldMutatorSO
                     worldGenerator.ChangePixel(arrayX, arrayY, newPixel);
                 }
             }
+
+            if (worldGenerator.UpdateProgressbar(false))
+            {
+                yield return null;
+            }
         }
     }
-    private void CleanUpSpills(Vector2Int worldSize, PixelInstance[,] pixels)
+    private IEnumerator CleanUpSpills(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
         {
@@ -167,10 +178,15 @@ public class MoreLavaMutator : WorldMutatorSO
                         worldGenerator.ChangePixel(arrayX, arrayY, volcanicRockPixel);
                     }
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
     }
-    private void MoreLavaAtNegativeDepth(Vector2Int worldSize, PixelInstance[,] pixels)
+    private IEnumerator MoreLavaAtNegativeDepth(Vector2Int worldSize, PixelInstance[,] pixels)
     {
         for (int arrayY = startY; arrayY >= endY; arrayY--)
         {
@@ -187,21 +203,30 @@ public class MoreLavaMutator : WorldMutatorSO
 
                     }
                 }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
+                }
             }
         }
 
-            for (int arrayY = endY + 96; arrayY >= endY; arrayY--)
+        for (int arrayY = endY + 96; arrayY >= endY; arrayY--)
+        {
+            for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
             {
-                for (int arrayX = 0; arrayX < worldSize.x; arrayX++)
-                {
-                    PixelInstance pixelInstance = pixels[arrayX, arrayY];
+                PixelInstance pixelInstance = pixels[arrayX, arrayY];
 
-                    if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, lavaPixel, 10))
-                    {
-                        worldGenerator.ChangePixel(arrayX, arrayY, lavaPixel);
-                    }
+                if (GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, lavaPixel, 10))
+                {
+                    worldGenerator.ChangePixel(arrayX, arrayY, lavaPixel);
+                }
+
+                if (worldGenerator.UpdateProgressbar(false))
+                {
+                    yield return null;
                 }
             }
-        
+        }
     }
 }
