@@ -202,6 +202,8 @@ public class WorldGenerator : MonoBehaviour
         worldTexture.Apply();
 
         rawImage.texture = worldTexture;
+
+        System.IO.File.WriteAllBytes("Assets/Scripts/Testing/NoiseTexture.png", worldTexture.EncodeToPNG());
     }
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)

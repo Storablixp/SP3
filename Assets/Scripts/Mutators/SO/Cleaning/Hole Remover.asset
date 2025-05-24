@@ -24,4 +24,4 @@ MonoBehaviour:
   deepStonePixel: {fileID: 11400000, guid: 972d9ae8f4fe0cc4ab39143628ad7e7f, type: 2}
   waterPixel: {fileID: 11400000, guid: 37823c6f62e244c4294199690223e120, type: 2}
   iterations: 10
-  minimumNeighborHoles: 8
+  minimumNeighborHoles: 9

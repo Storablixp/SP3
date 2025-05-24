@@ -21,7 +21,8 @@ public class SurfaceMutator : WorldMutatorSO
                 if (pixels[arrayX, arrayY].Pixel == dirtPixel &&
                     GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.up, worldGenerator, airPixel))
                 {
-                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.down, worldGenerator, dirtPixel))
+                    if (GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY, Vector2Int.down, worldGenerator, dirtPixel) &&
+                        GlobalNeighborCheckFucntions.SimpleCheck(arrayX, arrayY - 1, Vector2Int.down, worldGenerator, dirtPixel))
                     {
                         worldGenerator.ChangePixel(arrayX, arrayY, grassPixel);
                     }
@@ -36,7 +37,7 @@ public class SurfaceMutator : WorldMutatorSO
                 }
 
                 if(pixels[arrayX, arrayY].Pixel == hollowPixel &&
-                    GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, airPixel, 3))
+                    GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, airPixel, 2))
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
                 }
