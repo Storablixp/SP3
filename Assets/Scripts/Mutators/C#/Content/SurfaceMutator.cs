@@ -4,6 +4,8 @@ using System.Collections;
 [CreateAssetMenu(fileName = "Surface Mutator", menuName = "Scriptable Objects/World Mutator/Surface")]
 public class SurfaceMutator : WorldMutatorSO
 {
+    public uint test;
+
     [Header("Pixels")]
     [SerializeField] private PixelSO airPixel;
     [SerializeField] private PixelSO dirtPixel;
@@ -37,7 +39,7 @@ public class SurfaceMutator : WorldMutatorSO
                 }
 
                 if(pixels[arrayX, arrayY].Pixel == hollowPixel &&
-                    GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 1, airPixel, 2))
+                    GlobalNeighborCheckFucntions.MooreCheck(arrayX, arrayY, worldGenerator, 2, airPixel, test))
                 {
                     worldGenerator.ChangePixel(arrayX, arrayY, airPixel);
                 }

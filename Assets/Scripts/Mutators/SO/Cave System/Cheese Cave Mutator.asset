@@ -18,4 +18,4 @@ MonoBehaviour:
   hollowPixel: {fileID: 11400000, guid: 90a98b86953042841b32134d91c6060c, type: 2}
   airPixel: {fileID: 11400000, guid: fe3bcbd79125c754495bf335541fc219, type: 2}
   noiseScettings: {fileID: 11400000, guid: af10a88a3c9642c428d3c510749f76aa, type: 2}
-  holeThreshold: 0.8
+  holeThreshold: 0.677
