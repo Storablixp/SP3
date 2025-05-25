@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -203,7 +202,7 @@ public class WorldGenerator : MonoBehaviour
 
         rawImage.texture = worldTexture;
 
-        System.IO.File.WriteAllBytes("Assets/Scripts/Testing/NoiseTexture.png", worldTexture.EncodeToPNG());
+        System.IO.File.WriteAllBytes($"Assets/Scripts/Testing/{seed}.png", worldTexture.EncodeToPNG());
     }
 
     public void ChangePixel(int xCoord, int yCoord, PixelSO pixel)
